@@ -90,7 +90,7 @@ $("document").ready(function() {
 		var password = document.getElementById("regPass").value;
 		var repassword = document.getElementById("regRePass").value;
 		
-		submitTheRegisterForm();
+		$('#modal1').show();
 	});
 	
 	$("#submit").click(function() {
@@ -106,6 +106,13 @@ $("document").ready(function() {
 	
 	$("#regPass").blur(function() {
 		$("#passNote").hide();
+	});
+	
+	$("#proceedModal").click(function() {
+	    // TODO update once verified mail
+		//$("form#signUpForm").submit();
+		$('#modal1').hide();
+		submitTheRegisterForm();
 	});
 	
 });

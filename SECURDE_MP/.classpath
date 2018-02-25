@@ -10,5 +10,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Users/isiah/Desktop/apache-tomcat-8.5.16"/>
 	<classpathentry kind="lib" path="C:/Users/isiah/Desktop/apache-tomcat-8.5.16/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/isiah/Downloads/javax.mail-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/isiah/Desktop/apache-tomcat-8.5.16/lib/javax.mail-1.6.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

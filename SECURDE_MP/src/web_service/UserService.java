@@ -194,6 +194,34 @@ public class UserService {
 		System.out.println();
 	}
 	
+	public static void verifyStudent(String hash) {
+		System.out.println();
+		try{
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement(
+					"UPDATE users "
+				  + "SET verificationid=? "//1
+				 + "WHERE verificationid=?" //2					
+					);
+			
+			stmt.setString(1, "");
+			stmt.setString(2, hash);
+			
+			stmt.executeUpdate();
+			
+			System.out.println("User verified!");
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+	
 	/**
 	 * Retrieves a list of products
 	 * @return List of products

@@ -542,11 +542,61 @@
 				display: none;
 			}
 			
+			#modal1 {
+			    height: 30%;
+			    width: 50%;
+			    margin: 0 auto;
+			    position: relative;
+			    background-color: #fff;
+			    border: 1px solid #E7E7E7;
+			    z-index: 1000;
+			    display: none;
+			}
+			
+			#modver {
+			    width: 100%;
+			    font-size: 14px;
+			    font-weight: 400;
+			    font-family: Montserrat, Sans-serif;
+			    padding: 10px;
+			    position: relative;
+			}
+			
+			#proceedModal {
+				font-size: 14px;
+			    font-weight: 400;
+			    font-family: Montserrat, Sans-serif;
+			    padding: 10px;
+			    position: relative;
+			    left: 755px;
+			    bottom: 10px;
+			    background-color: #353535;
+                border-radius: 2px;
+				color: #F8F7F7;
+				border: none;
+				font-family: Montserrat, Sans-serif;
+				transition: all .15s ease-in-out;
+			}
+			
+			#proceedModal:hover {
+				background-color: #454545;
+				cursor: pointer;
+				transition: all .15s ease-in-out;
+			}
+
 		</style>
 	</head>
 	<body>
 	<img src = "images/a4068434880_5(flipped).png" id = "funImage"></img>
 	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
+	<div id="modal1" class="modal modal-fixed-footer">
+    	<div class="modal-content">
+        	<p id="modver">A verification link has been sent to the email address you used to create your account. Please click on the link to verify your account and proceed with the registration.</p>
+        </div>
+        <div class="modal-footer">
+        	<button class="modal-action modal-close waves-effect waves-green btn-flat " id = "proceedModal">Proceed</button>
+        </div>
+    </div>
 	<div id = "container">
         <div id = "header">
             <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
