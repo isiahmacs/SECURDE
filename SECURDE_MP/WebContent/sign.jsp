@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -409,7 +410,7 @@
 				height: 30px;
 				width: 35%;
                 margin: 0 auto;
-                top: 5px;
+                top: 2px;
 				left: 200px;
 				font-size: 13px;
                 text-align: center;
