@@ -238,7 +238,7 @@ public class UserService {
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				products.add(new Product(rs.getInt("productid"), rs.getInt("catalogid"), rs.getInt("quantity"), rs.getString("productname"), rs.getString("description"), rs.getString("images"), rs.getDouble("price")));
+				products.add(new Product(rs.getInt("productid"), rs.getInt("quantity"), rs.getString("productname"), rs.getString("description"), rs.getString("image"), rs.getDouble("price")));
 				System.out.println("Product: " + rs.getString("productname"));
 			} 
 			

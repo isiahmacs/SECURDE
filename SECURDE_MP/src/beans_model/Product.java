@@ -2,14 +2,13 @@ package beans_model;
 
 public class Product {
 	
-	int catalogId, productId, quantity;
+	int productId, quantity;
 	double price;
 	String productName, productDescription, productImage;
 	
-	public Product(int productId, int catalogId, int quantity, String productName, String productDescription, String productImage, double price) {
+	public Product(int productId, int quantity, String productName, String productDescription, String productImage, double price) {
 		super();
 		this.productId = productId;
-		this.catalogId = catalogId;
 		this.quantity = quantity;
 		this.productName = productName;
 		this.productDescription = productDescription;
@@ -18,19 +17,11 @@ public class Product {
 	}
 	
 	public int getProductId() {
-		return catalogId;
+		return productId;
 	}
 
 	public void setProductId(int productId) {
 		this.productId = productId;
-	}
-
-	public int getCatalogId() {
-		return catalogId;
-	}
-
-	public void setCatalogId(int catalogId) {
-		this.catalogId = catalogId;
 	}
 
 	public int getQuantity() {

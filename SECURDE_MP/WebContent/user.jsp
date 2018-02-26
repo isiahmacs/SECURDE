@@ -281,7 +281,7 @@
 			
 			.productName {
 				position: relative;
-				font-size: 20px;
+				font-size: 16px;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
                 letter-spacing: 1px;

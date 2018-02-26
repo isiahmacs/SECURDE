@@ -1,6 +1,7 @@
 package web_servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Properties;
@@ -43,6 +44,7 @@ public class UserServlet extends HttpServlet {
 	
 	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
 	private static final String SECURDE_PASS = "Securdeproj";
+	private static DecimalFormat df2 = new DecimalFormat(".##");
 
     /**
      * Default constructor. 
@@ -60,6 +62,7 @@ public class UserServlet extends HttpServlet {
 		switch(request.getServletPath()) {
 			case "/logout": performLogout(request, response); break;
 			case "/sendVerification": performVerification(request, response); break;
+			case "/getProducts": getProducts(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
@@ -83,7 +86,6 @@ public class UserServlet extends HttpServlet {
 			case "/login": performLogin(request, response); break;
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
-			case "/getProducts": getProducts(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -395,7 +397,7 @@ public class UserServlet extends HttpServlet {
 							"<a href = 'user/product.html'><img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
 							"	<div class='productDesc'>" +
 					        "   	<p class = 'productName'>" + p.getProductName() + "</p>" +
-							" 		<p class = 'price'>" + p.getPrice() + "</p>" +
+							" 		<p class = 'price'>$" + df2.format(p.getPrice()) + "</p>" +
 					        "	</div>" + 
 							"</a>" +
 					        "</div> ";

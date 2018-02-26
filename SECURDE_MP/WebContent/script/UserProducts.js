@@ -7,10 +7,10 @@ function loadProducts(){
 	$.ajax({
  	    context: this,
         url:'getProducts',
-        type: 'POST',
+        type: 'GET',
         cache:false,
         success: function(data){
-        	var productFeed = document.getElementById("#productFormat");
+        	var productFeed = document.getElementById("productFormat");
         	if(productFeed != null){
 	        	// Remove all children
 	        	while (productFeed.firstChild) {	
