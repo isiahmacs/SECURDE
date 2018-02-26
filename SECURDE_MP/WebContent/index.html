@@ -303,7 +303,7 @@
 			}
 			
 			.productDesc {
-				positioN: absolute;
+				position: absolute;
 				width: 350px;
 				height: 550px;
 				margin: 0 auto;
