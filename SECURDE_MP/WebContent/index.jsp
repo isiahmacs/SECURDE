@@ -281,7 +281,6 @@
 			
 			#productFormat {
 				width: 86%;
-				height: auto;
 				float: left;
                 position: relative;
                 left: 115px;
@@ -290,7 +289,7 @@
 			.productContainer {
 				position: relative;
 				width: 350px;
-				height: 600px;
+				height: 700px;
 				margin-right: 30px;
 				display: inline-block;
 			}
@@ -299,7 +298,7 @@
 				width: 350px;
 				height: 550px;
 				margin-right: 25px;
-				margin-bottom: 20px;
+				margin-bottom: 5px;
 				position: relative;
 			}
 			
@@ -310,6 +309,7 @@
 				margin: 0 auto;
 				background-color: rgba(35, 35, 35, 0.75);
 				top: 0px;
+				text-align: center;
 				visibility: hidden;
 			}
 			
@@ -330,10 +330,9 @@
 			
 			.productName {
 				position: relative;
-				font-size: 16px;
+				font-size: 20px;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
                 letter-spacing: 1px;
 				text-align: center;
 				top: 225px;
@@ -347,8 +346,8 @@
                 font-weight: bold;
                 text-transform: uppercase;
 				text-align: center;
-				top: 225px;
 				letter-spacing: 1px;
+				top:225px;
 			}
 			
 			#funImage {
@@ -386,7 +385,39 @@
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<article id = "productFormat">
-            
+			<div class = "productContainer">
+				<a href = "product.jsp"  >
+					<img class = "img" src="images/product1.png"></img>	
+					<div class = "productDesc">			
+						<p class = "productName"> MagikAmph</p>
+						<p class = "price"> $0.50</p>
+					</div>
+				</a>
+				
+				
+			</div>
+			<div class = "productContainer">
+				<a href = "product.jsp"  >
+					<img class = "img" src="images/product2.jpg"></img>	
+					<div class = "productDesc">			
+						<p class = "productName"> Pik Haching </p>
+						<p class = "price"> $88.66</p>
+					</div>
+				</a>
+				
+				
+			</div>
+			<div class = "productContainer">
+				<a href = "product.jsp"  >
+					<img class = "img" src="images/product3.jpg"></img>
+					<div class = "productDesc">				
+						<p class = "productName"> Nami-san and Some Dragon Action Figure </p>
+						<p class = "price"> $69.69</p>
+					</div>
+				</a>
+				
+				
+			</div>
         </article>
 	</div>
 	</body>
