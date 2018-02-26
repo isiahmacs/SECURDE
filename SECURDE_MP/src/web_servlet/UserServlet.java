@@ -389,7 +389,7 @@ public class UserServlet extends HttpServlet {
 		
 	    for(Product p : productList){
 			htmlPostList += "<div class = 'productContainer' productId = '" + p.getProductId() + "'>" +
-							"<a href = 'user/product.html'><img src = '" + p.getProductImage() + "' class = 'img' />" +
+							"<a href = 'user/product.html'><img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
 							"	<div class='productDesc'>" +
 					        "   	<p class = 'productName'>" + p.getProductName() + "</p>" +
 							" 		<p class = 'price'>" + p.getPrice() + "</p>" +
