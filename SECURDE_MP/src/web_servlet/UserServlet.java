@@ -34,7 +34,8 @@ import beans_model.User;
 						   "/register",
 						   "/logout",
 						   "/add",
-						   "/sendVerification"})
+						   "/sendVerification",
+						   "/getProducts"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
@@ -60,8 +61,9 @@ public class UserServlet extends HttpServlet {
 			case "/logout": performLogout(request, response); break;
 			case "/sendVerification": performVerification(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
-			
-			request.getQueryString();
+		}
+
+		request.getQueryString();
 			String hash = request.getParameter("verify");
 			
 			System.out.println("****************VERIFICATION SERVLET*******************");
@@ -70,7 +72,6 @@ public class UserServlet extends HttpServlet {
 			
 			response.sendRedirect("sign.jsp");
 			
-		}
 	}
 
 	/**
@@ -82,6 +83,7 @@ public class UserServlet extends HttpServlet {
 			case "/login": performLogin(request, response); break;
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
+			case "/getProducts": getProducts(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
