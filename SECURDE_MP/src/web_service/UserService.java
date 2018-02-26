@@ -253,4 +253,39 @@ public class UserService {
 		
 	}
 	
+	/**
+	 * Retrieves a product
+	 * @return prouct
+	 */
+	public static Product getProduct(int id) {
+		System.out.println();
+		Product product = null;
+		try{
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE productid = ?");
+			stmt.setInt(1, 1);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				product = new Product(rs.getInt("productid"), rs.getInt("quantity"), rs.getString("productname"), rs.getString("description"), rs.getString("image"), rs.getDouble("price"));
+			} 
+			
+			System.out.println("Product: " + product.getProductName());
+			
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println();
+		return product;
+		
+	}
+	
 }

@@ -230,14 +230,14 @@
                 text-decoration: underline;
             }
 			
-			#productFormat {
+			#productListFormat {
 				width: 86%;
 				float: left;
                 position: relative;
                 left: 115px;
 			}
 			
-			.productContainer {
+			.productListContainer {
 				position: relative;
 				width: 350px;
 				height: 550px;
@@ -253,7 +253,7 @@
 				position: relative;
 			}
 			
-			.productDesc {
+			.productListDesc {
 				position: absolute;
 				width: 350px;
 				height: 550px;
@@ -264,22 +264,22 @@
 				visibility: hidden;
 			}
 			
-			.productContainer:hover .productDesc {
+			.productListContainer:hover .productListDesc {
 				visibility: visible;
 				background-color: rgba(35, 35, 35, 0.75);
 			}
 			
-			.productContainer:hover .productName {
+			.productListContainer:hover .productListName {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productContainer:hover .price {
+			.productListContainer:hover .priceList {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productName {
+			.productListName {
 				position: relative;
 				font-size: 16px;
 				color: #fff;
@@ -289,7 +289,7 @@
 				top: 225px;
 			}
 			
-			.price {
+			.priceList {
 				position: relative;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
@@ -333,10 +333,45 @@
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
-		<article id = "productFormat">
+		<div id = "productListFormat">
+			<a href = 'userproduct.jsp' id = "productLink">
 			
-        </article>
+			</a>
+        </div>
 	</div>
 	</body>
+	
+	<script type = "text/javascript">
+		function loadProducts(){
+			
+			$.ajax({
+		 	    context: this,
+		        url:'getProducts',
+		        type: 'GET',
+		        cache:false,
+		        success: function(data){
+		        	var link = document.getElementById("productLink");
+		        	var productFeed = document.getElementById("productListFormat");
+		        	if(productFeed != null){
+			        	// Remove all children
+			        	while (productFeed.firstChild) {	
+			        		productFeed.removeChild(productFeed.firstChild);
+			        	}
+			
+			        	// Append html snippet 
+			        	$(link).append(data);
+			    	    $(productFeed).append(link);
+		        	}
+		    	},
+		        error:function(){
+		            console.log("URL getPosts does not exist");
+		        }
+		    });
+		}
+	
+		$(document).ready(function() {
+			loadProducts();
+		});
+	</script>
 	
 </html>

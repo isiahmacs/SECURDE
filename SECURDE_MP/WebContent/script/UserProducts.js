@@ -1,12 +1,13 @@
 /**
  * 
  */
+var productId;
 
-function loadProducts(){
-	
+
+function loadProduct(){
 	$.ajax({
  	    context: this,
-        url:'getProducts',
+        url:'viewProduct',
         type: 'GET',
         cache:false,
         success: function(data){
@@ -28,6 +29,6 @@ function loadProducts(){
 }
 
 
-$("document").ready(function() {
-	loadProducts();
+$(document).ready(function() {
+	loadProduct();
 });

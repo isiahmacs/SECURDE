@@ -159,7 +159,18 @@ public class authentication implements Filter {
                	  System.out.println("Redirecting to index.jsp..");
                	  res.sendRedirect("index.jsp");
                 }
-break; 
+            break; 
+			case "/userproduct.jsp":
+			case "/adminproduct.jsp":			//if user/admin exist, continue
+				if(admin || user) {
+					System.out.println("Continue on this page..");
+					chain.doFilter(request, response);
+				}
+				else {
+					System.out.println("Redirecting to sign.jsp..");
+					res.sendRedirect("sign.jsp");
+				}
+			break;
 			
 			default: System.out.println("ERORR (In authentication filter): Path does not exist ");
 

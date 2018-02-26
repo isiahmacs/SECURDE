@@ -7,6 +7,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
+		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="script/UserProducts.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -278,7 +280,7 @@
                 transition: all .15s ease-in-out;
             }
 			
-			 #productFormat {
+			#productFormat {
 				width: 85%;
 				height: auto;
 				display: inline-block;
@@ -287,7 +289,7 @@
 				bottom: 20px;
 			}
 			
-			#productContainer {
+			.productContainer {
 				position: relative;
 				display: flex; 
 				flex-wrap: nowrap; 
@@ -299,21 +301,21 @@
 				height: 550px;
 			}
 			
-			#productDescCont {
+			.productDescCont {
 				position: relative;
 				left: 50px;
 				width: 700px;
 				height: auto;
 			}
 			
-			#productNameCont {
+			.productNameCont {
 				position: relative;
 				width: 100%;
 				height: 75px;
 				border-bottom: 1px solid #EAECEE;
 			}
 			
-			#productName {
+			.productName {
 				position: relative;
 				font-size: 20px;
 				bottom: 20px;
@@ -323,7 +325,7 @@
                 letter-spacing: 1px;
 			}
 			
-			#price {
+			.price {
 				position: relative;
 				color: #353535;
 				bottom: 20px;
@@ -333,7 +335,7 @@
                 text-transform: uppercase;
 			}
 			
-			#addtoCart {
+			.addtoCart {
 				position: relative;
 				bottom: 20px;
 				left: 50px;
@@ -349,20 +351,20 @@
 				font-weight: bold;
 			}
 			
-			#addtoCart:hover {
+			.addtoCart:hover {
 				background-color: #454545;
 				cursor: pointer;
 				transition: all .15s ease-in-out;
 			}
 			
-			#productDesc {
+			.productDesc {
 				position: relative;
 				width: 100%;
 				height: auto;
 				top: 20px;
 			}
 			
-			#description {
+			.description {
 				position: relative;
 				color: #353535;
 				bottom: 20px;
@@ -407,35 +409,10 @@
 			<p id = "account"><a href = "transactions.jsp">Account</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">Â»</span> Product</p>
+            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-            <div id = "productContainer">
-                <img src = "images/Shopify-Uncaged03-patch01.jpg"></img>
-				<div id = "productDescCont">
-					<div id = "productNameCont">
-						<p id = "productName">Uncaged 03 Embroidered Patch</p>
-						<span id = "price">$10.00</span>
-						<button id = "addtoCart">Add to Cart</button> <br>
-					</div>
-					<div id = "productDesc">
-						<p id = "description">
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-							industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
-							scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
-							into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
-							release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-							like Aldus PageMaker including versions of Lorem Ipsum.
-							<br><br>
-							It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
-							The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 
-							'Content here, content here', making it look like readable English. Many desktop publishing packages and web page 
-							editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites 
-							still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-						</p>
-					</div>
-				</div>
-            </div>
+            
         </article>
 	</div>
 	</body>

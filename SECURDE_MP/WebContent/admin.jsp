@@ -206,7 +206,7 @@
                 text-decoration: underline;
             }
 			
-			#productFormat {
+			#productListFormat {
 				width: 86%;
 				height: auto;
 				float: left;
@@ -214,7 +214,7 @@
                 left: 115px;
 			}
 			
-			.productContainer {
+			.productListContainer {
 				position: relative;
 				width: 350px;
 				height: 550px;
@@ -230,7 +230,7 @@
 				position: relative;
 			}
 			
-			.productDesc {
+			.productListDesc {
 				position: absolute;
 				width: 350px;
 				height: 550px;
@@ -240,23 +240,23 @@
 				visibility: hidden;
 			}
 			
-			.productContainer:hover .productDesc {
+			.productListContainer:hover .productListDesc {
 				visibility: visible;
 				background-color: rgba(35, 35, 35, 0.75);
 				cursor: pointer;
 			}
 			
-			.productContainer:hover .productName {
+			.productListContainer:hover .productListName {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productContainer:hover .price {
+			.productListContainer:hover .priceList {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productName {
+			.productListName {
 				position: relative;
 				font-size: 16px;
 				color: #fff;
@@ -267,7 +267,7 @@
 				top: 225px;
 			}
 			
-			.price {
+			.priceList {
 				position: relative;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
@@ -310,9 +310,11 @@
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
-		<article id = "productFormat">
-            
-        </article>
+		<div id = "productListFormat">
+            <a href = 'adminproduct.jsp' id = "productLink">
+			
+			</a>
+        </div>
 	</div>
 	</body>
 	

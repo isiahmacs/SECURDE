@@ -7,6 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
+
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -428,36 +429,10 @@
 			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.html" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.html" id = "collA">Collections</a> <span class="separator">Â»</span> Product</p>
+            <p id = "subCaption"><a href = "index.html" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.html" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-            <div id = "productContainer">
-                <img src = "images/Shopify-Uncaged03-patch01.jpg"></img>
-				<div id = "productDescCont">
-					<div id = "productNameCont">
-						<p id = "productName">Uncaged 03 Embroidered Patch</p>
-						<span id = "price">$10.00</span>
-						<button id = "editProduct">Edit Product</button>
-						<button id = "deleteProduct">Delete Product</button> <br>
-					</div>
-					<div id = "productDesc">
-						<p id = "description">
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the 
-							industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
-							scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap 
-							into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the 
-							release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software 
-							like Aldus PageMaker including versions of Lorem Ipsum.
-							<br><br>
-							It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
-							The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 
-							'Content here, content here', making it look like readable English. Many desktop publishing packages and web page 
-							editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites 
-							still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-						</p>
-					</div>
-				</div>
-            </div>
+            
         </article>
 	</div>
 	</body>

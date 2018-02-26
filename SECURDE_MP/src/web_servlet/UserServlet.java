@@ -36,7 +36,8 @@ import beans_model.User;
 						   "/logout",
 						   "/add",
 						   "/sendVerification",
-						   "/getProducts"})
+						   "/getProducts",
+						   "/viewProduct"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
@@ -63,6 +64,7 @@ public class UserServlet extends HttpServlet {
 			case "/logout": performLogout(request, response); break;
 			case "/sendVerification": performVerification(request, response); break;
 			case "/getProducts": getProducts(request, response); break;
+			case "/viewProduct": viewProduct(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
@@ -388,25 +390,92 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void getProducts(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** UPDATING POST FEED ************************");
+		Cookie[] cookies;
 		ArrayList<Product> productList = UserService.getProducts();
 		String htmlPostList = "";
 		
-		
-	    for(Product p : productList){
-			htmlPostList += "<div class = 'productContainer' productId = '" + p.getProductId() + "'>" +
-							"<a href = 'user/product.html'><img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
-							"	<div class='productDesc'>" +
-					        "   	<p class = 'productName'>" + p.getProductName() + "</p>" +
-							" 		<p class = 'price'>$" + df2.format(p.getPrice()) + "</p>" +
-					        "	</div>" + 
-							"</a>" +
-					        "</div> ";
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				for(Product p : productList){
+					htmlPostList += "<div class = 'productListContainer' id = '" + p.getProductId() + "'>" +
+									"<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
+									"	<div class='productListDesc'>" +
+									"   	<p class = 'productListName'>" + p.getProductName() + "</p>" +
+									" 		<p class = 'priceList'>$" + df2.format(p.getPrice()) + "</p>" +
+									"	</div>" + 
+									"</div> ";
+				}
+				
+				System.out.println(productList);
+				response.setContentType("text/html"); 
+				response.setCharacterEncoding("UTF-8"); 
+				response.getWriter().write(htmlPostList);       
+				System.out.println("*******************************************");
+			}
+			else if(c.getName().equals("ADMIN")) {
+				for(Product p : productList){
+					htmlPostList += "<div class = 'productListContainer' id = '" + p.getProductId() + "'>" +
+									"<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
+									"	<div class='productListDesc'>" +
+									"   	<p class = 'productListName'>" + p.getProductName() + "</p>" +
+									" 		<p class = 'priceList'>$" + df2.format(p.getPrice()) + "</p>" +
+									"	</div>" + 
+									"</div> ";
+				}
+				
+				System.out.println(productList);
+				response.setContentType("text/html"); 
+				response.setCharacterEncoding("UTF-8"); 
+				response.getWriter().write(htmlPostList);       
+				System.out.println("*******************************************");
+			}
+			
 		}
 		
-		System.out.println(productList);
+	}
+	
+	/**
+	 * Retrieves a product
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @return List of Posts
+	 */
+	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GETTING PRODUCT ************************");
+		int productid = 0;
+		/*try {
+			productid = Integer.parseInt(request.getParameter("productId"));
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
+		}*/
+		
+		System.out.println(productid);
+		
+		Product p = UserService.getProduct(productid);
+		String htmlProduct = "";
+		
+
+		htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
+							"<img src = 'images/" + p.getProductImage() + "'></img>" +
+							"	<div class = 'productDescCont'>" +
+							"		<div class = 'productNameCont'>" +
+					        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
+							" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+							"			<button class = 'addtoCart'>Add to Cart</button> <br>" +
+					        "		</div>" + 
+							"		<div class = 'productDesc'>" +
+							"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
+							"		</div>" +
+							"	</div>" + 
+					        "</div> ";
+		
+		System.out.println(p);
 	    response.setContentType("text/html"); 
 	    response.setCharacterEncoding("UTF-8"); 
-	    response.getWriter().write(htmlPostList);       
+	    response.getWriter().write(htmlProduct);       
 		System.out.println("*******************************************");
 		
 	}
