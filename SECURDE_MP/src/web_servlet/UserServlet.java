@@ -63,14 +63,14 @@ public class UserServlet extends HttpServlet {
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
-		request.getQueryString();
-			String hash = request.getParameter("verify");
+		/*request.getQueryString();
+		String hash = request.getParameter("verify");
 			
-			System.out.println("****************VERIFICATION SERVLET*******************");
-			UserService.verifyStudent(hash);
-			System.out.println("******************************************************");
+		System.out.println("****************VERIFICATION SERVLET*******************");
+		UserService.verifyStudent(hash);
+		System.out.println("******************************************************");
 			
-			response.sendRedirect("sign.jsp");
+		response.sendRedirect("sign.jsp");*/
 			
 	}
 
@@ -87,7 +87,7 @@ public class UserServlet extends HttpServlet {
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
-		doGet(request, response);
+		//doGet(request, response);
 	}
 	
 	/**
@@ -346,9 +346,14 @@ public class UserServlet extends HttpServlet {
 		properties.put("mail.smtp.port", "465");
 
 		
-		Session session = Session.getInstance(properties, null);
-	    session.setDebug(true);
-
+		Session session = Session.getInstance(properties,  
+			    new javax.mail.Authenticator() {  
+					@Override
+		      		protected javax.mail.PasswordAuthentication getPasswordAuthentication() {  
+		      			return new javax.mail.PasswordAuthentication(SECURDE_EMAIL, SECURDE_PASS);  
+		      		}  
+		    });
+		
 		try {
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(SECURDE_EMAIL));
@@ -356,9 +361,7 @@ public class UserServlet extends HttpServlet {
 			message.setSubject(subject);
 			message.setContent(generatedMsg, "text/plain");
 			
-			SMTPTransport t = (SMTPTransport)session.getTransport("smtp");
-	        t.connect(SECURDE_EMAIL, SECURDE_PASS);
-	        t.sendMessage(message, message.getAllRecipients());
+            Transport.send(message/*, username, password*/);
 			resultMessage = "Message sent successfully!";
 		} catch (MessagingException e) {
 			resultMessage = "Unable to send message!";
@@ -394,6 +397,7 @@ public class UserServlet extends HttpServlet {
 					        "   	<p class = 'productName'>" + p.getProductName() + "</p>" +
 							" 		<p class = 'price'>" + p.getPrice() + "</p>" +
 					        "	</div>" + 
+							"</a>" +
 					        "</div> ";
 		}
 		

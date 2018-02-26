@@ -69,12 +69,12 @@ function accPassMismatch(data) {
 	
 	//redirect to adminhomepage.
 	else if(data === "PASS-LOGIN-ADMIN"){
-		document.location.href = 'index.jsp';
+		document.location.href = 'admin.jsp';
 	}
 	
 	//redirect to user homepage.
 	else {
-		document.location.href = 'index.jsp';
+		document.location.href = 'user.jsp';
 	}
 }
 

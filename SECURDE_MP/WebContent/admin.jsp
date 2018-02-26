@@ -282,6 +282,7 @@
 			
 			#productFormat {
 				width: 86%;
+				height: auto;
 				float: left;
                 position: relative;
                 left: 115px;
@@ -290,7 +291,7 @@
 			.productContainer {
 				position: relative;
 				width: 350px;
-				height: 550px;
+				height: 600px;
 				margin-right: 30px;
 				display: inline-block;
 			}
@@ -299,7 +300,7 @@
 				width: 350px;
 				height: 550px;
 				margin-right: 25px;
-				margin-bottom: 5px;
+				margin-bottom: 20px;
 				position: relative;
 			}
 			
@@ -310,13 +311,13 @@
 				margin: 0 auto;
 				background-color: rgba(35, 35, 35, 0.75);
 				top: 0px;
-				text-align: center;
 				visibility: hidden;
 			}
 			
 			.productContainer:hover .productDesc {
 				visibility: visible;
 				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
 			}
 			
 			.productContainer:hover .productName {
@@ -331,9 +332,10 @@
 			
 			.productName {
 				position: relative;
-				font-size: 20px;
+				font-size: 16px;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
                 letter-spacing: 1px;
 				text-align: center;
 				top: 225px;
@@ -347,8 +349,8 @@
                 font-weight: bold;
                 text-transform: uppercase;
 				text-align: center;
+				top: 225px;
 				letter-spacing: 1px;
-				top:225px;
 			}
 			
 			#funImage {
@@ -376,49 +378,17 @@
         <div id = "header">
             <a href = "#"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <p id = "myCart"><a href = "cart.jsp">My Cart (1)</a></p>
-            <p id = "join"><a href = "sign.jsp">Join</a></p>
-           	<p id = "sign-in"><a href = "sign.jsp">Sign In</a></p>
-			<p id = "sign-out"><a href = "logout">Sign Out</a></p>
-			<p id = "account"><a href = "sign.jsp">Account</a></p>
+            <a href = "cart.jsp"><p id = "myCart">My Cart (1)</p></a>
+            <a href = "sign.jsp"><p id = "join">Join</p></a>
+            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
+			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
+			<a href = "sign.jsp"><p id = "account">Account</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<article id = "productFormat">
-			<div class = "productContainer">
-				<a href = "userproduct.jsp"  >
-					<img class = "img" src="images/product1.png"></img>	
-					<div class = "productDesc">			
-						<p class = "productName"> MagikAmph</p>
-						<p class = "price"> $0.50</p>
-					</div>
-				</a>
-				
-				
-			</div>
-			<div class = "productContainer">
-				<a href = "userproduct.jsp"  >
-					<img class = "img" src="images/product2.jpg"></img>	
-					<div class = "productDesc">			
-						<p class = "productName"> Pik Haching </p>
-						<p class = "price"> $88.66</p>
-					</div>
-				</a>
-				
-				
-			</div>
-			<div class = "productContainer">
-				<a href = "userproduct.jsp"  >
-					<img class = "img" src="images/product3.jpg"></img>
-					<div class = "productDesc">				
-						<p class = "productName"> Nami-san and Some Dragon Action Figure </p>
-						<p class = "price"> $69.69</p>
-					</div>
-				</a>
-				
-				
-			</div>
+            
         </article>
 	</div>
 	</body>

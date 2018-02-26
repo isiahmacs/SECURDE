@@ -28,7 +28,7 @@ public class AdminService {
 			ResultSet rs = st.executeQuery();
 		
 			while(rs.next()) {
-				if(p.authenticate(password.toCharArray(), rs.getString("password"))) {
+				if(password.equals(rs.getString("password"))) {
 					System.out.println("Admin found, valid!");
 					found = true;
 					break;

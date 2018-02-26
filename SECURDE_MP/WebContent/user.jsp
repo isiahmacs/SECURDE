@@ -151,7 +151,6 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #account:hover {
@@ -176,7 +175,6 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #sign-out:hover {
@@ -201,6 +199,7 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
+                display: none;
 			}
             
             #sign-in:hover {
@@ -225,6 +224,7 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
+                display: none;
 			}
             
             #join:hover {
@@ -386,39 +386,7 @@
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<article id = "productFormat">
-			<div class = "productContainer">
-				<a href = "userproduct.jsp"  >
-					<img class = "img" src="images/product1.png"></img>	
-					<div class = "productDesc">			
-						<p class = "productName"> MagikAmph</p>
-						<p class = "price"> $0.50</p>
-					</div>
-				</a>
-				
-				
-			</div>
-			<div class = "productContainer">
-				<a href = "userproduct.jsp"  >
-					<img class = "img" src="images/product2.jpg"></img>	
-					<div class = "productDesc">			
-						<p class = "productName"> Pik Haching </p>
-						<p class = "price"> $88.66</p>
-					</div>
-				</a>
-				
-				
-			</div>
-			<div class = "productContainer">
-				<a href = "userproduct.jsp"  >
-					<img class = "img" src="images/product3.jpg"></img>
-					<div class = "productDesc">				
-						<p class = "productName"> Nami-san and Some Dragon Action Figure </p>
-						<p class = "price"> $69.69</p>
-					</div>
-				</a>
-				
-				
-			</div>
+			
         </article>
 	</div>
 	</body>

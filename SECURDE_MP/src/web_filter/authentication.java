@@ -115,24 +115,51 @@ public class authentication implements Filter {
 		switch(url) {
 		    /*Public Pagges*/
 		    case "/sign.jsp":
-			case "/index.jsp": //If user, proceed to UserHomePage.
+		    case "/index.jsp": //If user, proceed to UserHomePage.
 				                System.out.println("Access public pages...");
 								if(user) {
 									 System.out.println("Redirecting to index.jsp.."); 
-									 res.sendRedirect("index.jsp"); 
+									 res.sendRedirect("user.jsp"); 
 								 }
 								
 								 //If admin, go to adminHomePage
 								 else if(admin) {
 									 System.out.println("Redirecting to index.jsp..");
-									 res.sendRedirect("index.jsp");
+									 res.sendRedirect("admin.jsp");
 								 }
 								 //No user, continue.
 								 else {
 									 System.out.println("Continue on this page..");
 									 chain.doFilter(request, response);
 								 }
-								 break; 
+			break;
+			/*Private Pages*/
+			case "/user.jsp": //if cookie exists, continue
+								System.out.println("Access user pages..");
+				                if(user) {
+				               	   System.out.println("Continue on this page..");
+				                   chain.doFilter(request, response);
+								}
+				                //If not, go to homepage
+				                
+				                else {
+				               	  System.out.println("Redirecting to index.jsp..");
+				               	  res.sendRedirect("index.jsp");
+				                }
+			break; 
+			case "/admin.jsp": //if cookie exists, continue
+				System.out.println("Access user pages..");
+                if(admin) {
+               	   System.out.println("Continue on this page..");
+                   chain.doFilter(request, response);
+				}
+                //If not, go to homepage
+                
+                else {
+               	  System.out.println("Redirecting to index.jsp..");
+               	  res.sendRedirect("index.jsp");
+                }
+break; 
 			
 			default: System.out.println("ERORR (In authentication filter): Path does not exist ");
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -112,7 +113,7 @@
             #header {
                 position: relative;
                 width: 85%;
-                height: 35px;
+                height: 40px;
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
             }
@@ -408,7 +409,7 @@
 			<a href = "sign.jsp"><p id = "account">Account</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
+            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">Â»</span> Product</p>
         </div>
 		<article id = "productFormat">
             <div id = "productContainer">
