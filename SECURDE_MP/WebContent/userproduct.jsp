@@ -400,13 +400,11 @@
 	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
+            <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "cart.jsp"><p id = "myCart">My Cart (1)</p></a>
-            <a href = "sign.jsp"><p id = "join">Join</p></a>
-            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
-			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
-			<a href = "sign.jsp"><p id = "account">Account</p></a>
+            <p id = "myCart"><a href = "cart.jsp">My Cart</a></p>
+			<p id = "sign-out"><a href = "logout">Sign Out</a></p>
+			<p id = "account"><a href = "transactions.jsp">Account</a></p>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">Â»</span> Product</p>

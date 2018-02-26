@@ -135,12 +135,12 @@
 				letter-spacing: 0px;
 			}
 			
-			#account {
+			#addProd {
 				position: relative;
                 float: right;
                 display: inline;
                 bottom: 14px;
-                right: 40px;
+                right: 20px;
                 text-align: right;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -151,10 +151,9 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
-            #account:hover {
+            #addProd:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -165,7 +164,6 @@
                 float: right;
                 display: inline;
                 bottom: 14px;
-                right: 20px;
                 text-align: right;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -176,81 +174,9 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #sign-out:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #sign-in {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 40px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #sign-in:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #join {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 20px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #join:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #myCart {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #myCart:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -376,13 +302,10 @@
 	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "#"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
+            <a href = "#"><p id = "titleCaption">VIEW ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "cart.jsp"><p id = "myCart">My Cart (1)</p></a>
-            <a href = "sign.jsp"><p id = "join">Join</p></a>
-            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
-			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
-			<a href = "sign.jsp"><p id = "account">Account</p></a>
+			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
+			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
