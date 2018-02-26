@@ -7,8 +7,7 @@ function loadProducts(){
 	$.ajax({
  	    context: this,
         url:'getProducts',
-        data:{'user': 'user'},
-        type: 'GET',
+        type: 'POST',
         cache:false,
         success: function(data){
         	var productFeed = document.getElementById("productFormat");
