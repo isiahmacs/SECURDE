@@ -71,6 +71,7 @@ public class UserServlet extends HttpServlet {
 			case "/getProducts": getProducts(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
 			case "/viewCart": viewCart(request, response); break;
+			case "/addtoCart": addtoCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
@@ -95,7 +96,6 @@ public class UserServlet extends HttpServlet {
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
-			case "/addtoCart": addtoCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -520,7 +520,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Product added to cart!");
 
 		System.out.println("*******************************************");
-		response.sendRedirect("cart.jsp");
+		request.getRequestDispatcher("cart.jsp").forward(request, response);
 	}
 
 	/**
