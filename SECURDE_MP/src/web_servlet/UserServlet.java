@@ -531,9 +531,11 @@ public class UserServlet extends HttpServlet {
 	private void viewCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
 		HttpSession s = request.getSession();
-		userId = s.getAttribute("UN");
+		String userId = (String) s.getAttribute("UN");
+		
+		int id = Integer.parseInt(userId);
+		ArrayList<Cart> cartList = UserService.getCart(id);
 
-		ArrayList<Cart> cartList = UserService.getCart(userId);
 		String htmlProduct = "";
 		
 		for(Cart c : cartList){
@@ -545,7 +547,6 @@ public class UserServlet extends HttpServlet {
 							"	<td align = 'center' id = 'removeRow'><button class = 'removeItem'>X</button></td>" +
 							"	<td class = 'priceTag' align = 'center'>" + c.getProductPrice() + "</td>" + 
 							"</tr> " +
-							"</table>" +
 							"<p id = 'subtotal'>Subtotal:" + c.getSubPrice() + "</p> <br>";
 		}
 				

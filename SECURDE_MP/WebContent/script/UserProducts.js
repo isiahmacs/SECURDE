@@ -20,7 +20,7 @@ function loadProduct(){
 	        	}
 	
 	        	// Append html snippet 
-                $(buttonProduct).append(buttonProduct);
+                $(productFeed).append(buttonProduct);
 	    	    $(productFeed).append(data);
         	}
     	},

@@ -492,7 +492,7 @@
 								<th width = 100>Remove</th>
 								<th width = 100 class = "priceTag">Price</th>
 							</tr>
-							
+						</table>	
 						<input type = "submit" id = "update" value = "Update Cart" /> <br>
 					</form>
 					<button id = "checkout">Check Out</button>
