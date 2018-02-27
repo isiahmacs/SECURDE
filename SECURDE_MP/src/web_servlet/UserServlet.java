@@ -546,8 +546,7 @@ public class UserServlet extends HttpServlet {
 							"	<td align = 'center'><input type = 'text' class = 'quantity' name = 'quantity' /></td>" +
 							"	<td align = 'center' id = 'removeRow'><button class = 'removeItem'>X</button></td>" +
 							"	<td class = 'priceTag' align = 'center'>$" + c.getProductPrice() + "</td>" + 
-							"</tr> " +
-							"<p id = 'subtotal'>Subtotal:" + c.getSubPrice() + "</p> <br>";
+							"</tr> ";
 		}
 				
 		System.out.println(cartList);

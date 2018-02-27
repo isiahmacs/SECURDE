@@ -114,7 +114,7 @@
             #header {
                 position: relative;
                 width: 85%;
-                height: 35px;
+                height: 40px;
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
             }
@@ -132,8 +132,8 @@
 				height: 30px;
 				width: 35%;
                 margin: 0 auto;
+                top: 2px;
 				left: 200px;
-				top: 2px;
 				font-size: 13px;
                 text-align: center;
 				border: 1px solid #E7E7E7;
@@ -174,7 +174,6 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #account:hover {
@@ -199,58 +198,9 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #sign-out:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #sign-in {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 40px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-			            
-            #sign-in:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #join {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 20px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #join:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -319,6 +269,7 @@
 				font-weight: bold;
                 letter-spacing: 1px;
                 line-height: 10px;
+                display: none;
             }
 			
 			th {
@@ -433,7 +384,6 @@
 			#checkout {
 				position: relative;
 				left: 995px;
-				bottom: 15px;
 				width: 150px;
 				height: 35px;
 				margin-bottom: 50px;
@@ -469,11 +419,9 @@
         <div id = "header">
             <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "#"><p id = "myCart">My Cart (1)</p></a>
-            <a href = "sign.jsp"><p id = "join">Join</p></a>
-            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
-			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
-			<a href = "sign.jsp"><p id = "account">Account</p></a>
+            <a href = "#"><p id = "myCart">My Cart</p></a>
+            <p id = "sign-out"><a href = "logout">Sign Out</a></p>
+			<p id = "account"><a href = "transactions.jsp">Account</a></p>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> Your Shopping Cart</p>
@@ -493,6 +441,7 @@
 								<th width = 100 class = "priceTag">Price</th>
 							</tr>
 						</table>	
+						<p id = "subtotal">Subtotal: $10.99</p> <br>
 						<input type = "submit" id = "update" value = "Update Cart" /> <br>
 					</form>
 					<button id = "checkout">Check Out</button>
