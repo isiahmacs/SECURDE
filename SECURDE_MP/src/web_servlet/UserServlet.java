@@ -450,7 +450,7 @@ public class UserServlet extends HttpServlet {
 		
 		productId = 0;
 		try {
-			productid = Integer.parseInt(request.getParameter("productId"));
+			productId = Integer.parseInt(request.getParameter("productId"));
 		} catch(NumberFormatException e) {
 			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
 		}
