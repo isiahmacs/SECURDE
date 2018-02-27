@@ -414,6 +414,7 @@ public class UserServlet extends HttpServlet {
 									" 		<p class = 'priceList'>$" + df2.format(p.getPrice()) + "</p>" +
 									"	</div>" + 
 									"</div> ";
+					System.out.println(p.getProductId());
 				}
 				
 				System.out.println(productList);
