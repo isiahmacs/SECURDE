@@ -530,7 +530,9 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
-		
+		HttpSession s = request.getSession();
+		userId = s.getAttribute("UN");
+
 		ArrayList<Cart> cartList = UserService.getCart(userId);
 		String htmlProduct = "";
 		
