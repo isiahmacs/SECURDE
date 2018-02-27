@@ -285,10 +285,10 @@
                 text-transform: uppercase;
 			}
 			
-			#addtoCart {
+			#addtoCartBut {
 				position: relative;
-				left: 500px;
-				top: 70px;
+				left: 50px;
+				bottom: 25px;
 				width: 150px;
 				height: 35px;
 				background-color: #353535;
@@ -301,12 +301,11 @@
 				font-weight: bold;
 			}
 			
-			#addtoCart:hover {
+			#addtoCartBut:hover {
 				background-color: #454545;
 				cursor: pointer;
 				transition: all .15s ease-in-out;
 			}
-			
 			.productDesc {
 				position: relative;
 				width: 100%;
@@ -362,7 +361,7 @@
             <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-            <a href = "addtoCart" id = "addtoCartLink"><button id = "addtoCart">Add to Cart</button></a>
+            
         </article>
 	</div>
 	</body>

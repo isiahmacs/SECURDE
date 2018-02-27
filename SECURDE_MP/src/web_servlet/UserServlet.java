@@ -488,6 +488,7 @@ public class UserServlet extends HttpServlet {
 							"		<div class = 'productNameCont'>" +
 					        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
 							" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+							"			<a href = 'addtoCart' id = 'addtoCartLink'><button id = 'addtoCartBut'>Add to Cart</button></a>" +
 					        "		</div>" + 
 							"		<div class = 'productDesc'>" +
 							"			<p class = 'description'>" + p.getProductDescription() + "</p>" +

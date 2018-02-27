@@ -556,7 +556,7 @@
 			    border: 1px solid #E7E7E7;
 			    z-index: 1000;
 				height: 135px;
-				
+				display: none;
 			}
 			
 			#modver {
