@@ -336,7 +336,7 @@ public class UserService {
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				cart.add(new Cart(rs.getInt("t.productid"), rs.getInt("t.user"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getDouble("SUM(p.price)")));
+				cart.add(new Cart(rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getDouble("SUM(p.price)")));
 				//System.out.println("Product: " + rs.getString("p.productname"));
 			} 
 			

@@ -337,8 +337,8 @@
 			
 			#addtoCartBut {
 				position: relative;
-				left: 50px;
-				bottom: 25px;
+				left: 500px;
+				top: 70px;
 				width: 150px;
 				height: 35px;
 				background-color: #353535;
@@ -412,7 +412,7 @@
             <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-            
+            <button id = "addtoCartBut">Add to Cart</button>
         </article>
 	</div>
 	</body>

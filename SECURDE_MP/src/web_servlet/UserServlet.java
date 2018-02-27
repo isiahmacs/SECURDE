@@ -71,7 +71,6 @@ public class UserServlet extends HttpServlet {
 			case "/getProducts": getProducts(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
 			case "/viewCart": viewCart(request, response); break;
-			case "/addtoCart": addtoCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
@@ -96,6 +95,7 @@ public class UserServlet extends HttpServlet {
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
+			case "/addtoCart": addtoCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -488,7 +488,6 @@ public class UserServlet extends HttpServlet {
 							"		<div class = 'productNameCont'>" +
 					        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
 							" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
-							"			<a href = 'addtoCart' id = 'addtoCartLink'><button id = 'addtoCartBut'>Add to Cart</button></a>" +
 					        "		</div>" + 
 							"		<div class = 'productDesc'>" +
 							"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
@@ -512,9 +511,7 @@ public class UserServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void addtoCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("*****************ADD TO CART ************************");
-		
-		Product p = UserService.getProduct(productId);
+		System.out.println("***************** ADD TO CART ************************");
 
 		UserService.addtoCart(productId, userId);
 		System.out.println("Product added to cart!");
