@@ -234,7 +234,7 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE quantity > 0 order by productid desc;");
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE quantity > 0 order by productid asc;");
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
