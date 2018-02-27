@@ -542,10 +542,10 @@ public class UserServlet extends HttpServlet {
 			htmlProduct += "<tr id = '" + c.getProductId() + "'>" +
 							"	<td style='display: flex; flex-wrap: nowrap; align-items: center;'>" + 
 							"	<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</td>" +
-							"	<td align = 'center' id = 'itemPrice'>" + c.getProductPrice() + "</td>" +
+							"	<td align = 'center' id = 'itemPrice'>$" + c.getProductPrice() + "</td>" +
 							"	<td align = 'center'><input type = 'text' class = 'quantity' name = 'quantity' /></td>" +
 							"	<td align = 'center' id = 'removeRow'><button class = 'removeItem'>X</button></td>" +
-							"	<td class = 'priceTag' align = 'center'>" + c.getProductPrice() + "</td>" + 
+							"	<td class = 'priceTag' align = 'center'>$" + c.getProductPrice() + "</td>" + 
 							"</tr> " +
 							"<p id = 'subtotal'>Subtotal:" + c.getSubPrice() + "</p> <br>";
 		}

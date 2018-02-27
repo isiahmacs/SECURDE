@@ -485,7 +485,7 @@
 				<form method = "checkOut" action = "POST">
 					<form method = "updateCart" action = "POST">
 		                <table id = "itemCart" cellspacing = "0" cellpadding = "0">
-							<tr>
+							<tr id = "rowHeader">
 								<th width = 1400>Product</th>
 								<th width = 150>Item Price</th>
 								<th width = 100>Quantity</th>

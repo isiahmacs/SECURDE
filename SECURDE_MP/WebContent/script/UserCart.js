@@ -11,6 +11,8 @@ function loadCart(){
         type: 'GET',
         cache:false,
         success: function(data){
+            var tableRowHeader = document.getElementById("rowHeader");
+            var tableHeader = document.getElementsByTagName("th");
         	var cartFeed = document.getElementById("itemCart");
         	if(cartFeed != null){
 	        	// Remove all children
@@ -19,6 +21,8 @@ function loadCart(){
 	        	}
 	
 	        	// Append html snippet 
+                $(tableRowHeader).append(tableHeader);
+                $(cartFeed).append(tableRowHeader);
 	    	    $(cartFeed).append(data);
         	}
     	},
