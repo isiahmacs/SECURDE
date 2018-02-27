@@ -108,7 +108,7 @@ public class UserService {
 			
 			while(rs.next()) {
 				System.out.println("Id found!");
-				id = rs.getInt("id");
+				id = rs.getInt("userid");
 				break;
 			} 
 				
