@@ -334,7 +334,7 @@
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<div id = "productListFormat">
-			<a href = 'userproduct.jsp' id = "productLink">
+			<a href = 'viewProduct' id = "productLink">
 			
 			</a>
         </div>
@@ -368,9 +368,29 @@
 		        }
 		    });
 		}
+
+		function loadProduct(productId) {
+			$.ajax({
+		 	    context: this,
+		        url:'viewProduct',
+		        data: {'productId', productId},
+		        type: 'POST',
+		        cache:false,
+		        success: function(data){
+		        	window.location.href = "userproduct.jsp";
+		    	},
+		        error:function(){
+		            console.log("URL getPosts does not exist");
+		        }
+		    });
+		}
 	
 		$(document).ready(function() {
 			loadProducts();
+			$("#productLink").click(function() {
+				var productId = $(".productListContainer").attr("id");
+				loadProduct(productId);	
+			});
 		});
 	</script>
 	

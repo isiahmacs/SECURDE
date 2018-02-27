@@ -7,7 +7,7 @@ var productId;
 function loadProduct(){
 	$.ajax({
  	    context: this,
-        url:'viewProduct',
+        data: {'productId' : producid},
         type: 'GET',
         cache:false,
         success: function(data){

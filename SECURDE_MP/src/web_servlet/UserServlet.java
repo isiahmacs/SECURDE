@@ -42,6 +42,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
 	private String matchError;
+	private in productId;
 	
 	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
 	private static final String SECURDE_PASS = "Securdeproj";
@@ -445,12 +446,12 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
-		int productid = 0;
-		/*try {
+		productId = 0;
+		try {
 			productid = Integer.parseInt(request.getParameter("productId"));
 		} catch(NumberFormatException e) {
 			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
-		}*/
+		}
 		
 		System.out.println(productid);
 		

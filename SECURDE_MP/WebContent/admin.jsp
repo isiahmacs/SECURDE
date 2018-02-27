@@ -311,7 +311,7 @@
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<div id = "productListFormat">
-            <a href = 'adminproduct.jsp' id = "productLink">
+            <a href = 'viewProduct' id = "productLink">
 			
 			</a>
         </div>
