@@ -364,7 +364,7 @@
 		        	}
 		    	},
 		        error:function(){
-		            console.log("URL getPosts does not exist");
+		            console.log("URL getProducts does not exist");
 		        }
 		    });
 		}
@@ -372,7 +372,7 @@
 		function loadProduct(productId) {
 			$.ajax({
 		 	    context: this,
-		        url:'viewProduct',
+		        url:'getProductId',
 		        data: {'productId', productId},
 		        type: 'POST',
 		        cache:false,
@@ -380,7 +380,7 @@
 		        	window.location.href = "userproduct.jsp";
 		    	},
 		        error:function(){
-		            console.log("URL getPosts does not exist");
+		            console.log("URL loadProduct does not exist");
 		        }
 		    });
 		}

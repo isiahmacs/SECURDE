@@ -37,6 +37,7 @@ import beans_model.User;
 						   "/add",
 						   "/sendVerification",
 						   "/getProducts",
+						   "/getProductId",
 						   "/viewProduct"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -89,6 +90,7 @@ public class UserServlet extends HttpServlet {
 			case "/login": performLogin(request, response); break;
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
+			case "/getProductId": getProductId(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -435,6 +437,27 @@ public class UserServlet extends HttpServlet {
 		}
 		
 	}
+	/**
+	* Retrieves the id of the product
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @retur Product id
+	 */
+	private void getProductId(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GET PRODUCT ID ************************");
+		
+		productId = 0;
+		try {
+			productid = Integer.parseInt(request.getParameter("productId"));
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
+		}
+
+		System.out.println("*******************************************");
+
+	}
 	
 	/**
 	 * Retrieves a product
@@ -446,16 +469,10 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
-		productId = 0;
-		try {
-			productid = Integer.parseInt(request.getParameter("productId"));
-		} catch(NumberFormatException e) {
-			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
-		}
 		
-		System.out.println(productid);
+		System.out.println(productId);
 		
-		Product p = UserService.getProduct(productid);
+		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
 		
 

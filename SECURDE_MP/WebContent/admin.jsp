@@ -317,5 +317,57 @@
         </div>
 	</div>
 	</body>
+	<script type = "text/javascript">
+		function loadProducts(){
+			
+			$.ajax({
+		 	    context: this,
+		        url:'getProducts',
+		        type: 'GET',
+		        cache:false,
+		        success: function(data){
+		        	var link = document.getElementById("productLink");
+		        	var productFeed = document.getElementById("productListFormat");
+		        	if(productFeed != null){
+			        	// Remove all children
+			        	while (productFeed.firstChild) {	
+			        		productFeed.removeChild(productFeed.firstChild);
+			        	}
+			
+			        	// Append html snippet 
+			        	$(link).append(data);
+			    	    $(productFeed).append(link);
+		        	}
+		    	},
+		        error:function(){
+		            console.log("URL getProducts does not exist");
+		        }
+		    });
+		}
+
+		function loadProduct(productId) {
+			$.ajax({
+		 	    context: this,
+		        url:'getProductId',
+		        data: {'productId', productId},
+		        type: 'POST',
+		        cache:false,
+		        success: function(data){
+		        	window.location.href = "adminproduct.jsp";
+		    	},
+		        error:function(){
+		            console.log("URL loadProduct does not exist");
+		        }
+		    });
+		}
+	
+		$(document).ready(function() {
+			loadProducts();
+			$("#productLink").click(function() {
+				var productId = $(".productListContainer").attr("id");
+				loadProduct(productId);	
+			});
+		});
+	</script>
 	
 </html>

@@ -8,7 +8,6 @@ function loadProduct(){
 	$.ajax({
  	    context: this,
         url: 'viewProduct',
-        data: {'productId' : producid},
         type: 'GET',
         cache:false,
         success: function(data){
@@ -24,7 +23,7 @@ function loadProduct(){
         	}
     	},
         error:function(){
-            console.log("URL getPosts does not exist");
+            console.log("URL viewProduct does not exist");
         }
     });
 }
