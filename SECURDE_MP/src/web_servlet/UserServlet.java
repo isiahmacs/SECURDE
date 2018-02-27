@@ -488,7 +488,6 @@ public class UserServlet extends HttpServlet {
 							"		<div class = 'productNameCont'>" +
 					        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
 							" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
-							"			<a href = 'addtoCart'><button class = 'addtoCart'>Add to Cart</button></a> <br>" +
 					        "		</div>" + 
 							"		<div class = 'productDesc'>" +
 							"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
@@ -520,6 +519,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Product added to cart!");
 
 		System.out.println("*******************************************");
+		response.sendRedirect("cart.jsp");
 	}
 
 	/**

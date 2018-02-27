@@ -433,7 +433,8 @@
             <p id = "subCaption"><a href = "index.html" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.html" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-            
+            <a href = "editItem" id = "editItemLink"><button id = "removeItem">Remove Item</button></a>
+            <a href = "removeItem" id = "removeItemLink"><button id = "editItem">Remove Item</button></a>
         </article>
 	</div>
 	</body>
