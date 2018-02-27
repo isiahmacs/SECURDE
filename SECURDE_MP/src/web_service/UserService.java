@@ -305,8 +305,8 @@ public class UserService {
 					"VALUES (?, ?)"
 					);
 			
-			stmt.setString(1, productId);
-			stmt.setString(2, userId);
+			stmt.setInt(1, productId);
+			stmt.setInt(2, userId);
 			
 			stmt.executeUpdate();
 			
@@ -332,7 +332,7 @@ public class UserService {
 			Connection conn = DatabaseManager.getConnection();
 
 			PreparedStatement st = conn.prepareStatement("SELECT t.productid, t.userid, p.image, p.productname, p.price, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE t.userid = ? AND p.productid = t.productid order by transactionid asc;");
-			st.setInt(userId);
+			st.setInt(1, userId);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
