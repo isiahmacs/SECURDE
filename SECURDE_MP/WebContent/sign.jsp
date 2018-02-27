@@ -611,7 +611,7 @@
         <div id = "header">
             <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "cart.jsp"><p id = "myCart">My Cart (1)</p></a>
+            <a href = "cart.jsp"><p id = "myCart">My Cart</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> Account</p>

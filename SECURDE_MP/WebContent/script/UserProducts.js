@@ -11,6 +11,8 @@ function loadProduct(){
         type: 'GET',
         cache:false,
         success: function(data){
+            var link = document.getElementById("addtoCartLink");
+            var button = document.getElementById("addtoCart");
         	var productFeed = document.getElementById("productFormat");
         	if(productFeed != null){
 	        	// Remove all children
@@ -19,6 +21,8 @@ function loadProduct(){
 	        	}
 	
 	        	// Append html snippet 
+                $(link).append(button);
+                $(productFeed).append(link);
 	    	    $(productFeed).append(data);
         	}
     	},
