@@ -133,56 +133,6 @@
 				opacity: 0.75;
 				letter-spacing: 0px;
 			}
-			
-			#account {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 40px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-				display: none;
-			}
-            
-            #account:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-			
-			#sign-out {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 20px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-				display: none;
-			}
-            
-            #sign-out:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
             
             #sign-in {
 				position: relative;
@@ -375,11 +325,9 @@
         <div id = "header">
             <a href = "#"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <p id = "myCart"><a href = "cart.jsp">My Cart (1)</a></p>
+            <p id = "myCart"><a href = "cart.jsp">My Cart</a></p>
             <p id = "join"><a href = "sign.jsp">Join</a></p>
            	<p id = "sign-in"><a href = "sign.jsp">Sign In</a></p>
-			<p id = "sign-out"><a href = "logout">Sign Out</a></p>
-			<p id = "account"><a href = "sign.jsp">Account</a></p>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>

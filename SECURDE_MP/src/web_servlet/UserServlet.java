@@ -27,6 +27,7 @@ import web_service.PasswordAuthentication;
 import web_service.UserService;
 import beans_model.Product;
 import beans_model.User;
+import beans_model.Cart;
 
 /**
  * Servlet implementation class UserServlet
@@ -38,12 +39,14 @@ import beans_model.User;
 						   "/sendVerification",
 						   "/getProducts",
 						   "/getProductId",
-						   "/viewProduct"})
+						   "/viewProduct",
+						   "/addtoCart",
+						   "/viewCart"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
 	private String matchError;
-	private int productId;
+	private int productId, userId;
 	
 	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
 	private static final String SECURDE_PASS = "Securdeproj";
@@ -67,6 +70,7 @@ public class UserServlet extends HttpServlet {
 			case "/sendVerification": performVerification(request, response); break;
 			case "/getProducts": getProducts(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
+			case "/viewCart": viewCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
@@ -91,6 +95,7 @@ public class UserServlet extends HttpServlet {
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
+			case "/addtoCart": addtoCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -151,6 +156,7 @@ public class UserServlet extends HttpServlet {
 			//check if validated
 			if(UserService.isValidated(email)) {
 				String userID = UserService.getUserID(email);
+				userId = Integer.parseInt(userID);
 				//set session attribute
 				s.setAttribute("UN", userID); 
 				System.out.println("Session(UN): " + s.getAttribute("UN"));
@@ -229,7 +235,7 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Add students
+	 * Add users
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -496,5 +502,58 @@ public class UserServlet extends HttpServlet {
 	    response.getWriter().write(htmlProduct);       
 		System.out.println("*******************************************");
 		
+	}
+
+	/**
+	 * Add users
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void addtoCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("*****************ADD TO CART ************************");
+		
+		Product p = UserService.getProduct(productId);
+
+		UserService.addtoCart(productId, userId);
+		System.out.println("Product added to cart!");
+
+		System.out.println("*******************************************");
+	}
+
+	/**
+	 * Retrieves a cart
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @return List of products in cart
+	 */
+	private void viewCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GETTING PRODUCT ************************");
+		
+		ArrayList<Cart> cartList = UserService.getCart(userId);
+		String htmlProduct = "";
+		
+		for(Cart c : cartList){
+			htmlProduct += "<tr id = '" + c.getProductId() + "'>" +
+							"	<td style='display: flex; flex-wrap: nowrap; align-items: center;'>" + 
+							"	<img src = 'images/" + c.getImage() + "'></img>" +
+							"	<td align = 'center' id = 'itemPrice'>" + c.getProductPrice() + "</td>" +
+							"	<td align = 'center'><input type = 'text' class = 'quantity' name = 'quantity' /></td>" +
+							"	<td align = 'center' id = 'removeRow'><button class = 'removeItem'>X</button></td>" +
+							"	<td class = 'priceTag' align = 'center'>" + c.getProductPrice() + "</td>" + 
+							"</tr> " +
+							"</table>" +
+							"<p id = 'subtotal'>Subtotal:" + c.getSubPrice() + "</p> <br>";
+		}
+				
+		System.out.println(cartList);
+		response.setContentType("text/html"); 
+		response.setCharacterEncoding("UTF-8"); 
+		response.getWriter().write(htmlProduct);       
+		System.out.println("*******************************************");
+
 	}
 }

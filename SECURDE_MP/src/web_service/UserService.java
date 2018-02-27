@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import beans_model.Product;
 import beans_model.User;
+import beans_model.Cart;
 
 public class UserService {
 	
@@ -287,5 +288,66 @@ public class UserService {
 		return product;
 		
 	}
+
+	/**
+	 * Adds the product to the cart table.
+	 * @param cart - the Cart object being added.
+	 */
+	public static void addtoCart(int productId, int userId) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement(
+					"INSERT INTO transactions (productid, userid) " +
+					"VALUES (?, ?)"
+					);
+			
+			stmt.setString(1, productId);
+			stmt.setString(2, userId);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
 	
+	/**
+	 * Retrieves a list of products in cart
+	 * @return List of products in cart
+	 */
+	public static ArrayList<Cart> getCart(int userId) {
+		System.out.println();
+		ArrayList<Cart> cart = new ArrayList<>();
+		try{
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+
+			PreparedStatement st = conn.prepareStatement("SELECT t.productid, t.userid, p.image, p.productname, p.price, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE t.userid = ? AND p.productid = t.productid order by transactionid asc;");
+			st.setInt(userId);
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				cart.add(new Cart(rs.getInt("t.productid"), rs.getInt("t.user"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getDouble("SUM(p.price)")));
+				//System.out.println("Product: " + rs.getString("p.productname"));
+			} 
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println();
+		return cart;
+		
+	}
 }

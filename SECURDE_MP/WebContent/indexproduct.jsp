@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Your Shopping Cart - PokeMerch</title>
+		<title>PokeMerch</title>
+		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="script/UserProducts.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -52,8 +55,8 @@
 				overflow: hidden;
                 width: 1350px;
                 position: relative;
+                margin: 0 auto;
                 top: 100px;
-				margin: 0 auto;
 			}
 			
 			#registerFormat {
@@ -102,8 +105,8 @@
                 letter-spacing: 0.5px;
                 font-weight: bold;
 				color: #353535;
-				font-family: Montserrat, Sans-serif;   
-            }        
+				font-family: Montserrat, Sans-serif; 
+            }
             
             #homeA:hover {
                 text-decoration: underline;
@@ -112,7 +115,7 @@
             #header {
                 position: relative;
                 width: 85%;
-                height: 35px;
+                height: 40px;
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
             }
@@ -156,57 +159,7 @@
 				letter-spacing: 0px;
 			}
 			
-			#account {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 40px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-				display: none;
-			}
-            
-            #account:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-			
-			#sign-out {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 20px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-				display: none;
-			}
-            
-            #sign-out:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #sign-in {
+			 #sign-in {
 				position: relative;
                 float: right;
                 display: inline;
@@ -223,7 +176,7 @@
                 line-height: 40px;
                 transition: all .15s ease-in-out;
 			}
-			            
+            
             #sign-in:hover {
                 color: #BBBBBB;
                 text-decoration: none;
@@ -276,140 +229,66 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-            
-            #cartFormat {
-				float: left;
+			
+			#productFormat {
 				width: 85%;
 				height: auto;
 				display: inline-block;
                 position: relative;
-                left: 100px;
-                top: 30px;
+                left: 120px;
+				bottom: 20px;
 			}
 			
-			#cartContainer {
+			.productContainer {
 				position: relative;
-			}
-			
-			#cart {
-				position: relative;
-                bottom: 60px;
-				font-size: 20px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                letter-spacing: 1px;
-                line-height: 40px;
-			}
-            
-            #itemCart {
-                position: relative;
-                bottom: 60px;
-				width: 100%;
-            }
-            
-            #emptyCart {
-                position: relative;
-				font-size: 13px;
-                bottom: 60px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                letter-spacing: 1px;
-                line-height: 10px;
-            }
-			
-			th {
-				padding: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                line-height: 10px;
-				font-size: 13px;
-				border-top: 1px solid #ABB2B9;
-				border-bottom: 1px solid #ABB2B9;
-				border-left: 1px solid #ABB2B9;
-				background-color: #EAECEE;
-				position: relative;
-			}
-			
-			td {
-				padding: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                line-height: 10px;
-				font-size: 13px;
-				border-bottom: 1px solid #ABB2B9;
-				border-left: 1px solid #ABB2B9;
-				position: relative;
-				letter-spacing: 1px;
-			}
-			
-			.priceTag {
-				border-right: 1px solid #ABB2B9;
+				display: flex; 
+				flex-wrap: nowrap; 
+				align-items: flex-start;
 			}
 			
 			img {
-				padding-right: 10px;
-				width: 77px;
-				height: 100px;
+				width: 350px;
+				height: 550px;
 			}
 			
-			.quantity {
-                display: inline;
+			.productDescCont {
 				position: relative;
-				height: 30px;
-				width: 50px;
-				font-size: 13px;
-                text-align: center;
-				border: 1px solid #E7E7E7;
-                border-radius: 2px;
-				background-color: #FDFEFE;
+				left: 50px;
+				width: 700px;
+				height: auto;
+			}
+			
+			.productNameCont {
+				position: relative;
+				width: 100%;
+				height: 75px;
+				border-bottom: 1px solid #EAECEE;
+			}
+			
+			.productName {
+				position: relative;
+				font-size: 20px;
+				bottom: 20px;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
-				outline: none;
-                transition: all .15s ease-in-out;
-			}
-            
-            .quantity:focus {
-                transition: all .15s ease-in-out;
-                box-shadow: 0px 0px 1px 1px #3C5AA6;
-            }
-			
-			.removeItem {
-				border: none;
-				background-color: transparent;
-				color: #353535;
-				font-family: Montserrat;
+				font-weight: bold;
+                letter-spacing: 1px;
 			}
 			
-			.removeItem:hover {
-                text-decoration: underline;
-				cursor: pointer;
-            }
-			
-			#subtotal {
+			.price {
 				position: relative;
-                float: right;
-                display: inline;
-                bottom: 50px;
-                text-align: right;
 				color: #353535;
+				bottom: 20px;
 				font-family: Montserrat, Sans-serif;
                 font-size: 16px;
                 font-weight: bold;
-                height: 40px;
                 text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
 			}
 			
-			#update {
+			.addtoCart {
 				position: relative;
-				margin-bottom: 10px;
-				left: 995px;
+				bottom: 20px;
+				left: 50px;
 				width: 150px;
 				height: 35px;
 				background-color: #353535;
@@ -422,34 +301,33 @@
 				font-weight: bold;
 			}
 			
-			#update:hover {
+			.addtoCart:hover {
 				background-color: #454545;
 				cursor: pointer;
 				transition: all .15s ease-in-out;
 			}
 			
-			#checkout {
+			.productDesc {
 				position: relative;
-				left: 995px;
-				bottom: 15px;
-				width: 150px;
-				height: 35px;
-				margin-bottom: 50px;
-				background-color: #353535;
-                border-radius: 2px;
-				color: #F8F7F7;
-				border: none;
-				font-family: Montserrat, Sans-serif;
-				transition: all .15s ease-in-out;
-				font-size: 13px;
-				font-weight: bold;
+				width: 100%;
+				height: auto;
+				top: 20px;
 			}
 			
-			#checkout:hover {
-				background-color: #454545;
-				cursor: pointer;
-				transition: all .15s ease-in-out;
+			.description {
+				position: relative;
+				color: #353535;
+				bottom: 20px;
+				font-family: Montserrat, Sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+				text-align: justify;
+				letter-spacing: 0.5px;
 			}
+			
+			#collA:hover {
+                text-decoration: underline;
+            }
 			
 			#funImage {
 				position: fixed;
@@ -458,46 +336,33 @@
 				left: 0px;
 				top: 0px;
 			}
+			
+			#funImage2 {
+				position: fixed;
+				width: 150px;
+				height: 150px;
+				right: 0px;
+				top: 0px;
+			}
             
 		</style>
 	</head>
-	<body> 
+	<body>
 	<img src = "images/a4068434880_5(flipped).png" id = "funImage"></img>
+	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
+            <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "#"><p id = "myCart">My Cart (1)</p></a>
-            <a href = "sign.jsp"><p id = "join">Join</p></a>
-            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
-			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
-			<a href = "sign.jsp"><p id = "account">Account</p></a>
+            <p id = "myCart"><a href = "cart.jsp">My Cart</a></p>
+			<p id = "join"><a href = "sign.jsp">Join</a></p>
+           	<p id = "sign-in"><a href = "sign.jsp">Sign In</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">�</span> Your Shopping Cart</p>
+            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
-        <article id = "cartFormat">
-            <div id = "cartContainer">
-                <p id = "cart">My Cart</p>
-                <p id = "emptyCart">Your cart is currently empty.</p>
-				<form method = "checkOut" action = "POST">
-					<form method = "updateCart" action = "POST">
-		                <table id = "itemCart" cellspacing = "0" cellpadding = "0">
-							<tr>
-								<th width = 1400>Product</th>
-								<th width = 150>Item Price</th>
-								<th width = 100>Quantity</th>
-								<th width = 100>Remove</th>
-								<th width = 100 class = "priceTag">Price</th>
-							</tr>
-							
-						<input type = "submit" id = "update" value = "Update Cart" /> <br>
-					</form>
-					<button id = "checkout">Check Out</button>
-				</form>
-					
-				
-            </div>
+		<article id = "productFormat">
+            
         </article>
 	</div>
 	</body>
