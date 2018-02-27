@@ -43,7 +43,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
 	private String matchError;
-	private in productId;
+	private int productId;
 	
 	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
 	private static final String SECURDE_PASS = "Securdeproj";
