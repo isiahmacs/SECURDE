@@ -348,7 +348,7 @@
 			$.ajax({
 		 	    context: this,
 		        url:'getProductId',
-		        data: {'productId', productId},
+		        data: {'productId' : productId},
 		        type: 'POST',
 		        cache:false,
 		        success: function(data){

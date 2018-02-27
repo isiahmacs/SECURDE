@@ -266,7 +266,7 @@ public class UserService {
 			Connection conn = DatabaseManager.getConnection();
 
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE productid = ?");
-			stmt.setInt(1, 1);
+			stmt.setInt(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
 			
