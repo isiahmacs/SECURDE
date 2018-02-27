@@ -30,7 +30,25 @@ function loadProduct(){
     });
 }
 
+function createCart() {
+    $.ajax({
+            context: this,
+            url: 'addtoCart',
+            type: 'POST',
+            cache:false,
+            success: function(data){
+                window.location.href = "cart.jsp";
+            },
+            error:function(){
+                console.log("URL viewProduct does not exist");
+            }
+        });
+}
+
 
 $(document).ready(function() {
 	loadProduct();
+    $("#addtoCartBut").click(function() {
+        createCart();
+    });
 });

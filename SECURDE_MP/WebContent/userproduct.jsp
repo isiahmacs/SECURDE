@@ -349,6 +349,7 @@
 				transition: all .15s ease-in-out;
 				font-size: 13px;
 				font-weight: bold;
+				z-index: 100;
 			}
 			
 			#addtoCartBut:hover {
