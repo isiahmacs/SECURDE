@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -416,10 +419,10 @@
 			<div id = 'addProductContainer'>
 	            <img src = "images/question-marks-background-200px-Question_mark.png" class = "img" id = "image"></img>
 	            <div id = 'productDescCont'>
-	            	<form action = "addProd" method = "POST">
+	            	<form action = "addProd" method = "POST" id = "addProdForm">
 							<input type = "text" placeholder = "Product Name" id = "prodname" name = "prodName" class = "upload" required /> <br>
-							<input type = "number" placeholder = "Price" id = "prodprice" name = "prodprice" class = "upload" min = "0.01" step = "0.01" required /> <br>
-							<input type = "number" placeholder = "Quantity" id = "prodquantity" name = "prodquantity" class = "upload" min = "1" required /> <br>
+							<input type = "number" placeholder = "Price" id = "prodprice" name = "prodPrice" class = "upload" min = "0.01" step = "0.01" required /> <br>
+							<input type = "number" placeholder = "Quantity" id = "prodquantity" name = "prodQuantity" class = "upload" min = "1" required /> <br>
 							<textarea placeholder = "Product Description" id = "proddesc" name = "prodDesc" class = "upload" required></textarea> <br><br>
 							<label for = "prodimage" class="custom-file-upload" id = "label">
 							    Add Image

@@ -350,4 +350,38 @@ public class UserService {
 		return cart;
 		
 	}
+
+	/**
+	 * Adds a product to the database.
+	 * @param product - the Product object being added.
+	 */
+	public static void addProduct(Product product) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement(
+					"INSERT INTO products (productname, description, " +
+					"image, quantity, price) " +
+					"VALUES (?, ?, ?, ?, ?)"
+					);
+			
+			stmt.setString(1, product.getProductName());
+			stmt.setString(2, product.getProductDescription());
+			stmt.setString(3, product.getProductImage());
+			stmt.setInt(4, product.getQuantity());
+			stmt.setDouble(5, product.getPrice());
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
 }

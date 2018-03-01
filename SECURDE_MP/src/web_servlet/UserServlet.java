@@ -41,7 +41,8 @@ import beans_model.Cart;
 						   "/getProductId",
 						   "/viewProduct",
 						   "/addtoCart",
-						   "/viewCart"})
+						   "/viewCart",
+						   "/addProduct"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
@@ -96,6 +97,7 @@ public class UserServlet extends HttpServlet {
 			case "/add": addUsers(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
 			case "/addtoCart": addtoCart(request, response); break;
+			case "/addProduct": addProduct(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -556,5 +558,29 @@ public class UserServlet extends HttpServlet {
 		response.getWriter().write(htmlProduct);       
 		System.out.println("*******************************************");
 
+	}
+
+	/**
+	 * Add products
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void addProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** ADD PRODUCT ************************");
+		
+		String productName = request.getParameter("firstname");
+		double productPrice = Double.parseDouble(request.getParameter("prodPrice"));
+		int productQuantity = Integer.parseInt(request.getParameter("regEmail")); 
+		String productDesc = request.getParameter("prodDesc");
+		String productImage = request.getParameter("prodImage");
+		
+	    Product product = new Product(productQuantity, productName, productDesc, prodImage, productPrice);
+			
+		UserService.addProduct(product);
+		System.out.println("Product added!");
+
+		System.out.println("*******************************************");
 	}
 }
