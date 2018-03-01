@@ -568,7 +568,7 @@ public class UserServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void addProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** ADD PRODUCT ************************");
+		System.out.println("***************** ADD PRODUCT ******************");
 		
 		String productName = request.getParameter("firstname");
 		double productPrice = Double.parseDouble(request.getParameter("prodPrice"));
