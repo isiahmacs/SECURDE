@@ -572,7 +572,7 @@ public class UserServlet extends HttpServlet {
 		
 		String productName = request.getParameter("firstname");
 		double productPrice = Double.parseDouble(request.getParameter("prodPrice"));
-		int productQuantity = Integer.parseInt(request.getParameter("regEmail")); 
+		int productQuantity = Integer.parseInt(request.getParameter("prodQuantity")); 
 		String productDesc = request.getParameter("prodDesc");
 		String productImage = request.getParameter("prodImage");
 		
