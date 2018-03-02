@@ -289,7 +289,7 @@
 			.productContainer {
 				position: relative;
 				width: 350px;
-				height: 600px;
+				height: 550px;
 				margin-right: 30px;
 				display: inline-block;
 			}
@@ -297,8 +297,6 @@
 			.img {
 				width: 350px;
 				height: 550px;
-				margin-right: 25px;
-				margin-bottom: 20px;
 				position: relative;
 			}
 			
@@ -311,19 +309,24 @@
 				top: 0px;
 				visibility: hidden;
 			}
+
+			.product:hover .productContainer {
+				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
+			}
 			
-			.productContainer:hover .productDesc {
+			.product:hover .productDesc {
 				visibility: visible;
 				background-color: rgba(35, 35, 35, 0.75);
 				cursor: pointer;
 			}
 			
-			.productContainer:hover .productName {
+			.product:hover .productName {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productContainer:hover .price {
+			.product:hover .price {
 				visibility: visible;
 			 	opacity: 1;
 			}
@@ -366,6 +369,16 @@
 				right: 0px;
 				top: 0px;
 			}
+
+			.product {
+				position: relative;
+				width: 360px;
+				height: 555px;
+				margin-right: 25px;
+				margin-bottom: 20px;
+				background-color: transparent;
+				border: none;
+			}
 			
 		</style>
 	</head>
@@ -386,15 +399,15 @@
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<article id = "productFormat">
-            <a href = 'product.jsp'>
-            <div class = 'productContainer'>
-				<img src = "images/Shopify-Uncaged03-patch01.jpg"  class = "img" />
-				<div class='productDesc'>
-				   	<p class = 'productName'>Monstercat Embroided Patch 05</p>
-					<p class = 'price'>$10.00</p>
+            <button class = "product">
+	            <div class = 'productContainer'>
+					<img src = "images/Shopify-Uncaged03-patch01.jpg"  class = "img" />
+					<div class='productDesc'>
+					   	<p class = 'productName'>Monstercat Embroided Patch 05</p>
+						<p class = 'price'>$10.00</p>
+					</div>
 				</div>
-			</div>
-			</a>
+			</button>
         </article>
 	</div>
 	</body>

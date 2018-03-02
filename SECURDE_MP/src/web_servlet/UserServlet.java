@@ -409,13 +409,17 @@ public class UserServlet extends HttpServlet {
 		for (Cookie c : cookies) {
 			if(c.getName().equals("USER")) {
 				for(Product p : productList){
-					htmlPostList += "<div class = 'productListContainer' id = '" + p.getProductId() + "'>" +
-									"<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
-									"	<div class='productListDesc'>" +
-									"   	<p class = 'productListName'>" + p.getProductName() + "</p>" +
-									" 		<p class = 'priceList'>$" + df2.format(p.getPrice()) + "</p>" +
-									"	</div>" + 
-									"</div> ";
+					htmlPostList += "<form action = 'getProductId' method = 'GET'>" +
+									"	<button class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
+									"	<div class = 'productContainer'>" +
+									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +
+									" 		<div class='productDesc'>" +
+									"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
+									"			<p class = 'price'>" + df2.format(p.getProductPrice()) + "</p>" + 
+									"		</div> " +
+									"	</div>" +
+									"	</button>" +
+									"</form>";
 					System.out.println(p.getProductId());
 				}
 				
@@ -427,13 +431,17 @@ public class UserServlet extends HttpServlet {
 			}
 			else if(c.getName().equals("ADMIN")) {
 				for(Product p : productList){
-					htmlPostList += "<div class = 'productListContainer' id = '" + p.getProductId() + "'>" +
-									"<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
-									"	<div class='productListDesc'>" +
-									"   	<p class = 'productListName'>" + p.getProductName() + "</p>" +
-									" 		<p class = 'priceList'>$" + df2.format(p.getPrice()) + "</p>" +
-									"	</div>" + 
-									"</div> ";
+					htmlPostList += "<form action = 'getProductId' method = 'GET'>" +
+									"	<button class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
+									"	<div class = 'productContainer'>" +
+									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +
+									" 		<div class='productDesc'>" +
+									"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
+									"			<p class = 'price'>" + df2.format(p.getProductPrice()) + "</p>" + 
+									"		</div> " +
+									"	</div>" +
+									"	</button>" +
+									"</form>";
 				}
 				
 				System.out.println(productList);
@@ -459,7 +467,7 @@ public class UserServlet extends HttpServlet {
 		
 		productId = 0;
 		try {
-			productId = Integer.parseInt(request.getParameter("productId"));
+			productId = Integer.parseInt(request.getParameter("prod"));
 		} catch(NumberFormatException e) {
 			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
 		}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -8,6 +9,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="script/UserProducts.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -150,6 +152,7 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
+				display: none;
 			}
             
             #account:hover {
@@ -174,9 +177,58 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
+				display: none;
 			}
             
             #sign-out:hover {
+                color: #BBBBBB;
+                text-decoration: none;
+                transition: all .15s ease-in-out;
+            }
+            
+            #sign-in {
+				position: relative;
+                float: right;
+                display: inline;
+                bottom: 14px;
+                right: 40px;
+                text-align: right;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                height: 40px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                line-height: 40px;
+                transition: all .15s ease-in-out;
+			}
+            
+            #sign-in:hover {
+                color: #BBBBBB;
+                text-decoration: none;
+                transition: all .15s ease-in-out;
+            }
+            
+            #join {
+				position: relative;
+                float: right;
+                display: inline;
+                bottom: 14px;
+                right: 20px;
+                text-align: right;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                height: 40px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                line-height: 40px;
+                transition: all .15s ease-in-out;
+			}
+            
+            #join:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -229,14 +281,15 @@
                 text-decoration: underline;
             }
 			
-			#productListFormat {
+			#productFormat {
 				width: 86%;
+				height: auto;
 				float: left;
                 position: relative;
                 left: 115px;
 			}
 			
-			.productListContainer {
+			.productContainer {
 				position: relative;
 				width: 350px;
 				height: 550px;
@@ -247,48 +300,52 @@
 			.img {
 				width: 350px;
 				height: 550px;
-				margin-right: 25px;
-				margin-bottom: 5px;
 				position: relative;
 			}
 			
-			.productListDesc {
+			.productDesc {
 				position: absolute;
 				width: 350px;
 				height: 550px;
 				margin: 0 auto;
 				background-color: rgba(35, 35, 35, 0.75);
 				top: 0px;
-				text-align: center;
 				visibility: hidden;
 			}
+
+			.product:hover .productContainer {
+				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
+			}
 			
-			.productListContainer:hover .productListDesc {
+			.product:hover .productDesc {
 				visibility: visible;
 				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
 			}
 			
-			.productListContainer:hover .productListName {
+			.product:hover .productName {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productListContainer:hover .priceList {
+			.product:hover .price {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productListName {
+			.productName {
 				position: relative;
 				font-size: 16px;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
                 letter-spacing: 1px;
 				text-align: center;
 				top: 225px;
 			}
 			
-			.priceList {
+			.price {
 				position: relative;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
@@ -296,8 +353,8 @@
                 font-weight: bold;
                 text-transform: uppercase;
 				text-align: center;
+				top: 225px;
 				letter-spacing: 1px;
-				top:225px;
 			}
 			
 			#funImage {
@@ -315,6 +372,16 @@
 				right: 0px;
 				top: 0px;
 			}
+
+			.product {
+				position: relative;
+				width: 360px;
+				height: 555px;
+				margin-right: 25px;
+				margin-bottom: 20px;
+				background-color: transparent;
+				border: none;
+			}
 			
 		</style>
 	</head>
@@ -323,20 +390,30 @@
 	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
+            <a href = "#"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <p id = "myCart"><a href = "cart.jsp">My Cart</a></p>
-			<p id = "sign-out"><a href = "logout">Sign Out</a></p>
-			<p id = "account"><a href = "transactions.jsp">Account</a></p>
+            <a href = "cart.jsp"><p id = "myCart">My Cart (1)</p></a>
+            <a href = "sign.jsp"><p id = "join">Join</p></a>
+            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
+			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
+			<a href = "sign.jsp"><p id = "account">Account</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
-		<div id = "productListFormat">
-			<a href = 'viewProduct' id = "productLink">
-			
-			</a>
-        </div>
+		<article id = "productFormat">
+			<form action = 'getProductId' method = 'GET'>
+	            <button class = 'product' name = 'prod' value = ''>
+		            <div class = 'productContainer'>
+						<img src = "images/Shopify-Uncaged03-patch01.jpg"  class = "img" />
+						<div class='productDesc'>
+						   	<p class = 'productName'>Monstercat Embroided Patch 05</p>
+							<p class = 'price'>$10.00</p>
+						</div>
+					</div>
+				</button>
+			</form>
+        </article>
 	</div>
 	</body>
 	
@@ -349,7 +426,6 @@
 		        type: 'GET',
 		        cache:false,
 		        success: function(data){
-		        	var link = document.getElementById("productLink");
 		        	var productFeed = document.getElementById("productListFormat");
 		        	if(productFeed != null){
 			        	// Remove all children
@@ -358,8 +434,7 @@
 			        	}
 			
 			        	// Append html snippet 
-			        	$(link).append(data);
-			    	    $(productFeed).append(link);
+			    	    $(productFeed).append(data);
 		        	}
 		    	},
 		        error:function(){
@@ -367,29 +442,9 @@
 		        }
 		    });
 		}
-
-		function loadProduct(productId) {
-			$.ajax({
-		 	    context: this,
-		        url:'getProductId',
-		        data: {'productId' : productId},
-		        type: 'POST',
-		        cache:false,
-		        success: function(data){
-		        	window.location.href = "userproduct.jsp";
-		    	},
-		        error:function(){
-		            console.log("URL loadProduct does not exist");
-		        }
-		    });
-		}
 	
 		$(document).ready(function() {
 			loadProducts();
-			$("#productLink").click(function() {
-				var productId = $(".productListContainer").attr("id");
-				loadProduct(productId);	
-			});
 		});
 	</script>
 	
