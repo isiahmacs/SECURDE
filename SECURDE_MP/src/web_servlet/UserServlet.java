@@ -497,7 +497,7 @@ public class UserServlet extends HttpServlet {
 			    response.setCharacterEncoding("UTF-8"); 
 			    response.getWriter().write(htmlProduct);       
 				System.out.println("*******************************************");
-				reqeust.getRequestDispatcher("userproducts.jsp").forward(reqeust, response);
+				request.getRequestDispatcher("userproducts.jsp").forward(reqeust, response);
 			}
 			else if(c.getName().equals("ADMIN")) {
 				htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
@@ -518,7 +518,7 @@ public class UserServlet extends HttpServlet {
 			    response.setCharacterEncoding("UTF-8"); 
 			    response.getWriter().write(htmlProduct);       
 				System.out.println("*******************************************");
-				reqeust.getRequestDispatcher("adminproducts.jsp").forward(reqeust, response);
+				request.getRequestDispatcher("adminproducts.jsp").forward(reqeust, response);
 			}
 		}
 	}
