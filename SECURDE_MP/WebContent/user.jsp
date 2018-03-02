@@ -9,7 +9,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="script/UserProducts.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -152,7 +151,6 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #account:hover {
@@ -177,58 +175,9 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #sign-out:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #sign-in {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 40px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #sign-in:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #join {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 20px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #join:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -392,27 +341,15 @@
         <div id = "header">
             <a href = "#"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "cart.jsp"><p id = "myCart">My Cart (1)</p></a>
-            <a href = "sign.jsp"><p id = "join">Join</p></a>
-            <a href = "sign.jsp"><p id = "sign-in">Sign In</p></a>
-			<a href = "sign.jsp"><p id = "sign-out">Sign Out</p></a>
+            <a href = "cart.jsp"><p id = "myCart">My Cart</p></a>
+			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
 			<a href = "sign.jsp"><p id = "account">Account</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
 		<article id = "productFormat">
-			<form action = 'getProductId' method = 'GET'>
-	            <button class = 'product' name = 'prod' value = ''>
-		            <div class = 'productContainer'>
-						<img src = "images/Shopify-Uncaged03-patch01.jpg"  class = "img" />
-						<div class='productDesc'>
-						   	<p class = 'productName'>Monstercat Embroided Patch 05</p>
-							<p class = 'price'>$10.00</p>
-						</div>
-					</div>
-				</button>
-			</form>
+
         </article>
 	</div>
 	</body>
@@ -426,13 +363,12 @@
 		        type: 'GET',
 		        cache:false,
 		        success: function(data){
-		        	var productFeed = document.getElementById("productListFormat");
+		        	var productFeed = document.getElementById("productFormat");
 		        	if(productFeed != null){
 			        	// Remove all children
 			        	while (productFeed.firstChild) {	
 			        		productFeed.removeChild(productFeed.firstChild);
 			        	}
-			
 			        	// Append html snippet 
 			    	    $(productFeed).append(data);
 		        	}

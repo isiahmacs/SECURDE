@@ -18,7 +18,6 @@ public class Product {
 	
 	public Product(int quantity, String productName, String productDescription, String productImage, double price) {
 		super();
-		this.productId = productId;
 		this.quantity = quantity;
 		this.productName = productName;
 		this.productDescription = productDescription;

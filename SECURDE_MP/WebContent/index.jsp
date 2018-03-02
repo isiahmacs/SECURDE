@@ -365,29 +365,9 @@
 		        }
 		    });
 		}
-
-		function loadProduct(productId) {
-			$.ajax({
-		 	    context: this,
-		        url:'getProductId',
-		        data: {'productId', productId},
-		        type: 'POST',
-		        cache:false,
-		        success: function(data){
-		        	window.location.href = "userproduct.jsp";
-		    	},
-		        error:function(){
-		            console.log("URL loadProduct does not exist");
-		        }
-		    });
-		}
 	
 		$(document).ready(function() {
 			loadProducts();
-			$("#productLink").click(function() {
-				var productId = $(".productListContainer").attr("id");
-				loadProduct(productId);	
-			});
 		});
 	</script>
 	

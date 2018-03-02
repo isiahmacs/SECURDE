@@ -38,7 +38,6 @@ import beans_model.Cart;
 						   "/add",
 						   "/sendVerification",
 						   "/getProducts",
-						   "/getProductId",
 						   "/viewProduct",
 						   "/addtoCart",
 						   "/viewCart",
@@ -95,7 +94,6 @@ public class UserServlet extends HttpServlet {
 			case "/login": performLogin(request, response); break;
 			case "/register": performSignup(request, response); break;
 			case "/add": addUsers(request, response); break;
-			case "/getProductId": getProductId(request, response); break;
 			case "/addtoCart": addtoCart(request, response); break;
 			case "/addProduct": addProduct(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
@@ -400,7 +398,7 @@ public class UserServlet extends HttpServlet {
 	 * @return List of Posts
 	 */
 	private void getProducts(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** UPDATING POST FEED ************************");
+		System.out.println("***************** UPDATING PRODUCT FEED ************************");
 		Cookie[] cookies;
 		ArrayList<Product> productList = UserService.getProducts();
 		String htmlPostList = "";
@@ -409,13 +407,13 @@ public class UserServlet extends HttpServlet {
 		for (Cookie c : cookies) {
 			if(c.getName().equals("USER")) {
 				for(Product p : productList){
-					htmlPostList += "<form action = 'getProductId' method = 'GET'>" +
-									"	<button class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
+					htmlPostList += "<form action = 'viewProduct' method = 'GET'>" +
+									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
 									"	<div class = 'productContainer'>" +
-									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +
+									"   	<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
 									" 		<div class='productDesc'>" +
 									"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
-									"			<p class = 'price'>" + df2.format(p.getProductPrice()) + "</p>" + 
+									"			<p class = 'price'>" + df2.format(p.getPrice()) + "</p>" + 
 									"		</div> " +
 									"	</div>" +
 									"	</button>" +
@@ -431,13 +429,13 @@ public class UserServlet extends HttpServlet {
 			}
 			else if(c.getName().equals("ADMIN")) {
 				for(Product p : productList){
-					htmlPostList += "<form action = 'getProductId' method = 'GET'>" +
-									"	<button class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
+					htmlPostList += "<form action = 'viewProduct' method = 'GET'>" +
+									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
 									"	<div class = 'productContainer'>" +
 									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +
 									" 		<div class='productDesc'>" +
 									"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
-									"			<p class = 'price'>" + df2.format(p.getProductPrice()) + "</p>" + 
+									"			<p class = 'price'>" + df2.format(p.getPrice()) + "</p>" + 
 									"		</div> " +
 									"	</div>" +
 									"	</button>" +
@@ -454,27 +452,6 @@ public class UserServlet extends HttpServlet {
 		}
 		
 	}
-	/**
-	* Retrieves the id of the product
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
-	 * @retur Product id
-	 */
-	private void getProductId(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** GET PRODUCT ID ************************");
-		
-		productId = 0;
-		try {
-			productId = Integer.parseInt(request.getParameter("prod"));
-		} catch(NumberFormatException e) {
-			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
-		}
-
-		System.out.println("*******************************************");
-
-	}
 	
 	/**
 	 * Retrieves a product
@@ -487,7 +464,14 @@ public class UserServlet extends HttpServlet {
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
 		
-		System.out.println(productId);
+		productId = 0;
+		String id = request.getParameter("prod");
+		System.out.println(id);
+		try {
+			productId = Integer.parseInt(request.getParameter("prod"));
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
+		}
 		
 		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
@@ -584,7 +568,7 @@ public class UserServlet extends HttpServlet {
 		String productDesc = request.getParameter("prodDesc");
 		String productImage = request.getParameter("prodImage");
 		
-	    Product product = new Product(productQuantity, productName, productDesc, prodImage, productPrice);
+	    Product product = new Product(productQuantity, productName, productDesc, productImage, productPrice);
 			
 		UserService.addProduct(product);
 		System.out.println("Product added!");
