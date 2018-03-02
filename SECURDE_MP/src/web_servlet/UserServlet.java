@@ -407,7 +407,7 @@ public class UserServlet extends HttpServlet {
 		for (Cookie c : cookies) {
 			if(c.getName().equals("USER")) {
 				for(Product p : productList){
-					htmlPostList += "<form action = 'viewProduct' method = 'GET'>" +
+					htmlPostList += "<form action = 'viewProduct' method = 'GET' class = 'forms'>" +
 									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
 									"	<div class = 'productContainer'>" +
 									"   	<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
@@ -429,7 +429,7 @@ public class UserServlet extends HttpServlet {
 			}
 			else if(c.getName().equals("ADMIN")) {
 				for(Product p : productList){
-					htmlPostList += "<form action = 'viewProduct' method = 'GET'>" +
+					htmlPostList += "<form action = 'viewProduct' method = 'GET' class = 'forms'>" +
 									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
 									"	<div class = 'productContainer'>" +
 									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +

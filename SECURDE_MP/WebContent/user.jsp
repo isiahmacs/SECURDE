@@ -332,6 +332,14 @@
 				border: none;
 			}
 			
+			.forms {
+				width: 350px;
+				height: 550px;
+				display: inline-block;
+				margin-right: 20px;
+				margin-top: 20px;
+			}
+			
 		</style>
 	</head>
 	<body>
