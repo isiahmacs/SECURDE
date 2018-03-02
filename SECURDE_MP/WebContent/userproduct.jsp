@@ -348,7 +348,7 @@
 			<p id = "account"><a href = "transactions.jsp">Account</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "user.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
+            <p id = "subCaption"><a href = "user.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "user.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
             <button id = "addtoCartBut">Add to Cart</button>

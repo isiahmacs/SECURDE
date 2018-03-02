@@ -159,7 +159,7 @@
 				letter-spacing: 0px;
 			}
 			
-			#account {
+			#addProd {
 				position: relative;
                 float: right;
                 display: inline;
@@ -178,7 +178,7 @@
 				display: none;
 			}
             
-            #account:hover {
+            #addProd:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -208,79 +208,8 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-            
-            #sign-in {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 40px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #sign-in:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #join {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                right: 20px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #join:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
-            
-            #myCart {
-				position: relative;
-                float: right;
-                display: inline;
-                bottom: 14px;
-                text-align: right;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-                height: 40px;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                line-height: 40px;
-                transition: all .15s ease-in-out;
-			}
-            
-            #myCart:hover {
-                color: #BBBBBB;
-                text-decoration: none;
-                transition: all .15s ease-in-out;
-            }
 			
-			 #productFormat {
+			#productFormat {
 				width: 85%;
 				height: auto;
 				display: inline-block;
@@ -289,7 +218,7 @@
 				bottom: 20px;
 			}
 			
-			#productContainer {
+			.productContainer {
 				position: relative;
 				display: flex; 
 				flex-wrap: nowrap; 
@@ -301,21 +230,21 @@
 				height: 550px;
 			}
 			
-			#productDescCont {
+			.productDescCont {
 				position: relative;
 				left: 50px;
 				width: 700px;
 				height: auto;
 			}
 			
-			#productNameCont {
+			.productNameCont {
 				position: relative;
 				width: 100%;
 				height: 75px;
 				border-bottom: 1px solid #EAECEE;
 			}
 			
-			#productName {
+			.productName {
 				position: relative;
 				font-size: 20px;
 				bottom: 20px;
@@ -325,7 +254,7 @@
                 letter-spacing: 1px;
 			}
 			
-			#price {
+			.price {
 				position: relative;
 				color: #353535;
 				bottom: 20px;
@@ -430,11 +359,11 @@
 			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.html" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.html" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
+            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "admin.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-            <a href = "editItem" id = "editItemLink"><button id = "removeItem">Edit Item</button></a>
-            <a href = "removeItem" id = "removeItemLink"><button id = "editItem">Remove Item</button></a>
+        	<button id = "editProduct">Edit Product</button>
+            <button id = "removeProduct">Remove Product</button>
         </article>
 	</div>
 	</body>
