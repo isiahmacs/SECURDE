@@ -386,31 +386,9 @@
 		        }
 		    });
 		}
-		
-		function loadProduct(productId) {
-			$.ajax({
-		 	    context: this,
-		        url:'viewProduct',
-		        data: {'productId': productId},
-		        type: 'GET',
-		        cache:false,
-		        success: function(data){
-		        	window.location.href = "userproduct.jsp";
-		    	},
-		        error:function(){
-		            console.log("URL loadProduct does not exist");
-		        }
-		    });
-		}
 	
 		$(document).ready(function() {
-			loadProducts();
-			$(".product").mouseover(function() {
-				var productId = $(".productContainer").attr("id");
-				console.log("sdd");
-				loadProduct(productId);
-			});
-			
+			loadProducts();	
 		});
 	</script>
 	

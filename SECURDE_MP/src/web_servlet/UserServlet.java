@@ -405,53 +405,27 @@ public class UserServlet extends HttpServlet {
 		ArrayList<Product> productList = UserService.getProducts();
 		String htmlPostList = "";
 		
-		cookies = request.getCookies();
-		for (Cookie c : cookies) {
-			if(c.getName().equals("USER")) {
-				for(Product p : productList){
-					htmlPostList += "<form action = 'getProductId' method = 'GET' class = 'forms'>" +
-									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
-									"	<div class = 'productContainer'>" +
-									"   	<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
-									" 		<div class='productDesc'>" +
-									"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
-									"			<p class = 'price'>" + df2.format(p.getPrice()) + "</p>" + 
-									"		</div> " +
-									"	</div>" +
-									"	</button>" +
-									"</form>";
-					System.out.println(p.getProductId());
-				}
-				
-				System.out.println(productList);
-				response.setContentType("text/html"); 
-				response.setCharacterEncoding("UTF-8"); 
-				response.getWriter().write(htmlPostList);       
-				System.out.println("*******************************************");
-			}
-			else if(c.getName().equals("ADMIN")) {
-				for(Product p : productList){
-					htmlPostList += "<form action = 'getProductId' method = 'GET' class = 'forms'>" +
-									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
-									"	<div class = 'productContainer'>" +
-									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +
-									" 		<div class='productDesc'>" +
-									"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
-									"			<p class = 'price'>" + df2.format(p.getPrice()) + "</p>" + 
-									"		</div> " +
-									"	</div>" +
-									"	</button>" +
-									"</form>";
-				}
-				
-				System.out.println(productList);
-				response.setContentType("text/html"); 
-				response.setCharacterEncoding("UTF-8"); 
-				response.getWriter().write(htmlPostList);       
-				System.out.println("*******************************************");
-			}
-			
+		for(Product p : productList){
+			htmlPostList += "<form action = 'getProductId' method = 'GET' class = 'forms'>" +
+							"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
+							"	<div class = 'productContainer'>" +
+							"   	<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
+							" 		<div class='productDesc'>" +
+							"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
+							"			<p class = 'price'>" + df2.format(p.getPrice()) + "</p>" + 
+							"		</div> " +
+							"	</div>" +
+							"	</button>" +
+							"</form>";
+			System.out.println(p.getProductId());
 		}
+				
+		System.out.println(productList);
+		response.setContentType("text/html"); 
+		response.setCharacterEncoding("UTF-8"); 
+		response.getWriter().write(htmlPostList);       
+		System.out.println("*******************************************");
+			
 		
 	}
 	
@@ -479,55 +453,28 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
-		Cookie[] cookies;
-		
-		
+			
 		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
 		
-		cookies = request.getCookies();
-		for (Cookie c : cookies) {
-			if(c.getName().equals("USER")) {
-				htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
-									"<img src = 'images/" + p.getProductImage() + "'></img>" +
-									"	<div class = 'productDescCont'>" +
-									"		<div class = 'productNameCont'>" +
-							        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
-									" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
-							        "		</div>" + 
-									"		<div class = 'productDesc'>" +
-									"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
-									"		</div>" +
-									"	</div>" + 
-							        "</div> ";
+		htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
+						"<img src = 'images/" + p.getProductImage() + "'></img>" +
+						"	<div class = 'productDescCont'>" +
+						"		<div class = 'productNameCont'>" +
+						"   		<p class = 'productName'>" + p.getProductName() + "</p>" +
+						" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+				        "		</div>" + 
+						"		<div class = 'productDesc'>" +
+						"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
+						"		</div>" +
+						"	</div>" + 
+						"</div> ";
 				
-				System.out.println(p);
-			    response.setContentType("text/html"); 
-			    response.setCharacterEncoding("UTF-8"); 
-			    response.getWriter().write(htmlProduct);       
-				System.out.println("*******************************************");
-			}
-			else if(c.getName().equals("ADMIN")) {
-				htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
-									"<img src = 'images/" + p.getProductImage() + "'></img>" +
-									"	<div class = 'productDescCont'>" +
-									"		<div class = 'productNameCont'>" +
-							        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
-									" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
-							        "		</div>" + 
-									"		<div class = 'productDesc'>" +
-									"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
-									"		</div>" +
-									"	</div>" + 
-							        "</div> ";
-				
-				System.out.println(p);
-			    response.setContentType("text/html"); 
-			    response.setCharacterEncoding("UTF-8"); 
-			    response.getWriter().write(htmlProduct);       
-				System.out.println("*******************************************");
-			}
-		}
+		System.out.println(p);
+		response.setContentType("text/html"); 
+	    response.setCharacterEncoding("UTF-8"); 
+	    response.getWriter().write(htmlProduct);       
+		System.out.println("*******************************************");
 	}
 
 	/**

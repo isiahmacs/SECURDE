@@ -351,7 +351,6 @@
 			        	while (productFeed.firstChild) {	
 			        		productFeed.removeChild(productFeed.firstChild);
 			        	}
-			
 			        	// Append html snippet 
 			    	    $(productFeed).append(data);
 		        	}
@@ -363,7 +362,7 @@
 		}
 	
 		$(document).ready(function() {
-			loadProducts();
+			loadProducts();		
 		});
 	</script>
 	
