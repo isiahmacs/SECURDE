@@ -38,6 +38,7 @@ import beans_model.Cart;
 						   "/add",
 						   "/sendVerification",
 						   "/getProducts",
+						   "/getProductId",
 						   "/viewProduct",
 						   "/addtoCart",
 						   "/viewCart",
@@ -69,6 +70,7 @@ public class UserServlet extends HttpServlet {
 			case "/logout": performLogout(request, response); break;
 			case "/sendVerification": performVerification(request, response); break;
 			case "/getProducts": getProducts(request, response); break;
+			case "/getProductId": getProductId(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
 			case "/viewCart": viewCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
@@ -407,7 +409,7 @@ public class UserServlet extends HttpServlet {
 		for (Cookie c : cookies) {
 			if(c.getName().equals("USER")) {
 				for(Product p : productList){
-					htmlPostList += "<form action = 'viewProduct' method = 'GET' class = 'forms'>" +
+					htmlPostList += "<form action = 'getProductId' method = 'GET' class = 'forms'>" +
 									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
 									"	<div class = 'productContainer'>" +
 									"   	<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
@@ -429,7 +431,7 @@ public class UserServlet extends HttpServlet {
 			}
 			else if(c.getName().equals("ADMIN")) {
 				for(Product p : productList){
-					htmlPostList += "<form action = 'viewProduct' method = 'GET' class = 'forms'>" +
+					htmlPostList += "<form action = 'getProductId' method = 'GET' class = 'forms'>" +
 									"	<button type = 'submit' class = 'product' name = 'prod' value = '" + String.format("%d", p.getProductId()) + "'>" +
 									"	<div class = 'productContainer'>" +
 									"   	<img src = 'images/'" + p.getProductImage() + "' class = 'img' />" +
@@ -453,6 +455,20 @@ public class UserServlet extends HttpServlet {
 		
 	}
 	
+	private void getProductId(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GETTING PRODUCT ID ************************");
+		productId = 0;
+		String id = request.getParameter("prod");
+		System.out.println(id);
+		try {
+			productId = Integer.parseInt(request.getParameter("prod"));
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
+		}
+		System.out.println("*******************************************");
+		request.getRequestDispatcher("userproduct.jsp").forward(request, response);
+	}
+	
 	/**
 	 * Retrieves a product
 	 * @param request
@@ -464,14 +480,7 @@ public class UserServlet extends HttpServlet {
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
 		Cookie[] cookies;
-		productId = 0;
-		String id = request.getParameter("prod");
-		System.out.println(id);
-		try {
-			productId = Integer.parseInt(request.getParameter("prod"));
-		} catch(NumberFormatException e) {
-			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
-		}
+		
 		
 		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
@@ -497,7 +506,6 @@ public class UserServlet extends HttpServlet {
 			    response.setCharacterEncoding("UTF-8"); 
 			    response.getWriter().write(htmlProduct);       
 				System.out.println("*******************************************");
-				request.getRequestDispatcher("userproducts.jsp").forward(reqeust, response);
 			}
 			else if(c.getName().equals("ADMIN")) {
 				htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
@@ -518,7 +526,6 @@ public class UserServlet extends HttpServlet {
 			    response.setCharacterEncoding("UTF-8"); 
 			    response.getWriter().write(htmlProduct);       
 				System.out.println("*******************************************");
-				request.getRequestDispatcher("adminproducts.jsp").forward(reqeust, response);
 			}
 		}
 	}
