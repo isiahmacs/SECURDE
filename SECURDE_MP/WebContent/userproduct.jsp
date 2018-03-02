@@ -379,7 +379,7 @@
 		                window.location.href = "cart.jsp";
 		            },
 		            error:function(){
-		                console.log("URL viewProduct does not exist");
+		                console.log("URL addtoCart does not exist");
 		            }
 		        });
 		}

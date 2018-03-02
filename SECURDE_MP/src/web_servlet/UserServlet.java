@@ -463,7 +463,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
-		
+		Cookie[] cookies;
 		productId = 0;
 		String id = request.getParameter("prod");
 		System.out.println(id);
@@ -476,26 +476,51 @@ public class UserServlet extends HttpServlet {
 		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
 		
-
-		htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
-							"<img src = 'images/" + p.getProductImage() + "'></img>" +
-							"	<div class = 'productDescCont'>" +
-							"		<div class = 'productNameCont'>" +
-					        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
-							" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
-					        "		</div>" + 
-							"		<div class = 'productDesc'>" +
-							"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
-							"		</div>" +
-							"	</div>" + 
-					        "</div> ";
-		
-		System.out.println(p);
-	    response.setContentType("text/html"); 
-	    response.setCharacterEncoding("UTF-8"); 
-	    response.getWriter().write(htmlProduct);       
-		System.out.println("*******************************************");
-		
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
+									"<img src = 'images/" + p.getProductImage() + "'></img>" +
+									"	<div class = 'productDescCont'>" +
+									"		<div class = 'productNameCont'>" +
+							        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
+									" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+							        "		</div>" + 
+									"		<div class = 'productDesc'>" +
+									"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
+									"		</div>" +
+									"	</div>" + 
+							        "</div> ";
+				
+				System.out.println(p);
+			    response.setContentType("text/html"); 
+			    response.setCharacterEncoding("UTF-8"); 
+			    response.getWriter().write(htmlProduct);       
+				System.out.println("*******************************************");
+				reqeust.getRequestDispatcher("userproducts.jsp").forward(reqeust, response);
+			}
+			else if(c.getName().equals("ADMIN")) {
+				htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
+									"<img src = 'images/" + p.getProductImage() + "'></img>" +
+									"	<div class = 'productDescCont'>" +
+									"		<div class = 'productNameCont'>" +
+							        "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
+									" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+							        "		</div>" + 
+									"		<div class = 'productDesc'>" +
+									"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
+									"		</div>" +
+									"	</div>" + 
+							        "</div> ";
+				
+				System.out.println(p);
+			    response.setContentType("text/html"); 
+			    response.setCharacterEncoding("UTF-8"); 
+			    response.getWriter().write(htmlProduct);       
+				System.out.println("*******************************************");
+				reqeust.getRequestDispatcher("adminproducts.jsp").forward(reqeust, response);
+			}
+		}
 	}
 
 	/**

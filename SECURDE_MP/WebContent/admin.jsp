@@ -205,7 +205,7 @@
                 text-decoration: underline;
             }
 			
-			#productListFormat {
+			#productFormat {
 				width: 86%;
 				height: auto;
 				float: left;
@@ -213,7 +213,7 @@
                 left: 115px;
 			}
 			
-			.productListContainer {
+			.productContainer {
 				position: relative;
 				width: 350px;
 				height: 550px;
@@ -224,12 +224,10 @@
 			.img {
 				width: 350px;
 				height: 550px;
-				margin-right: 25px;
-				margin-bottom: 20px;
 				position: relative;
 			}
 			
-			.productListDesc {
+			.productDesc {
 				position: absolute;
 				width: 350px;
 				height: 550px;
@@ -238,24 +236,29 @@
 				top: 0px;
 				visibility: hidden;
 			}
+
+			.product:hover .productContainer {
+				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
+			}
 			
-			.productListContainer:hover .productListDesc {
+			.product:hover .productDesc {
 				visibility: visible;
 				background-color: rgba(35, 35, 35, 0.75);
 				cursor: pointer;
 			}
 			
-			.productListContainer:hover .productListName {
+			.product:hover .productName {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productListContainer:hover .priceList {
+			.product:hover .price {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productListName {
+			.productName {
 				position: relative;
 				font-size: 16px;
 				color: #fff;
@@ -266,7 +269,7 @@
 				top: 225px;
 			}
 			
-			.priceList {
+			.price {
 				position: relative;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
@@ -293,6 +296,25 @@
 				right: 0px;
 				top: 0px;
 			}
+
+			.product {
+				position: relative;
+				width: 360px;
+				height: 555px;
+				margin-right: 25px;
+				margin-bottom: 20px;
+				background-color: transparent;
+				border: none;
+			}
+			
+			.forms {
+				width: 350px;
+				height: 550px;
+				display: inline-block;
+				margin-right: 20px;
+				margin-top: 20px;
+			}
+			
 			
 		</style>
 	</head>
@@ -309,11 +331,9 @@
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
         </div>
-		<div id = "productListFormat">
-            <a href = 'viewProduct' id = "productLink">
-			
-			</a>
-        </div>
+		<article id = "productFormat">
+
+        </article>
 	</div>
 	</body>
 	<script type = "text/javascript">
@@ -325,8 +345,7 @@
 		        type: 'GET',
 		        cache:false,
 		        success: function(data){
-		        	var link = document.getElementById("productLink");
-		        	var productFeed = document.getElementById("productListFormat");
+		        	var productFeed = document.getElementById("productFormat");
 		        	if(productFeed != null){
 			        	// Remove all children
 			        	while (productFeed.firstChild) {	
@@ -334,8 +353,7 @@
 			        	}
 			
 			        	// Append html snippet 
-			        	$(link).append(data);
-			    	    $(productFeed).append(link);
+			    	    $(productFeed).append(data);
 		        	}
 		    	},
 		        error:function(){
@@ -343,29 +361,9 @@
 		        }
 		    });
 		}
-
-		function loadProduct(productId) {
-			$.ajax({
-		 	    context: this,
-		        url:'getProductId',
-		        data: {'productId' : productId},
-		        type: 'POST',
-		        cache:false,
-		        success: function(data){
-		        	window.location.href = "adminproduct.jsp";
-		    	},
-		        error:function(){
-		            console.log("URL loadProduct does not exist");
-		        }
-		    });
-		}
 	
 		$(document).ready(function() {
 			loadProducts();
-			$("#productLink").click(function() {
-				var productId = $(".productListContainer").attr("id");
-				loadProduct(productId);	
-			});
 		});
 	</script>
 	

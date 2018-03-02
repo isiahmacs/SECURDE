@@ -231,6 +231,7 @@
 			
 			#productFormat {
 				width: 86%;
+				height: auto;
 				float: left;
                 position: relative;
                 left: 115px;
@@ -247,8 +248,6 @@
 			.img {
 				width: 350px;
 				height: 550px;
-				margin-right: 25px;
-				margin-bottom: 5px;
 				position: relative;
 			}
 			
@@ -259,21 +258,26 @@
 				margin: 0 auto;
 				background-color: rgba(35, 35, 35, 0.75);
 				top: 0px;
-				text-align: center;
 				visibility: hidden;
 			}
-			
-			.productContainer:hover .productDesc {
-				visibility: visible;
+
+			.product:hover .productContainer {
 				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
 			}
 			
-			.productContainer:hover .productName {
+			.product:hover .productDesc {
+				visibility: visible;
+				background-color: rgba(35, 35, 35, 0.75);
+				cursor: pointer;
+			}
+			
+			.product:hover .productName {
 				visibility: visible;
 			 	opacity: 1;
 			}
 			
-			.productContainer:hover .price {
+			.product:hover .price {
 				visibility: visible;
 			 	opacity: 1;
 			}
@@ -283,6 +287,7 @@
 				font-size: 16px;
 				color: #fff;
 				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
                 letter-spacing: 1px;
 				text-align: center;
 				top: 225px;
@@ -296,8 +301,8 @@
                 font-weight: bold;
                 text-transform: uppercase;
 				text-align: center;
+				top: 225px;
 				letter-spacing: 1px;
-				top:225px;
 			}
 			
 			#funImage {
@@ -314,6 +319,24 @@
 				height: 150px;
 				right: 0px;
 				top: 0px;
+			}
+
+			.product {
+				position: relative;
+				width: 360px;
+				height: 555px;
+				margin-right: 25px;
+				margin-bottom: 20px;
+				background-color: transparent;
+				border: none;
+			}
+			
+			.forms {
+				width: 350px;
+				height: 550px;
+				display: inline-block;
+				margin-right: 20px;
+				margin-top: 20px;
 			}
 			
 		</style>
@@ -347,8 +370,7 @@
 		        type: 'GET',
 		        cache:false,
 		        success: function(data){
-		        	var link = document.getElementById("productLink");
-		        	var productFeed = document.getElementById("productListFormat");
+		        	var productFeed = document.getElementById("productFormat");
 		        	if(productFeed != null){
 			        	// Remove all children
 			        	while (productFeed.firstChild) {	
@@ -356,8 +378,7 @@
 			        	}
 			
 			        	// Append html snippet 
-			        	$(link).append(data);
-			    	    $(productFeed).append(link);
+			    	    $(productFeed).append(data);
 		        	}
 		    	},
 		        error:function(){
