@@ -255,9 +255,11 @@
 			}
             
             #itemCart {
+            	display:table;
                 position: relative;
                 bottom: 60px;
 				width: 100%;
+				border-collapse: separate;
             }
             
             #emptyCart {
@@ -272,32 +274,6 @@
                 display: none;
             }
 			
-			th {
-				padding: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                line-height: 10px;
-				font-size: 13px;
-				border-top: 1px solid #ABB2B9;
-				border-bottom: 1px solid #ABB2B9;
-				border-left: 1px solid #ABB2B9;
-				background-color: #EAECEE;
-				position: relative;
-			}
-			
-			td {
-				padding: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                line-height: 10px;
-				font-size: 13px;
-				border-bottom: 1px solid #ABB2B9;
-				border-left: 1px solid #ABB2B9;
-				position: relative;
-				letter-spacing: 1px;
-			}
 			
 			.priceTag {
 				border-right: 1px solid #ABB2B9;
@@ -335,6 +311,7 @@
 				background-color: transparent;
 				color: #353535;
 				font-family: Montserrat;
+ 				display:table-cell;
 			}
 			
 			.removeItem:hover {
@@ -410,6 +387,49 @@
 				left: 0px;
 				top: 0px;
 			}
+			
+			
+			#rowHeader {
+				display: table-row;
+			}
+			
+			.th {
+				display: table-cell;
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 10px;
+				font-size: 10px;
+				border-top: 1px solid #ABB2B9;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				background-color: #EAECEE;
+				position: relative;
+				display: inline-block;
+				text-align: center;
+				top: 1px;
+			}
+			
+			.rowData {
+				display: table-row;
+			}
+			
+			.td {
+				display: table-cell;
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 10px;
+				font-size: 13px;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				position: relative;
+				text-align: center;
+				vertical-align: middle;
+				top: 1px;
+			}
             
 		</style>
 	</head>
@@ -432,16 +452,15 @@
                 <p id = "emptyCart">Your cart is currently empty.</p>
 				<form method = "checkOut" action = "POST">
 					<form method = "updateCart" action = "POST">
-		                <table id = "itemCart" cellspacing = "0" cellpadding = "0">
-							<tr id = "rowHeader">
-								<th width = 1400>Product</th>
-								<th width = 150>Item Price</th>
-								<th width = 100>Quantity</th>
-								<th width = 100>Remove</th>
-								<th width = 100 class = "priceTag">Price</th>
-							</tr>
-						</table>	
-						<p id = "subtotal">Subtotal: $10.99</p> <br>
+		                <div id = "itemCart">
+							<div id = "rowHeader">
+								<div class = "th" style = "width: 768px;">Product</div>
+								<div class = "th" style = "width: 58px;">Item Price</div>
+								<div class = "th" style = "width: 67.88px;">Quantity</div>
+								<div class = "th" style = "width: 41px;">Remove</div>
+								<div class = "th" style = "width: 55.33px; border-right: 1px solid #ABB2B9;">Price</div>
+							</div>
+						</div>	
 						<input type = "submit" id = "update" value = "Update Cart" /> <br>
 					</form>
 					<button id = "checkout">Check Out</button>

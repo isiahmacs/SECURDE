@@ -301,12 +301,13 @@ public class UserService {
 			Connection conn = DatabaseManager.getConnection();
 			
 			PreparedStatement stmt =  conn.prepareStatement(
-					"INSERT INTO transactions (productid, userid) " +
-					"VALUES (?, ?)"
+					"INSERT INTO transactions (productid, userid, quantity) " +
+					"VALUES (?, ?, ?)"
 					);
 			
 			stmt.setInt(1, productId);
 			stmt.setInt(2, userId);
+			stmt.setInt(3, 1);
 			
 			stmt.executeUpdate();
 			
@@ -331,12 +332,12 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT t.productid, t.userid, p.image, p.productname, p.price, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE t.userid = ? AND p.productid = t.productid order by transactionid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, t.quantity, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? group by t.productid order by transactionid asc;");
 			st.setInt(1, userId);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				cart.add(new Cart(rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getDouble("SUM(p.price)")));
+				cart.add(new Cart(rs.getInt("t.transactionid"), rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getInt("t.quantity"), rs.getDouble("SUM(p.price)")));
 				//System.out.println("Product: " + rs.getString("p.productname"));
 			} 
 			
@@ -373,6 +374,32 @@ public class UserService {
 			stmt.setString(3, product.getProductImage());
 			stmt.setInt(4, product.getQuantity());
 			stmt.setDouble(5, product.getPrice());
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Removes item in transaction
+	 * @param transId - the id of the item
+	 */
+	public static void deleteItem(int transId) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement("DELETE FROM pokemerch.transactions WHERE transactionid = ?");
+			
+			stmt.setInt(1, transId);
 			
 			stmt.executeUpdate();
 			

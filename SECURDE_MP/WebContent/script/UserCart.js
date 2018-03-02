@@ -12,7 +12,7 @@ function loadCart(){
         cache:false,
         success: function(data){
             var tableRowHeader = document.getElementById("rowHeader");
-            var tableHeader = document.getElementsByTagName("th");
+            var tableHeader = document.getElementsByClassName("th");
         	var cartFeed = document.getElementById("itemCart");
         	if(cartFeed != null){
 	        	// Remove all children

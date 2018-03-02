@@ -249,7 +249,7 @@
 			.productNameCont {
 				position: relative;
 				width: 100%;
-				height: 75px;
+				height: 70px;
 				border-bottom: 1px solid #EAECEE;
 			}
 			
@@ -266,7 +266,7 @@
 			.price {
 				position: relative;
 				color: #353535;
-				bottom: 20px;
+				bottom: 15px;
 				font-family: Montserrat, Sans-serif;
                 font-size: 16px;
                 font-weight: bold;
@@ -276,7 +276,7 @@
 			#addtoCartBut {
 				position: relative;
 				left: 500px;
-				top: 70px;
+				top: 80px;
 				width: 150px;
 				height: 35px;
 				background-color: #353535;

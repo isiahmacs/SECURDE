@@ -42,6 +42,7 @@ import beans_model.Cart;
 						   "/viewProduct",
 						   "/addtoCart",
 						   "/viewCart",
+						   "/removeItem",
 						   "/addProduct"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -98,6 +99,7 @@ public class UserServlet extends HttpServlet {
 			case "/add": addUsers(request, response); break;
 			case "/addtoCart": addtoCart(request, response); break;
 			case "/addProduct": addProduct(request, response); break;
+			case "/removeItem": removeItem(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -516,6 +518,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println("***************** GETTING PRODUCT ************************");
 		HttpSession s = request.getSession();
 		String userId = (String) s.getAttribute("UN");
+		System.out.println(userId);
 		
 		int id = Integer.parseInt(userId);
 		ArrayList<Cart> cartList = UserService.getCart(id);
@@ -523,14 +526,16 @@ public class UserServlet extends HttpServlet {
 		String htmlProduct = "";
 		
 		for(Cart c : cartList){
-			htmlProduct += "<tr id = '" + c.getProductId() + "'>" +
-							"	<td style='display: flex; flex-wrap: nowrap; align-items: center;'>" + 
-							"	<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</td>" +
-							"	<td align = 'center' id = 'itemPrice'>$" + c.getProductPrice() + "</td>" +
-							"	<td align = 'center'><input type = 'text' class = 'quantity' name = 'quantity' /></td>" +
-							"	<td align = 'center' id = 'removeRow'><button class = 'removeItem'>X</button></td>" +
-							"	<td class = 'priceTag' align = 'center'>$" + c.getProductPrice() + "</td>" + 
-							"</tr> ";
+			htmlProduct += "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
+						   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
+						   "		<div class = 'td' style = 'display: flex; align-items: center; width: 768px;'>" + 
+						   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
+						   "		<div class = 'td' style = 'width: 59.5px;'>$" + c.getProductPrice() + "</div>" +
+						   "		<div class = 'td' style = 'width: 69px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
+						   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
+						   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'>$" + c.getProductPrice() + "</div>" + 
+						   "	</div>" +
+						   "</form>";
 		}
 				
 		System.out.println(cartList);
@@ -563,5 +568,29 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Product added!");
 
 		System.out.println("*******************************************");
+	}
+	
+	/**
+	 * Removes item in cart
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void removeItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** REMOVE ITEM ******************");
+		
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("remove")); 
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing removeItem method");
+		}
+		
+		UserService.deleteItem(id);
+		System.out.println("Item removed!");
+
+		System.out.println("*******************************************");
+		request.getRequestDispatcher("cart.jsp").forward(request, response);
 	}
 }

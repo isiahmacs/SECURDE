@@ -2,7 +2,7 @@ package beans_model;
 
 public class Cart {
 
-	int productId, userId;
+	int transId, productId, userId, quantity;
 	String productName, image;
 	double productPrice, subPrice;
 
@@ -12,16 +12,26 @@ public class Cart {
 		this.userId = userId;
 	}
 
-	public Cart(int productId, int userId, String image, String productName, double productPrice, double subPrice) {
+	public Cart(int transId, int productId, int userId, String image, String productName, double productPrice, int quantity, double subPrice) {
 		super();
+		this.transId = transId;
 		this.productId = productId;
 		this.userId = userId;
 		this.image = image;
 		this.productName = productName;
 		this.productPrice = productPrice;
+		this.quantity = quantity;
 		this.subPrice = subPrice;
 	}
 
+	
+	public int getTransId() {
+		return transId;
+	}
+
+	public void setTransId(int transId) {
+		this.transId = transId;
+	}
 
 	public int getProductId() {
 		return productId;
@@ -61,6 +71,14 @@ public class Cart {
 
 	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
+	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public double getSubPrice() {
