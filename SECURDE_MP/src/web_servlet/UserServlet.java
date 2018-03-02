@@ -431,6 +431,7 @@ public class UserServlet extends HttpServlet {
 	
 	private void getProductId(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ID ************************");
+		Cookie[] cookies;
 		productId = 0;
 		String id = request.getParameter("prod");
 		System.out.println(id);
@@ -440,7 +441,16 @@ public class UserServlet extends HttpServlet {
 			System.out.println("Error: UserServlet.java String to Integer parsing updatePost method");
 		}
 		System.out.println("*******************************************");
-		request.getRequestDispatcher("userproduct.jsp").forward(request, response);
+		
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				request.getRequestDispatcher("userproduct.jsp").forward(request, response);
+			} else if(c.getName().equals("ADMIN")) {
+				c.setMaxAge(0);
+				request.getRequestDispatcher("adminproduct.jsp").forward(request, response);
+			}
+		}
 	}
 	
 	/**
