@@ -336,11 +336,10 @@
                 transition: all .15s ease-in-out;
 			}
 			
-			#update {
+			.update {
 				position: relative;
 				margin-bottom: 10px;
-				left: 995px;
-				width: 150px;
+				width: 55px;
 				height: 35px;
 				background-color: #353535;
                 border-radius: 2px;
@@ -348,11 +347,11 @@
 				border: none;
 				font-family: Montserrat, Sans-serif;
 				transition: all .15s ease-in-out;
-				font-size: 13px;
+				font-size: 8px;
 				font-weight: bold;
 			}
 			
-			#update:hover {
+			.update:hover {
 				background-color: #454545;
 				cursor: pointer;
 				transition: all .15s ease-in-out;
@@ -451,19 +450,17 @@
                 <p id = "cart">My Cart</p>
                 <p id = "emptyCart">Your cart is currently empty.</p>
 				<form method = "checkOut" action = "POST">
-					<form method = "updateCart" action = "POST">
 		                <div id = "itemCart">
 							<div id = "rowHeader">
-								<div class = "th" style = "width: 768px;">Product</div>
+								<div class = "th" style = "width: 682px;">Product</div>
 								<div class = "th" style = "width: 58px;">Item Price</div>
 								<div class = "th" style = "width: 67.88px;">Quantity</div>
 								<div class = "th" style = "width: 41px;">Remove</div>
-								<div class = "th" style = "width: 55.33px; border-right: 1px solid #ABB2B9;">Price</div>
+								<div class = "th" style = "width: 55.33px;">Price</div>
+								<div class = "th" style = "width: 55.33px; border-right: 1px solid #ABB2B9;">Update?</div>
 							</div>
 						</div>	
-						<input type = "submit" id = "update" value = "Update Cart" /> <br>
-					</form>
-					<button id = "checkout">Check Out</button>
+					<button type = "submit" id = "checkout">Check Out</button>
 				</form>
 					
 				

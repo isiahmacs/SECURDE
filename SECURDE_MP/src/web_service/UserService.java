@@ -411,4 +411,30 @@ public class UserService {
 		}
 		System.out.println();
 	}
+	
+	/**
+	 * Updates item in transaction
+	 * @param transId - the id of the item
+	 */
+	public static void updateItem(int transId, int quantity) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement("UPDATE transactions SET quantity = ? WHERE transactionid = ?");
+			stmt.setInt(1, quantity);
+			stmt.setInt(2, transId);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
 }

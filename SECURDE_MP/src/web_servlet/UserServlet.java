@@ -43,6 +43,7 @@ import beans_model.Cart;
 						   "/addtoCart",
 						   "/viewCart",
 						   "/removeItem",
+						   "/updateItem",
 						   "/addProduct"})
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -100,6 +101,7 @@ public class UserServlet extends HttpServlet {
 			case "/addtoCart": addtoCart(request, response); break;
 			case "/addProduct": addProduct(request, response); break;
 			case "/removeItem": removeItem(request, response); break;
+			case "/updateItem": updateItem(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -526,15 +528,18 @@ public class UserServlet extends HttpServlet {
 		String htmlProduct = "";
 		
 		for(Cart c : cartList){
-			htmlProduct += "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
+			htmlProduct += "<form action = 'updateItem' method = 'POST'>" +
+						   "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
 						   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
-						   "		<div class = 'td' style = 'display: flex; align-items: center; width: 768px;'>" + 
+						   "		<div class = 'td' style = 'display: flex; align-items: center; width: 682px;'>" + 
 						   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
 						   "		<div class = 'td' style = 'width: 59.5px;'>$" + c.getProductPrice() + "</div>" +
-						   "		<div class = 'td' style = 'width: 69px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
+						   "		<div class = 'td' style = 'width: 68px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
 						   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
-						   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'>$" + c.getProductPrice() + "</div>" + 
+						   "		<div class = 'td' style = 'width: 56px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</div>" + 
+						   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'><button type = 'submit' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></div>" +
 						   "	</div>" +
+						   "</form>" +
 						   "</form>";
 		}
 				
@@ -589,6 +594,32 @@ public class UserServlet extends HttpServlet {
 		
 		UserService.deleteItem(id);
 		System.out.println("Item removed!");
+
+		System.out.println("*******************************************");
+		request.getRequestDispatcher("cart.jsp").forward(request, response);
+	}
+	
+	/**
+	 * Updates item in cart
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void updateItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** REMOVE ITEM ******************");
+		
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("update")); 
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing updateItem method");
+		}
+		
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		
+		UserService.updateItem(id, quantity);
+		System.out.println("Item updated!");
 
 		System.out.println("*******************************************");
 		request.getRequestDispatcher("cart.jsp").forward(request, response);
