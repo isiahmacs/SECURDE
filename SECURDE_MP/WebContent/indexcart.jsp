@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>PokeMerch</title>
+		<title>Your Shopping Cart - PokeMerch</title>
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="script/UserCart.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -27,7 +28,7 @@
 				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 				background-color: #555;
 			}
-
+			
 			@font-face {
 			    font-family: Montserrat;
 			    src: url("Montserrat/Montserrat-Regular.ttf");
@@ -54,8 +55,8 @@
 				overflow: hidden;
                 width: 1350px;
                 position: relative;
-                margin: 0 auto;
                 top: 100px;
+				margin: 0 auto;
 			}
 			
 			#registerFormat {
@@ -93,6 +94,23 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
+			
+			#subCaption {
+				position: relative;
+                float: left;
+                width: 130%;
+                padding-top: 20px;
+                bottom: 40px;
+				font-size: 12px;
+                letter-spacing: 0.5px;
+                font-weight: bold;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;   
+            }        
+            
+            #homeA:hover {
+                text-decoration: underline;
+            }
             
             #header {
                 position: relative;
@@ -101,6 +119,13 @@
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
             }
+			
+			#nav {
+                position: relative;
+                width: 85%;
+                height: 5%;
+                left: 100px;
+            }
             
             #search {
                 display: inline;
@@ -108,8 +133,8 @@
 				height: 30px;
 				width: 35%;
                 margin: 0 auto;
+                top: 2px;
 				left: 200px;
-				top: 2px;
 				font-size: 13px;
                 text-align: center;
 				border: 1px solid #E7E7E7;
@@ -133,8 +158,8 @@
 				opacity: 0.75;
 				letter-spacing: 0px;
 			}
-            
-            #sign-in {
+			
+			#account {
 				position: relative;
                 float: right;
                 display: inline;
@@ -152,13 +177,13 @@
                 transition: all .15s ease-in-out;
 			}
             
-            #sign-in:hover {
+            #account:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-            
-            #join {
+			
+			#sign-out {
 				position: relative;
                 float: right;
                 display: inline;
@@ -176,7 +201,7 @@
                 transition: all .15s ease-in-out;
 			}
             
-            #join:hover {
+            #sign-out:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -204,105 +229,155 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-			
-			#nav {
-                position: relative;
-                width: 85%;
-                height: 5%;
-                left: 100px;
-            }
-			
-			#subCaption {
-				position: relative;
-                float: left;
-                width: 130%;
-                padding-top: 20px;
-                bottom: 40px;
-				font-size: 12px;
-                letter-spacing: 0.5px;
-                font-weight: bold;
-				color: #353535;
-				font-family: Montserrat, Sans-serif; 
-            }
-			
-			#homeA:hover {
-                text-decoration: underline;
-            }
-			
-			#productFormat {
-				width: 86%;
-				height: auto;
+            
+            #cartFormat {
 				float: left;
-                position: relative;
-                left: 115px;
-			}
-			
-			.productContainer {
-				position: relative;
-				width: 350px;
-				height: 550px;
-				margin-right: 30px;
+				width: 85%;
+				height: auto;
 				display: inline-block;
+                position: relative;
+                left: 100px;
+                top: 30px;
 			}
 			
-			.img {
-				width: 350px;
-				height: 550px;
+			#cartContainer {
 				position: relative;
 			}
 			
-			.productDesc {
-				position: absolute;
-				width: 350px;
-				height: 550px;
-				margin: 0 auto;
-				background-color: rgba(35, 35, 35, 0.75);
-				top: 0px;
-				visibility: hidden;
-			}
-
-			.product:hover .productContainer {
-				background-color: rgba(35, 35, 35, 0.75);
-				cursor: pointer;
-			}
-			
-			.product:hover .productDesc {
-				visibility: visible;
-				background-color: rgba(35, 35, 35, 0.75);
-				cursor: pointer;
-			}
-			
-			.product:hover .productName {
-				visibility: visible;
-			 	opacity: 1;
-			}
-			
-			.product:hover .price {
-				visibility: visible;
-			 	opacity: 1;
-			}
-			
-			.productName {
+			#cart {
 				position: relative;
-				font-size: 16px;
-				color: #fff;
+                bottom: 60px;
+				font-size: 20px;
+				color: #353535;
 				font-family: Montserrat, Sans-serif;
 				font-weight: bold;
                 letter-spacing: 1px;
-				text-align: center;
-				top: 225px;
+                line-height: 40px;
+			}
+            
+            #itemCart {
+            	display:table;
+                position: relative;
+                bottom: 60px;
+				width: 100%;
+				border-collapse: separate;
+            }
+            
+            #emptyCart {
+                position: relative;
+				font-size: 13px;
+                bottom: 60px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                letter-spacing: 1px;
+                line-height: 10px;
+                display: none;
+            }
+			
+			
+			.priceTag {
+				border-right: 1px solid #ABB2B9;
 			}
 			
-			.price {
+			img {
+				padding-right: 10px;
+				width: 77px;
+				height: 100px;
+			}
+			
+			.quantity {
+                display: inline;
 				position: relative;
-				color: #fff;
+				height: 30px;
+				width: 50px;
+				font-size: 13px;
+                text-align: center;
+				border: 1px solid #E7E7E7;
+                border-radius: 2px;
+				background-color: #FDFEFE;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				outline: none;
+                transition: all .15s ease-in-out;
+			}
+            
+            .quantity:focus {
+                transition: all .15s ease-in-out;
+                box-shadow: 0px 0px 1px 1px #3C5AA6;
+            }
+			
+			.removeItem {
+				border: none;
+				background-color: transparent;
+				color: #353535;
+				font-family: Montserrat;
+ 				display:table-cell;
+			}
+			
+			.removeItem:hover {
+                text-decoration: underline;
+				cursor: pointer;
+            }
+			
+			#subtotal {
+				position: relative;
+                float: right;
+                display: inline;
+                bottom: 50px;
+                text-align: right;
+				color: #353535;
 				font-family: Montserrat, Sans-serif;
                 font-size: 16px;
                 font-weight: bold;
+                height: 40px;
                 text-transform: uppercase;
-				text-align: center;
-				top: 225px;
-				letter-spacing: 1px;
+                letter-spacing: 1px;
+                line-height: 40px;
+                transition: all .15s ease-in-out;
+			}
+			
+			.update {
+				position: relative;
+				margin-bottom: 10px;
+				width: 55px;
+				height: 35px;
+				background-color: #353535;
+                border-radius: 2px;
+				color: #F8F7F7;
+				border: none;
+				font-family: Montserrat, Sans-serif;
+				transition: all .15s ease-in-out;
+				font-size: 8px;
+				font-weight: bold;
+			}
+			
+			.update:hover {
+				background-color: #454545;
+				cursor: pointer;
+				transition: all .15s ease-in-out;
+			}
+			
+			#checkout {
+				position: relative;
+				left: 995px;
+				width: 150px;
+				height: 35px;
+				margin-bottom: 50px;
+				background-color: #353535;
+                border-radius: 2px;
+				color: #F8F7F7;
+				border: none;
+				font-family: Montserrat, Sans-serif;
+				transition: all .15s ease-in-out;
+				font-size: 13px;
+				font-weight: bold;
+			}
+			
+			#checkout:hover {
+				background-color: #454545;
+				cursor: pointer;
+				transition: all .15s ease-in-out;
 			}
 			
 			#funImage {
@@ -312,84 +387,87 @@
 				left: 0px;
 				top: 0px;
 			}
-            
-			#funImage2 {
-				position: fixed;
-				width: 150px;
-				height: 150px;
-				right: 0px;
-				top: 0px;
+			
+			
+			#rowHeader {
+				display: table-row;
 			}
-
-			.product {
+			
+			.th {
+				display: table-cell;
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 10px;
+				font-size: 10px;
+				border-top: 1px solid #ABB2B9;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				background-color: #EAECEE;
 				position: relative;
-				width: 360px;
-				height: 555px;
-				margin-right: 25px;
-				margin-bottom: 20px;
-				background-color: transparent;
-				border: none;
-			}
-			
-			.forms {
-				width: 350px;
-				height: 550px;
 				display: inline-block;
-				margin-right: 20px;
-				margin-top: 20px;
+				text-align: center;
+				top: 1px;
 			}
 			
+			.rowData {
+				display: table-row;
+			}
+			
+			.td {
+				display: table-cell;
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 10px;
+				font-size: 13px;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				position: relative;
+				text-align: center;
+				vertical-align: middle;
+				top: 1px;
+			}
+            
 		</style>
 	</head>
-	<body>
+	<body> 
 	<img src = "images/a4068434880_5(flipped).png" id = "funImage"></img>
-	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "#"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
+            <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <p id = "myCart"><a href = "indexcart.jsp">My Cart</a></p>
+            <a href = "#"><p id = "myCart">My Cart</p></a>
             <p id = "join"><a href = "sign.jsp">Join</a></p>
            	<p id = "sign-in"><a href = "sign.jsp">Sign In</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>
+            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> Your Shopping Cart</p>
         </div>
-		<article id = "productFormat">
-			
+        <article id = "cartFormat">
+            <div id = "cartContainer">
+                <p id = "cart">My Cart</p>
+                <p id = "emptyCart">Your cart is currently empty.</p>
+				<form method = "checkOut" action = "POST">
+		                <div id = "itemCart">
+							<div id = "rowHeader">
+								<div class = "th" style = "width: 682px;">Product</div>
+								<div class = "th" style = "width: 58px;">Item Price</div>
+								<div class = "th" style = "width: 67.88px;">Quantity</div>
+								<div class = "th" style = "width: 41px;">Remove</div>
+								<div class = "th" style = "width: 55.33px;">Price</div>
+								<div class = "th" style = "width: 55.33px; border-right: 1px solid #ABB2B9;">Update?</div>
+							</div>
+						</div>	
+					<button type = "submit" id = "checkout">Check Out</button>
+				</form>
+					
+				
+            </div>
         </article>
 	</div>
 	</body>
-
-	<script type = "text/javascript">
-		function loadProducts(){
-			
-			$.ajax({
-		 	    context: this,
-		        url:'getProducts',
-		        type: 'GET',
-		        cache:false,
-		        success: function(data){
-		        	var productFeed = document.getElementById("productFormat");
-		        	if(productFeed != null){
-			        	// Remove all children
-			        	while (productFeed.firstChild) {	
-			        		productFeed.removeChild(productFeed.firstChild);
-			        	}
-			
-			        	// Append html snippet 
-			    	    $(productFeed).append(data);
-		        	}
-		    	},
-		        error:function(){
-		            console.log("URL getProducts does not exist");
-		        }
-		    });
-		}
-	
-		$(document).ready(function() {
-			loadProducts();
-		});
-	</script>
 	
 </html>

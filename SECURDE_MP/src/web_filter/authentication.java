@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class authentication implements Filter {
 	private HttpServletRequest req;
 	private HttpServletResponse res;
-	private boolean user;
+	private boolean user, guest;
 
     /**
      * Default constructor. 
@@ -44,6 +44,7 @@ public class authentication implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		req = (HttpServletRequest) request;
 		res = (HttpServletResponse) response;
+		guest = false;
 		user = false; //Fixed infinite redirection
 		Boolean admin = false;
 		String url = req.getServletPath(); //
@@ -64,8 +65,9 @@ public class authentication implements Filter {
 				if(c.getName().equals("USER")) {
 					System.out.println("USER Cookie found!");
 						
-					if(c.getMaxAge() != 0)
-						user = true; //if it exists, proceed.
+					if(c.getMaxAge() != 0) {
+						 user = true; //if it exists, proceed.
+					}
 					
 					//Allows session attribute to stay in the website
 					//When user enters exact url.
@@ -81,6 +83,22 @@ public class authentication implements Filter {
 						
 					if(c.getMaxAge() != 0){
 						admin = true;
+					}
+					
+					//Allows session attribute to stay in the website
+					//When user enters exact url.
+					if(theSession.getAttribute("UN") == null) {
+						temp = c.getValue();
+						System.out.println("(Authenticate) Cookie value: " + temp);
+						theSession.setAttribute("UN",temp);
+						System.out.println("Session(UN): " + theSession.getAttribute("UN"));
+					}
+					
+				} else if(c.getName().equals("GUEST")) {
+					System.out.println("GUEST Cookie found!");
+						
+					if(c.getMaxAge() != 0) {
+						 guest = true; //if it exists, proceed.
 					}
 					
 					//Allows session attribute to stay in the website
@@ -112,6 +130,7 @@ public class authentication implements Filter {
 		}
 		
 
+		System.out.println(guest);
 		switch(url) {
 		    /*Public Pagges*/
 		    case "/sign.jsp":
@@ -134,8 +153,7 @@ public class authentication implements Filter {
 								 }
 			break;
 			/*Private Pages*/
-			case "/user.jsp":
-			case "/cart.jsp": //if cookie exists, continue
+			case "/user.jsp": //if cookie exists, continue
 								System.out.println("Access user pages..");
 				                if(user) {
 				               	   System.out.println("Continue on this page..");
@@ -161,18 +179,40 @@ public class authentication implements Filter {
                	  res.sendRedirect("index.jsp");
                 }
             break; 
+			case "/indexproduct.jsp":
 			case "/userproduct.jsp":
 			case "/adminproduct.jsp":			//if user/admin exist, continue
-				if(admin || user) {
+				if(admin || user || guest) {
 					System.out.println("Continue on this page..");
 					chain.doFilter(request, response);
 				}
 				else {
-					System.out.println("Redirecting to sign.jsp..");
-					res.sendRedirect("sign.jsp");
+					System.out.println("Redirecting to index.jsp..");
+					res.sendRedirect("index.jsp");
 				}
 			break;
-			
+			case "/cart.jsp": //if cookie exists, continue
+				System.out.println("Access user pages..");
+                if(user) {
+               	   System.out.println("Continue on this page..");
+                   chain.doFilter(request, response);
+				}
+                else {
+					System.out.println("Redirecting to index.jsp..");
+					res.sendRedirect("index.jsp");
+				}
+			break;
+			case "/indexcart.jsp":
+				System.out.println("Access user pages..");
+                if(guest) {
+               	   System.out.println("Continue on this page..");
+                   chain.doFilter(request, response);
+				}
+                else {
+					System.out.println("Redirecting to index.jsp..");
+					res.sendRedirect("index.jsp");
+				}
+            break;
 			default: System.out.println("ERORR (In authentication filter): Path does not exist ");
 
 				    

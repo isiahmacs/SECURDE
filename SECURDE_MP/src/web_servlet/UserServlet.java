@@ -405,9 +405,49 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void getProducts(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** UPDATING PRODUCT FEED ************************");
-		Cookie[] cookies;
 		ArrayList<Product> productList = UserService.getProducts();
 		String htmlPostList = "";
+		boolean found = false;
+		HttpSession s = request.getSession();
+		s.setAttribute("UN", "0"); 
+		
+		Cookie[] cookieList = request.getCookies();
+			for (Cookie c : cookieList) {
+				if(!found) {
+					if(c.getName().equals("USER")) {
+						Cookie[] list = request.getCookies();
+						for (Cookie cookie : list) {
+							if(cookie.getName().equals("GUEST")) {
+								found = true;
+								cookie.setMaxAge(0);
+								response.addCookie(cookie);
+								break;
+							}
+						}
+					} else if(c.getName().equals("ADMIN")) {
+						Cookie[] list = request.getCookies();
+						for (Cookie cookie : list) {
+							if(cookie.getName().equals("GUEST")) {
+								found = true;
+								cookie.setMaxAge(0);
+								response.addCookie(cookie);
+								break;
+							}
+						}
+					} else {
+						Cookie theCookie;
+						theCookie = new Cookie("GUEST", "0"); 
+						theCookie.setMaxAge(604800); //1 week expirey.
+							
+						//Checking
+						System.out.println("Cookie placed: " + theCookie.getName());
+						System.out.println("Cookie value: " + theCookie.getValue());
+					
+						//Add cookie
+						response.addCookie(theCookie);
+					}
+				} else break;
+			}
 		
 		for(Product p : productList){
 			htmlPostList += "<form action = 'getProductId' method = 'GET' class = 'forms'>" +
@@ -449,10 +489,11 @@ public class UserServlet extends HttpServlet {
 		cookies = request.getCookies();
 		for (Cookie c : cookies) {
 			if(c.getName().equals("USER")) {
-				request.getRequestDispatcher("userproduct.jsp").forward(request, response);
+					request.getRequestDispatcher("userproduct.jsp").forward(request, response);
 			} else if(c.getName().equals("ADMIN")) {
-				c.setMaxAge(0);
-				request.getRequestDispatcher("adminproduct.jsp").forward(request, response);
+					request.getRequestDispatcher("adminproduct.jsp").forward(request, response);
+			} else if (c.getName().equals("GUEST")) {
+				request.getRequestDispatcher("indexproduct.jsp").forward(request, response);
 			}
 		}
 	}
@@ -467,7 +508,8 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
-			
+		
+		System.out.println(userId);
 		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
 		
@@ -492,7 +534,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	/**
-	 * Add users
+	 * Add product to cart
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -500,12 +542,20 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void addtoCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** ADD TO CART ************************");
-
+		Cookie[] cookies;
+		
 		UserService.addtoCart(productId, userId);
 		System.out.println("Product added to cart!");
 
 		System.out.println("*******************************************");
-		request.getRequestDispatcher("cart.jsp").forward(request, response);
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				request.getRequestDispatcher("cart.jsp").forward(request, response);
+			} else if(c.getName().equals("GUEST")) {
+				request.getRequestDispatcher("indexcart.jsp").forward(request, response);
+			}
+		}
 	}
 
 	/**
@@ -584,6 +634,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void removeItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** REMOVE ITEM ******************");
+		Cookie[] cookies;
 		
 		int id = 0;
 		try {
@@ -596,7 +647,14 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Item removed!");
 
 		System.out.println("*******************************************");
-		request.getRequestDispatcher("cart.jsp").forward(request, response);
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				request.getRequestDispatcher("cart.jsp").forward(request, response);
+			} else if(c.getName().equals("GUEST")) {
+				request.getRequestDispatcher("indexcart.jsp").forward(request, response);
+			}
+		}
 	}
 	
 	/**
@@ -608,7 +666,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void updateItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** REMOVE ITEM ******************");
-		
+		Cookie[] cookies;
 		int id = 0;
 		try {
 			id = Integer.parseInt(request.getParameter("update")); 
@@ -622,6 +680,13 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Item updated!");
 
 		System.out.println("*******************************************");
-		request.getRequestDispatcher("cart.jsp").forward(request, response);
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				request.getRequestDispatcher("cart.jsp").forward(request, response);
+			} else if(c.getName().equals("GUEST")) {
+				request.getRequestDispatcher("indexcart.jsp").forward(request, response);
+			}
+		}
 	}
 }

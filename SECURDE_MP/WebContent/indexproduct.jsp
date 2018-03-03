@@ -249,7 +249,7 @@
 			.productNameCont {
 				position: relative;
 				width: 100%;
-				height: 75px;
+				height: 70px;
 				border-bottom: 1px solid #EAECEE;
 			}
 			
@@ -266,7 +266,7 @@
 			.price {
 				position: relative;
 				color: #353535;
-				bottom: 20px;
+				bottom: 15px;
 				font-family: Montserrat, Sans-serif;
                 font-size: 16px;
                 font-weight: bold;
@@ -275,8 +275,8 @@
 			
 			#addtoCartBut {
 				position: relative;
-				left: 50px;
-				bottom: 25px;
+				left: 500px;
+				top: 80px;
 				width: 150px;
 				height: 35px;
 				background-color: #353535;
@@ -287,6 +287,7 @@
 				transition: all .15s ease-in-out;
 				font-size: 13px;
 				font-weight: bold;
+				z-index: 100;
 			}
 			
 			#addtoCartBut:hover {
@@ -341,12 +342,12 @@
         <div id = "header">
             <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <p id = "myCart"><a href = "cart.jsp">My Cart</a></p>
+            <p id = "myCart"><a href = "indexcart.jsp">My Cart</a></p>
 			<p id = "join"><a href = "sign.jsp">Join</a></p>
            	<p id = "sign-in"><a href = "sign.jsp">Sign In</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">Â»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">Â»</span> Product</p>
+            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "index.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
             <button id = "addtoCartBut">Add to Cart</button>
@@ -362,7 +363,7 @@
 		            type: 'POST',
 		            cache:false,
 		            success: function(data){
-		                window.location.href = "cart.jsp";
+		                window.location.href = "indexcart.jsp";
 		            },
 		            error:function(){
 		                console.log("URL addtoCart does not exist");
