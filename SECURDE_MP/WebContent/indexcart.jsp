@@ -159,7 +159,7 @@
 				letter-spacing: 0px;
 			}
 			
-			#account {
+			#sign-in {
 				position: relative;
                 float: right;
                 display: inline;
@@ -177,13 +177,13 @@
                 transition: all .15s ease-in-out;
 			}
             
-            #account:hover {
+            #sign-in:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-			
-			#sign-out {
+            
+            #join {
 				position: relative;
                 float: right;
                 display: inline;
@@ -201,7 +201,7 @@
                 transition: all .15s ease-in-out;
 			}
             
-            #sign-out:hover {
+            #join:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -223,6 +223,12 @@
                 line-height: 40px;
                 transition: all .15s ease-in-out;
 			}
+            
+            #myCart:hover {
+                color: #BBBBBB;
+                text-decoration: none;
+                transition: all .15s ease-in-out;
+            }
             
             #myCart:hover {
                 color: #BBBBBB;

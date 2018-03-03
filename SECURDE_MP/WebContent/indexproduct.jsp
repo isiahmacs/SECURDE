@@ -147,7 +147,7 @@
 				letter-spacing: 0px;
 			}
 			
-			 #sign-in {
+			#sign-in {
 				position: relative;
                 float: right;
                 display: inline;
