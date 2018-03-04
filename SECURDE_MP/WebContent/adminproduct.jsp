@@ -308,14 +308,14 @@
 				transition: all .15s ease-in-out;
 			}
 			
-			#productDesc {
+			.productDesc {
 				position: relative;
 				width: 100%;
 				height: auto;
 				top: 20px;
 			}
 			
-			#description {
+			.description {
 				position: relative;
 				color: #353535;
 				bottom: 20px;

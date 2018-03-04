@@ -1,6 +1,8 @@
 package web_servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -13,12 +15,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.sun.mail.smtp.SMTPTransport;
 
@@ -45,6 +49,7 @@ import beans_model.Cart;
 						   "/removeItem",
 						   "/updateItem",
 						   "/addProduct"})
+@MultipartConfig
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
@@ -581,10 +586,10 @@ public class UserServlet extends HttpServlet {
 			htmlProduct += "<form action = 'updateItem' method = 'POST'>" +
 						   "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
 						   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
-						   "		<div class = 'td' style = 'display: flex; align-items: center; width: 682px;'>" + 
+						   "		<div class = 'td' style = 'display: flex; align-items: center; width: 681.5px;'>" + 
 						   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
-						   "		<div class = 'td' style = 'width: 59.5px;'>$" + c.getProductPrice() + "</div>" +
-						   "		<div class = 'td' style = 'width: 68px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
+						   "		<div class = 'td' style = 'width: 60px;'>$" + c.getProductPrice() + "</div>" +
+						   "		<div class = 'td' style = 'width: 68.5px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
 						   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
 						   "		<div class = 'td' style = 'width: 56px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</div>" + 
 						   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'><button type = 'submit' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></div>" +
@@ -611,11 +616,13 @@ public class UserServlet extends HttpServlet {
 	private void addProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** ADD PRODUCT ******************");
 		
-		String productName = request.getParameter("firstname");
+		String productName = request.getParameter("prodName");
 		double productPrice = Double.parseDouble(request.getParameter("prodPrice"));
 		int productQuantity = Integer.parseInt(request.getParameter("prodQuantity")); 
 		String productDesc = request.getParameter("prodDesc");
 		String productImage = request.getParameter("prodImage");
+		
+		System.out.println(productImage);
 		
 	    Product product = new Product(productQuantity, productName, productDesc, productImage, productPrice);
 			
@@ -623,6 +630,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Product added!");
 
 		System.out.println("*******************************************");
+		response.sendRedirect("admin.jsp");
 	}
 	
 	/**

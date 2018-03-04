@@ -33,8 +33,15 @@
 			    src: url("Montserrat/Montserrat-Regular.ttf");
 			}
 			
+			html {
+				height: 101%;
+			}
+			
 			body {
 				overflow-x: hidden;
+				overflow-y: scroll;
+				min-height: 101%;
+				max-height: auto;
 				/*background: url('images/minimalism_background_macro_chip_board_circuit_74408_1920x1080.jpg');
 				background-size: cover;
 				background-repeat: no-repeat;*/

@@ -129,8 +129,6 @@ public class authentication implements Filter {
 			System.out.println("No user!");
 		}
 		
-
-		System.out.println(guest);
 		switch(url) {
 		    /*Public Pagges*/
 		    case "/sign.jsp":
@@ -166,6 +164,7 @@ public class authentication implements Filter {
 				               	  res.sendRedirect("index.jsp");
 				                }
 			break; 
+			case "/addProduct.jsp":
 			case "/admin.jsp": //if cookie exists, continue
 				System.out.println("Access user pages..");
                 if(admin) {
@@ -213,6 +212,7 @@ public class authentication implements Filter {
 					res.sendRedirect("index.jsp");
 				}
             break;
+				
 			default: System.out.println("ERORR (In authentication filter): Path does not exist ");
 
 				    

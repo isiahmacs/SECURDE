@@ -6,9 +6,9 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#image').attr('src', e.target.result);
-            $('label[for=prodimage]').empty();
+            $('label[for=prodImage]').empty();
 	        for (var i = 0, l = files.length; i < l; i++) {
-	            $('label[for=prodimage]').append(files[i].name + '\n');
+	            $('label[for=prodImage]').append(files[i].name + '\n');
 	        }
         }
 
@@ -18,29 +18,10 @@ function readURL(input) {
 
 $(document).ready(function() {
 
-	$("#prodimage").change(function(){
+	$("#prodImage").change(function(){
 	    readURL(this);
 	});
 
-	$("#addProdBtn").click(function() {
-		submitProductForm();
-	});
+	
 
 });
-
-//This function handles submitting the data.
-function submitProductForm() {
-	$.ajax({
-		context: this,
-      	url:'addProduct',
-	    data:$("form#addProdForm").serialize(),
-	    type:'POST',
-	    cache:false,
-	    success: function(data){
-	    	  window.location.href = "admin.jsp";
-	    },
-	    error:function(){
-	    	console.log("error searchResult.js");
-	   	}
-   });
-}
