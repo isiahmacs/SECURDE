@@ -589,28 +589,31 @@ public class UserServlet extends HttpServlet {
 		ArrayList<Cart> cartList = UserService.getCart(id);
 
 		String htmlProduct = "";
-		
-		for(Cart c : cartList){
-			htmlProduct += "<form action = 'updateItem' method = 'POST'>" +
-						   "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
-						   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
-						   "		<div class = 'td' style = 'display: flex; align-items: center; width: 681.5px;'>" + 
-						   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
-						   "		<div class = 'td' style = 'width: 60px;'>$" + c.getProductPrice() + "</div>" +
-						   "		<div class = 'td' style = 'width: 68.5px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
-						   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
-						   "		<div class = 'td' style = 'width: 56px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</div>" + 
-						   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'><button type = 'submit' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></div>" +
-						   "	</div>" +
-						   "</form>" +
-						   "</form>";
+		if(cartList != null) {
+			for(Cart c : cartList){
+				htmlProduct += "<form action = 'updateItem' method = 'POST'>" +
+							   "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
+							   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
+							   "		<div class = 'td' style = 'display: flex; align-items: center; width: 681.5px;'>" + 
+							   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
+							   "		<div class = 'td' style = 'width: 60px;'>$" + c.getProductPrice() + "</div>" +
+							   "		<div class = 'td' style = 'width: 68.5px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
+							   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
+							   "		<div class = 'td' style = 'width: 56px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</div>" + 
+							   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'><button type = 'submit' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></div>" +
+							   "	</div>" +
+							   "</form>" +
+							   "</form>";
+			}
+					
+			System.out.println(cartList);
+			response.setContentType("text/html"); 
+			response.setCharacterEncoding("UTF-8"); 
+			response.getWriter().write(htmlProduct);       
+			System.out.println("*******************************************");
+		} else {
+			response.getWriter().write("NO-ITEMS-CART");
 		}
-				
-		System.out.println(cartList);
-		response.setContentType("text/html"); 
-		response.setCharacterEncoding("UTF-8"); 
-		response.getWriter().write(htmlProduct);       
-		System.out.println("*******************************************");
 
 	}
 
