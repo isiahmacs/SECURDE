@@ -777,7 +777,7 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Product edited!");
 
 		System.out.println("*******************************************");
-		response.sendRedirect("admin.jsp");
+		response.sendRedirect("adminproduct.jsp");
 	}
 
 	/**
@@ -802,13 +802,6 @@ public class UserServlet extends HttpServlet {
 		System.out.println("Product removed!");
 
 		System.out.println("*******************************************");
-		cookies = request.getCookies();
-		for (Cookie c : cookies) {
-			if(c.getName().equals("USER")) {
-				request.getRequestDispatcher("user.jsp").forward(request, response);
-			} else if(c.getName().equals("GUEST")) {
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			}
-		}
+		response.sendRedirect("admin.jsp");
 	}
 }
