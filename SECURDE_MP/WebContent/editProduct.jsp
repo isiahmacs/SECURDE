@@ -132,6 +132,30 @@
 				letter-spacing: 0px;
 			}
 			
+			#orders {
+				position: relative;
+                float: right;
+                display: inline;
+                bottom: 14px;
+                right: 40px;
+                text-align: right;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                height: 40px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                line-height: 40px;
+                transition: all .15s ease-in-out;
+			}
+            
+            #orders:hover {
+                color: #BBBBBB;
+                text-decoration: none;
+                transition: all .15s ease-in-out;
+            }
+			
 			#addProd {
 				position: relative;
                 float: right;
@@ -408,27 +432,14 @@
             <a href = "admin.jsp"><p id = "titleCaption">VIEW ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
 			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
+			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
+			<a href = "orders.jsp"><p id = "orders">Orders</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">Â»</span> Add Product</p>
+            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> Edit Product</p>
         </div>
 		<article id = "editProductFormat">
-			<div id = 'editProductContainer'>
-	            <img src = "images/question-marks-background-200px-Question_mark.png" class = "img" id = "image"></img>
-	            <div id = 'productDescCont'>
-	            	<form action = "addProduct" method = "POST" id = "addProdForm">
-							<input type = "text" placeholder = "Product Name" id = "prodname" name = "prodName" class = "upload" required /> <br>
-							<input type = "number" placeholder = "Price" id = "prodprice" name = "prodPrice" class = "upload" min = "0.01" step = "0.01" required /> <br>
-							<input type = "number" placeholder = "Quantity" id = "prodquantity" name = "prodQuantity" class = "upload" min = "1" required /> <br>
-							<textarea placeholder = "Product Description" id = "proddesc" name = "prodDesc" class = "upload" required></textarea> <br><br>
-							<label for = "prodImage" class="custom-file-upload" id = "label">
-							    Add Image
-							</label>
-							<input type = "file" id = "prodImage" name = "prodImage" class = "upload" accept=".png, .jpg, .jpeg" required /> <br><br>
-						<input type = "submit" id = "editProdBtn" value = "Update Product" />
-					</form>
-	            </div>
-	        </div>
+
         </article>
 	</div>
 	</body>

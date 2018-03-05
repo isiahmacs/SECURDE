@@ -164,6 +164,8 @@ public class authentication implements Filter {
 				               	  res.sendRedirect("index.jsp");
 				                }
 			break; 
+			case "/orders.jsp":
+			case "/editProduct.jsp":
 			case "/addProduct.jsp":
 			case "/admin.jsp": //if cookie exists, continue
 				System.out.println("Access user pages..");

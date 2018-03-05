@@ -134,6 +134,30 @@
 				letter-spacing: 0px;
 			}
 			
+			#orders {
+				position: relative;
+                float: right;
+                display: inline;
+                bottom: 14px;
+                right: 40px;
+                text-align: right;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                height: 40px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                line-height: 40px;
+                transition: all .15s ease-in-out;
+			}
+            
+            #orders:hover {
+                color: #BBBBBB;
+                text-decoration: none;
+                transition: all .15s ease-in-out;
+            }
+			
 			#addProd {
 				position: relative;
                 float: right;
@@ -327,6 +351,7 @@
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
 			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
 			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
+			<a href = "orders.jsp"><p id = "orders">Orders</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "#" id = "homeA">Home</a> <span class="separator">»</span> Collections</p>

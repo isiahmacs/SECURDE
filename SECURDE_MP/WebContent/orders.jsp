@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -5,7 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="script/addProduct.js"></script>
+		<script type="text/javascript" src="script/AdminOrders.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -25,7 +28,7 @@
 				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 				background-color: #555;
 			}
-
+			
 			@font-face {
 			    font-family: Montserrat;
 			    src: url("Montserrat/Montserrat-Regular.ttf");
@@ -91,6 +94,23 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
+			
+			#subCaption {
+				position: relative;
+                float: left;
+                width: 130%;
+                padding-top: 20px;
+                bottom: 40px;
+				font-size: 12px;
+                letter-spacing: 0.5px;
+                font-weight: bold;
+				color: #353535;
+				font-family: Montserrat, Sans-serif; 
+            }
+            
+            #homeA:hover {
+                text-decoration: underline;
+            }
             
             #header {
                 position: relative;
@@ -98,6 +118,13 @@
                 height: 40px;
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
+            }
+			
+			#nav {
+                position: relative;
+                width: 85%;
+                height: 5%;
+                left: 100px;
             }
             
             #search {
@@ -137,7 +164,7 @@
                 float: right;
                 display: inline;
                 bottom: 14px;
-                right: 20px;
+                right: 40px;
                 text-align: right;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -151,6 +178,30 @@
 			}
             
             #orders:hover {
+                color: #BBBBBB;
+                text-decoration: none;
+                transition: all .15s ease-in-out;
+            }
+			
+			#addProd {
+				position: relative;
+                float: right;
+                display: inline;
+                bottom: 14px;
+                right: 20px;
+                text-align: right;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                height: 40px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                line-height: 40px;
+                transition: all .15s ease-in-out;
+			}
+            
+            #addProd:hover {
                 color: #BBBBBB;
                 text-decoration: none;
                 transition: all .15s ease-in-out;
@@ -179,185 +230,96 @@
                 transition: all .15s ease-in-out;
             }
 			
-			#nav {
-                position: relative;
-                width: 85%;
-                height: 5%;
-                left: 100px;
-            }
-			
-			#subCaption {
-				position: relative;
-                float: left;
-                width: 130%;
-                padding-top: 20px;
-                bottom: 40px;
-				font-size: 12px;
-                letter-spacing: 0.5px;
-                font-weight: bold;
-				color: #353535;
-				font-family: Montserrat, Sans-serif; 
-            }
-			
-			#homeA:hover {
-                text-decoration: underline;
-            }
-			
-			#addProductFormat {
-				width: 86%;
+			#transFormat {
+				width: 85%;
 				height: auto;
-				float: left;
+				display: inline-block;
                 position: relative;
-                left: 115px;
+                left: 120px;
+				bottom: 20px;
 			}
 			
-			#addProductContainer {
+			.transContainer {
 				position: relative;
 				display: flex; 
 				flex-wrap: nowrap; 
 				align-items: flex-start;
+				padding-bottom: 10px;
+				right: 15px;
+				border-bottom: 2px solid #D5D8DC;
 			}
 			
-			.img {
-				width: 350px;
-				height: 550px;
-				margin-right: 25px;
-				margin-bottom: 20px;
-				position: relative;
+			img {
+				width: 150px;
+				height: 250px;
 			}
 
-			#productDescCont {
+			.transDescCont {
 				position: relative;
+				top: 0px;
 				left: 50px;
 				width: 700px;
 				height: auto;
-			}
-			
-			#prodname {
-				position: relative;
-				margin-top: 20px;
-				height: 40px;
-				width: 50%;
-				font-size: 13px;
-                padding-left: 10px;
-				border: 1px solid #E7E7E7;
-                border-radius: 2px;
-				background-color: #F7F7F7;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				outline: none;
-				font-weight: bold;
-				letter-spacing: 1px;
-				transition: all .15s ease-in-out;
-			}
-            
-            #prodname:focus {
-                box-shadow: 0px 0px 1px 1px #3C5AA6;
-                transition: all .15s ease-in-out;
-            }
-			
-			#proddesc {
-				position: relative;
-				margin-top: 20px;
-				height: 70px;
-				width: 90%;
-				font-size: 13px;
-				padding-top: 10px;
-                padding-left: 10px;
-				border: 1px solid #E7E7E7;
-                border-radius: 2px;
-				background-color: #F7F7F7;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				outline: none;
-				font-weight: bold;
-				letter-spacing: 1px;
-				transition: all .15s ease-in-out;
-				resize: none;
-			}
-			
-            #proddesc:focus {
-                box-shadow: 0px 0px 1px 1px #3C5AA6;
-                transition: all .15s ease-in-out;
-            }
-            
-			#prodprice {
-				position: relative;
-				margin-top: 20px;
-				height: 40px;
-				width: 10%;
-				font-size: 13px;
-                padding-left: 10px;
-				border: 1px solid #E7E7E7;
-                border-radius: 2px;
-				background-color: #F7F7F7;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				outline: none;
-				font-weight: bold;
-				letter-spacing: 1px;
-				transition: all .15s ease-in-out;
-			}
-            
-            #prodprice:focus {
-                box-shadow: 0px 0px 1px 1px #3C5AA6;
-                transition: all .15s ease-in-out;
-            }
+			}	
 
-            #prodquantity {
+			.productName {
 				position: relative;
-				margin-top: 20px;
-				height: 40px;
-				width: 11%;
-				font-size: 13px;
-                padding-left: 10px;
-				border: 1px solid #E7E7E7;
-                border-radius: 2px;
-				background-color: #F7F7F7;
+				font-size: 14px;
+				bottom: 15px;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
-				outline: none;
 				font-weight: bold;
-				letter-spacing: 1px;
-				transition: all .15s ease-in-out;
 			}
-            
-            #prodquantity:focus {
-                box-shadow: 0px 0px 1px 1px #3C5AA6;
-                transition: all .15s ease-in-out;
-            }
 
-            input[type="file"] {
-			    display: none;
-			}
-			
-			.custom-file-upload {
+			.productPrice {
 				position: relative;
-				text-align: center;
-				padding: 10px;
-				background-color: #F7F7F7;
-                border-radius: 2px;
+				font-size: 14px;
+				bottom: 15px;
 				color: #353535;
-				border: 1px solid #E7E7E7;
 				font-family: Montserrat, Sans-serif;
-				transition: all .15s ease-in-out;
-				font-size: 13px;
 				font-weight: bold;
 			}
-            
-            .custom-file-upload:hover {
-               	box-shadow: 0px 0px 1px 1px #3C5AA6;
-               	cursor: pointer;
-				transition: all .15s ease-in-out;
-            }
-			
-			#addProdBtn {
+
+			.productQuantity {
 				position: relative;
-				margin-top: 30px;
-				margin-bottom: 20px;
-				text-align: center;
+				font-size: 14px;
+				bottom: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+			}
+
+			.productTotalPrice {
+				position: relative;
+				font-size: 14px;
+				bottom: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+			}
+
+			.productBuyer {
+				position: relative;
+				font-size: 14px;
+				bottom: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+			}
+
+			.productBuyerEmail {
+				position: relative;
+				font-size: 14px;
+				bottom: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+			}
+
+			.cancelOrderBtn {
+				position: relative;
 				width: 150px;
-				height: 45px;
+				height: 35px;
 				background-color: #353535;
                 border-radius: 2px;
 				color: #F8F7F7;
@@ -366,22 +328,15 @@
 				transition: all .15s ease-in-out;
 				font-size: 13px;
 				font-weight: bold;
-				float: left;
-				left: 0px;
+				z-index: 100;
 			}
-
-			#addProdBtn:hover {
+			
+			.cancelOrderBtn:hover {
 				background-color: #454545;
 				cursor: pointer;
 				transition: all .15s ease-in-out;
 			}
 			
-			.upload::-webkit-input-placeholder {
-				color: #353535;
-				opacity: 0.75;
-				letter-spacing: 0px;
-			}
-
 			#funImage {
 				position: fixed;
 				width: 150px;
@@ -389,7 +344,7 @@
 				left: 0px;
 				top: 0px;
 			}
-            
+			
 			#funImage2 {
 				position: fixed;
 				width: 150px;
@@ -397,7 +352,7 @@
 				right: 0px;
 				top: 0px;
 			}
-			
+            
 		</style>
 	</head>
 	<body>
@@ -405,31 +360,17 @@
 	<img src = "images/a4068434880_5.png" id = "funImage2"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "admin.jsp"><p id = "titleCaption">VIEW ALL PRODUCTS</p></a>
+            <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
-			<a href = "orders.jsp"><p id = "orders">Orders</p></a>
+            <a href = "logout"><p id = "sign-out">Sign Out</p></a>
+			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
+			<a href = "#"><p id = "orders">Orders</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> Add Product</p>
+            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> Orders</p>
         </div>
-		<article id = "addProductFormat">
-			<div id = 'addProductContainer'>
-	            <img src = "images/question-marks-background-200px-Question_mark.png" class = "img" id = "image"></img>
-	            <div id = 'productDescCont'>
-	            	<form action = "addProduct" method = "POST" id = "addProdForm">
-							<input type = "text" placeholder = "Product Name" id = "prodname" name = "prodName" class = "upload" required /> <br>
-							<input type = "number" placeholder = "Price" id = "prodprice" name = "prodPrice" class = "upload" min = "0.01" step = "0.01" required /> <br>
-							<input type = "number" placeholder = "Quantity" id = "prodquantity" name = "prodQuantity" class = "upload" min = "1" required /> <br>
-							<textarea placeholder = "Product Description" id = "proddesc" name = "prodDesc" class = "upload" required></textarea> <br><br>
-							<label for = "prodImage" class="custom-file-upload" id = "label">
-							    Add Image
-							</label>
-							<input type = "file" id = "prodImage" name = "prodImage" class = "upload" accept=".png, .jpg, .jpeg" required /> <br><br>
-						<input type = "submit" id = "addProdBtn" value = "Add Product" />
-					</form>
-	            </div>
-	        </div>
+		<article id = "transFormat">
+			
         </article>
 	</div>
 	</body>

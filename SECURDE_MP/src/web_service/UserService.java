@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import beans_model.Product;
 import beans_model.User;
 import beans_model.Cart;
+import beans_model.Order;
 
 public class UserService {
 	
@@ -458,7 +459,7 @@ public class UserService {
 			stmt.setString(3, productImage);
 			stmt.setInt(4, productQuantity);
 			stmt.setDouble(5, productPrice);
-			stmt.setInt(6, id)
+			stmt.setInt(6, id);
 			
 			stmt.executeUpdate();
 			
@@ -485,6 +486,62 @@ public class UserService {
 			PreparedStatement stmt =  conn.prepareStatement("DELETE FROM pokemerch.products WHERE productid = ?");
 			
 			stmt.setInt(1, productId);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Retrieves a list of orders
+	 * @return List of orders
+	 */
+	public static ArrayList<Order> getOrders() {
+		System.out.println();
+		ArrayList<Order> orders = new ArrayList<>();
+		try{
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+
+			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, CONCAT(u.fname, ' ', u.lname) AS fullname, p.productname, p.price, t.quantity, (t.quantity * p.price) AS totalPrice, u.email, p.image FROM pokemerch.transactions t, pokemerch.users u, pokemerch.products p  WHERE t.confirmed = 1 AND t.productid = p.productid AND t.userid = u.userid order by transactionid asc;");
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				orders.add(new Order(rs.getString("p.image"), rs.getInt("t.transactionid"), rs.getString("p.productname"), rs.getString("fullname"), rs.getString("u.email"), rs.getDouble("p.price"), rs.getDouble("totalPrice"), rs.getInt("t.quantity")));
+			} 
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println();
+		return orders;
+		
+	}
+	
+	/**
+	 * Removes order
+	 * @param orderId - the id of the order
+	 */
+	public static void deleteOrder(int orderId) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement("DELETE FROM pokemerch.transactions WHERE transactionid = ?");
+			
+			stmt.setInt(1, orderId);
 			
 			stmt.executeUpdate();
 			
