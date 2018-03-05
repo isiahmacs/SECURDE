@@ -333,7 +333,7 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, t.quantity, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? group by t.productid order by transactionid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, t.quantity, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? AND t.confirmed = 0 group by t.productid order by transactionid asc;");
 			st.setInt(1, userId);
 			ResultSet rs = st.executeQuery();
 			
@@ -542,6 +542,62 @@ public class UserService {
 			PreparedStatement stmt =  conn.prepareStatement("DELETE FROM pokemerch.transactions WHERE transactionid = ?");
 			
 			stmt.setInt(1, orderId);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Adds the address to the address table
+	 * @param cart - the Cart object being added.
+	 */
+	public static void addAddress(int userid, String address) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement(
+					"INSERT INTO addresses (userid, address) " +
+					"VALUES (?, ?)"
+					);
+			
+			stmt.setInt(1, userid);
+			stmt.setString(2, address);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Updates the transaction
+	 * @param product - the Product object being updated.
+	 */
+	public static void updateTransaction(int id) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement("UPDATE transactions SET confirmed = 1 WHERE userid = ?");
+			
+			stmt.setInt(1, id);
 			
 			stmt.executeUpdate();
 			

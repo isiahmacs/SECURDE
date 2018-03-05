@@ -366,9 +366,10 @@
 			
 			#checkout {
 				position: relative;
-				left: 995px;
+				left: 405px;
 				width: 150px;
 				height: 35px;
+				bottom: 100px;
 				margin-bottom: 50px;
 				background-color: #353535;
                 border-radius: 2px;
@@ -436,7 +437,51 @@
 				vertical-align: middle;
 				top: 1px;
 			}
-            
+			
+			#totalOrderPrice {
+				position: relative;
+				left: 1000px;
+				width: 150px;
+				height: 35px;
+				margin-bottom: 50px;
+				color: #353535;
+				border: none;
+				bottom: 20px;
+				font-family: Montserrat, Sans-serif;
+				transition: all .15s ease-in-out;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			
+			#note {
+				position: relative;
+				font-family: Montserrat, Sans-serif;
+				font-size: 12px;
+				line-height: 15px;
+				bottom: 100px;
+				font-style: italic;
+				color: #353535;
+			}
+			
+			#address {
+				position: relative;
+				margin-top: 10px;
+				height: 40px;
+				width: 50%;
+				bottom: 100px;
+				font-size: 13px;
+                padding-left: 10px;
+				border: 1px solid #E7E7E7;
+                border-radius: 2px;
+				background-color: #F7F7F7;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				outline: none;
+				font-weight: bold;
+				letter-spacing: 1px;
+				transition: all .15s ease-in-out;
+			}
+			           
 		</style>
 	</head>
 	<body> 
@@ -456,7 +501,7 @@
             <div id = "cartContainer">
                 <p id = "cart">My Cart</p>
                 <p id = "emptyCart">Your cart is currently empty.</p>
-				<form method = "checkOut" action = "POST">
+				<form action = "checkOut" method = "POST">
 		                <div id = "itemCart">
 							<div id = "rowHeader">
 								<div class = "th" style = "width: 682px;">Product</div>
@@ -467,7 +512,10 @@
 								<div class = "th" style = "width: 55.33px; border-right: 1px solid #ABB2B9;">Update?</div>
 							</div>
 						</div>	
-					<button type = "submit" id = "checkout">Check Out</button>
+						<p id = "totalOrderPrice">Total Price: $${total }</p>
+						<p id = "note">To complete the order, please input your delivery address here: </p>
+						<input type = "text" id = "address" name = "address" placeholder = "Address" required />
+					<input type = "submit" id = "checkout" value = "Check Out" />
 				</form>
 					
 				

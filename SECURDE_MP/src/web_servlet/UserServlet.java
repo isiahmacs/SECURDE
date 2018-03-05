@@ -45,6 +45,7 @@ import beans_model.Order;
 						   "/getProducts",
 						   "/getProductId",
 						   "/viewProduct",
+						   "/viewProductForAdmin",
 						   "/addtoCart",
 						   "/viewCart",
 						   "/removeItem",
@@ -54,7 +55,8 @@ import beans_model.Order;
 						   "/editProduct",
 						   "/removeProduct",
 						   "/viewOrders",
-						   "/cancelOrder"})
+						   "/cancelOrder",
+						   "/checkOut"})
 @MultipartConfig
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -85,6 +87,7 @@ public class UserServlet extends HttpServlet {
 			case "/getProducts": getProducts(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
+			case "/viewProductForAdmin": viewProductForAdmin(request, response); break;
 			case "/viewEditProduct": viewEditProduct(request, response); break;
 			case "/viewCart": viewCart(request, response); break;
 			case "/viewOrders": viewOrders(request, response); break;
@@ -118,6 +121,7 @@ public class UserServlet extends HttpServlet {
 			case "/editProduct": editProduct(request, response); break;
 			case "/removeProduct": removeProduct(request, response); break;
 			case "/cancelOrder": cancelOrder(request, response); break;
+			case "/checkOut": checkOut(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -425,12 +429,12 @@ public class UserServlet extends HttpServlet {
 		String htmlPostList = "";
 		boolean found = false;
 		HttpSession s = request.getSession();
-		s.setAttribute("UN", "0"); 
 		
 		Cookie[] cookieList = request.getCookies();
 			for (Cookie c : cookieList) {
 				if(!found) {
 					if(c.getName().equals("USER")) {
+						s.setAttribute("UN", c.getValue()); 
 						Cookie[] list = request.getCookies();
 						for (Cookie cookie : list) {
 							if(cookie.getName().equals("GUEST")) {
@@ -453,6 +457,7 @@ public class UserServlet extends HttpServlet {
 					} else {
 						Cookie theCookie;
 						theCookie = new Cookie("GUEST", "0"); 
+						s.setAttribute("UN", theCookie.getValue()); 
 						theCookie.setMaxAge(604800); //1 week expirey.
 							
 						//Checking
@@ -515,7 +520,7 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Retrieves a product
+	 * Retrieves a product for users/guests
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -523,6 +528,41 @@ public class UserServlet extends HttpServlet {
 	 * @return List of Posts
 	 */
 	private void viewProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GETTING PRODUCT ************************");
+		
+		System.out.println(userId);
+		Product p = UserService.getProduct(productId);
+		String htmlProduct = "";
+		
+		htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
+					   "<img src = 'images/" + p.getProductImage() + "'></img>" +
+					   "	<div class = 'productDescCont'>" +
+					   "		<div class = 'productNameCont'>" +
+					   "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
+					   " 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+				       "		</div>" + 
+					   "		<div class = 'productDesc'>" +
+					   "			<p class = 'description'>" + p.getProductDescription() + "</p>" +
+					   "		</div>" +
+					   "	</div>" + 
+					   "</div>";
+				
+		System.out.println(p);
+		response.setContentType("text/html"); 
+	    response.setCharacterEncoding("UTF-8"); 
+	    response.getWriter().write(htmlProduct);       
+		System.out.println("*******************************************");
+	}
+	
+	/**
+	 * Retrieves a product for admin
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @return List of Posts
+	 */
+	private void viewProductForAdmin(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
 		
 		System.out.println(userId);
@@ -587,8 +627,10 @@ public class UserServlet extends HttpServlet {
 	 * @return List of products in cart
 	 */
 	private void viewCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** GETTING PRODUCT ************************");
+		System.out.println("***************** GETTING CART ************************");
 		HttpSession s = request.getSession();
+		
+		double totalPrice = 0;
 		String userId = (String) s.getAttribute("UN");
 		System.out.println(userId);
 		
@@ -611,12 +653,15 @@ public class UserServlet extends HttpServlet {
 							   "	</div>" +
 							   "</form>" +
 							   "</form>";
+				
+				totalPrice += (c.getQuantity() * c.getProductPrice());
 			}
-					
+			
+			request.getSession().setAttribute("total", totalPrice);
 			System.out.println(cartList);
 			response.setContentType("text/html"); 
 			response.setCharacterEncoding("UTF-8"); 
-			response.getWriter().write(htmlProduct);       
+			response.getWriter().write(htmlProduct);
 			System.out.println("*******************************************");
 		} else {
 			response.getWriter().write("NO-ITEMS-CART");
@@ -832,7 +877,7 @@ public class UserServlet extends HttpServlet {
 							   "			<p class = 'productName'>Product: " + o.getProductName() + "</p>" +
 							   "			<p class = 'productPrice'>Retail Price: " + o.getRetailPrice() + "</p>" + 
 							   "			<p class = 'productQuantity'>Quantity: " + o.getProductQuantity() + "</p>" + 
-							   "			<p class = 'productTotalPrice'>TotalPrice: " + o.getTotalPrice() + "</p>" + 
+							   "			<p class = 'productTotalPrice'>Total Price: " + o.getTotalPrice() + "</p>" + 
 							   "			<p class = 'productBuyer'>Ordered by: " + o.getProductBuyer() + "</p>" + 
 							   "			<p class = 'productBuyerEmail'>Email: " + o.getProductBuyerEmail() + "</p>" +
 							   "			<button type = 'submit' name = 'cancel' class = 'cancelOrderBtn' value = '" + o.getTransactionId() + "'>Cancel Order</button>" +
@@ -876,5 +921,42 @@ public class UserServlet extends HttpServlet {
 
 		System.out.println("*******************************************");
 		response.sendRedirect("orders.jsp");
+	}
+	
+	/**
+	 * Adds the address and confirms the order
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @return List of products in cart
+	 */
+	private void checkOut(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** ADDING ADDRESS ************************");
+		HttpSession s = request.getSession();
+		Cookie[] cookies;
+		
+		String address = request.getParameter("address");
+		String userId = (String) s.getAttribute("UN");
+		System.out.println(userId);
+		
+		int id = Integer.parseInt(userId);
+		
+		if(id != 0) {
+			UserService.addAddress(id, address);
+			System.out.println("Address added!");
+		}
+		
+		UserService.updateTransaction(id);
+		System.out.println("Transaction updated!");
+		System.out.println("*******************************************");
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				request.getRequestDispatcher("user.jsp").forward(request, response);
+			} else if(c.getName().equals("GUEST")) {
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+		}
 	}
 }
