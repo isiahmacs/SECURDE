@@ -48,7 +48,10 @@ import beans_model.Cart;
 						   "/viewCart",
 						   "/removeItem",
 						   "/updateItem",
-						   "/addProduct"})
+						   "/addProduct",
+						   "/viewEditProduct",
+						   "/editProduct",
+						   "/removeProduct"})
 @MultipartConfig
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -79,6 +82,7 @@ public class UserServlet extends HttpServlet {
 			case "/getProducts": getProducts(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
+			case "/viewEditProduct": viewEditProduct(request, response); break;
 			case "/viewCart": viewCart(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
@@ -107,6 +111,8 @@ public class UserServlet extends HttpServlet {
 			case "/addProduct": addProduct(request, response); break;
 			case "/removeItem": removeItem(request, response); break;
 			case "/updateItem": updateItem(request, response); break;
+			case "/editProduct": editProduct(request, response); break;
+			case "/removeProduct": removeProduct(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
 		
@@ -519,17 +525,19 @@ public class UserServlet extends HttpServlet {
 		String htmlProduct = "";
 		
 		htmlProduct += "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
-						"<img src = 'images/" + p.getProductImage() + "'></img>" +
-						"	<div class = 'productDescCont'>" +
-						"		<div class = 'productNameCont'>" +
-						"   		<p class = 'productName'>" + p.getProductName() + "</p>" +
-						" 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
-				        "		</div>" + 
-						"		<div class = 'productDesc'>" +
-						"			<p class = 'description'>" + p.getProductDescription() + "</p>" +
-						"		</div>" +
-						"	</div>" + 
-						"</div> ";
+					   "<img src = 'images/" + p.getProductImage() + "'></img>" +
+					   "	<div class = 'productDescCont'>" +
+					   "		<div class = 'productNameCont'>" +
+					   "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
+					   " 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+				       "		</div>" + 
+					   "		<div class = 'productDesc'>" +
+					   "			<p class = 'description'>" + p.getProductDescription() + "</p>" +
+					   "		</div>" +
+					   "	</div>" + 
+					   "</div>" +
+					   "<a href = 'editProduct.jsp'><button id = 'editProduct' type = 'submit' name = 'editProd' value = '" + p.getProductId() + "'>Edit Product</button></a>" +
+            		   "<a href = 'removeProduct'><button id = 'removeProduct' type = 'submit' name = 'removeProd' value = '" + p.getProductId() + "'>Remove Product</button></a>";
 				
 		System.out.println(p);
 		response.setContentType("text/html"); 
@@ -694,6 +702,112 @@ public class UserServlet extends HttpServlet {
 				request.getRequestDispatcher("cart.jsp").forward(request, response);
 			} else if(c.getName().equals("GUEST")) {
 				request.getRequestDispatcher("indexcart.jsp").forward(request, response);
+			}
+		}
+	}
+
+	/**
+	 * Views edit form of a product
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @return Product info
+	 */
+	private void viewEditProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** EDIT PRODUCT ************************");
+		
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("editProd")); 
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing removeProduct method");
+		}
+		Product p = UserService.getProduct(id);
+		String htmlProduct = "";
+		
+		htmlProduct += "<div id = 'editProductContainer'>" +
+					   "<img src = 'images/" + p.getProductImage() + "'></img>" +
+					   "	<div id = 'productDescCont'>" +
+					   "		<form action = 'editProduct' method = "POST" id = 'editProdForm'>" +
+					   " 			<input type = 'text' value = '" + p.getProductName() + "' id = 'prodname' name = 'prodName' class = 'upload' required /> <br>" +
+					   "			<input type = 'number' value = '" + p.getProductPrice() + "' id = 'prodprice' name = 'prodPrice' class = 'upload' min = '0.01' step = '0.01' required /> <br>" +
+					   "			<input type = 'number' value = '" + p.getQuantity() + "' id = 'prodquantity' name = 'prodQuantity' class = 'upload' min = "1" required /> <br>" +
+					   "			<textarea value = '" + p.getProductDescription() + "' id = 'proddesc' name = 'prodDesc' class = 'upload' required></textarea> <br><br>" +
+					   "			<label for = 'prodImage' class='custom-file-upload' id = 'label'>
+							    		'" + p.getProductImage() + "'
+									</label>" +
+					   "			<input type = 'file' id = 'prodImage' name = 'prodImage' class = 'upload' accept='.png, .jpg, .jpeg' required /> <br><br>" +
+					   "			<button type = 'submit' name = 'editProdId' id = 'editProdBtn' value = '" + p.getProductId() + "'>Update Product</button>" +
+					   "		</form>" +
+					   "	</div>" +
+					   "</div>";
+		System.out.println(p);
+		response.setContentType("text/html"); 
+	    response.setCharacterEncoding("UTF-8"); 
+	    response.getWriter().write(htmlProduct);       
+		System.out.println("*******************************************");
+	}
+
+	/**
+	 * Edits product
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void editProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** EDIT PRODUCT ******************");
+		
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("editProdId")); 
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing removeProduct method");
+		}
+
+		String productName = request.getParameter("prodName");
+		double productPrice = Double.parseDouble(request.getParameter("prodPrice"));
+		int productQuantity = Integer.parseInt(request.getParameter("prodQuantity")); 
+		String productDesc = request.getParameter("prodDesc");
+		String productImage = request.getParameter("prodImage");
+		
+			
+		UserService.editProduct(id, productName, productPrice, productQuantity, productDesc, productImage);
+		System.out.println("Product edited!");
+
+		System.out.println("*******************************************");
+		response.sendRedirect("admin.jsp");
+	}
+
+	/**
+	 * Removes product
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void removeProduct(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** REMOVE PRODUCT ******************");
+		Cookie[] cookies;
+		
+		int id = 0;
+		try {
+			id = Integer.parseInt(request.getParameter("removeProd")); 
+		} catch(NumberFormatException e) {
+			System.out.println("Error: UserServlet.java String to Integer parsing removeProduct method");
+		}
+		
+		UserService.deleteProduct(id);
+		System.out.println("Product removed!");
+
+		System.out.println("*******************************************");
+		cookies = request.getCookies();
+		for (Cookie c : cookies) {
+			if(c.getName().equals("USER")) {
+				request.getRequestDispatcher("user.jsp").forward(request, response);
+			} else if(c.getName().equals("GUEST")) {
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		}
 	}

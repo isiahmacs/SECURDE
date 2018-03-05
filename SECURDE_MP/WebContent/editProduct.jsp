@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -8,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="script/UserProducts.js"></script>
+		<script type="text/javascript" src="script/editProduct.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -28,7 +25,7 @@
 				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 				background-color: #555;
 			}
-			
+
 			@font-face {
 			    font-family: Montserrat;
 			    src: url("Montserrat/Montserrat-Regular.ttf");
@@ -94,23 +91,6 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-			
-			#subCaption {
-				position: relative;
-                float: left;
-                width: 130%;
-                padding-top: 20px;
-                bottom: 40px;
-				font-size: 12px;
-                letter-spacing: 0.5px;
-                font-weight: bold;
-				color: #353535;
-				font-family: Montserrat, Sans-serif; 
-            }
-            
-            #homeA:hover {
-                text-decoration: underline;
-            }
             
             #header {
                 position: relative;
@@ -118,13 +98,6 @@
                 height: 40px;
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
-            }
-			
-			#nav {
-                position: relative;
-                width: 85%;
-                height: 5%;
-                left: 100px;
             }
             
             #search {
@@ -164,7 +137,7 @@
                 float: right;
                 display: inline;
                 bottom: 14px;
-                right: 40px;
+                right: 20px;
                 text-align: right;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -175,7 +148,6 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #addProd:hover {
@@ -189,7 +161,6 @@
                 float: right;
                 display: inline;
                 bottom: 14px;
-                right: 20px;
                 text-align: right;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -200,7 +171,6 @@
                 letter-spacing: 1px;
                 line-height: 40px;
                 transition: all .15s ease-in-out;
-				display: none;
 			}
             
             #sign-out:hover {
@@ -209,127 +179,209 @@
                 transition: all .15s ease-in-out;
             }
 			
-			#productFormat {
-				width: 85%;
-				height: auto;
-				display: inline-block;
+			#nav {
                 position: relative;
-                left: 120px;
-				bottom: 20px;
+                width: 85%;
+                height: 5%;
+                left: 100px;
+            }
+			
+			#subCaption {
+				position: relative;
+                float: left;
+                width: 130%;
+                padding-top: 20px;
+                bottom: 40px;
+				font-size: 12px;
+                letter-spacing: 0.5px;
+                font-weight: bold;
+				color: #353535;
+				font-family: Montserrat, Sans-serif; 
+            }
+			
+			#homeA:hover {
+                text-decoration: underline;
+            }
+			
+			#editProductFormat {
+				width: 86%;
+				height: auto;
+				float: left;
+                position: relative;
+                left: 115px;
 			}
 			
-			.productContainer {
+			#editProductContainer {
 				position: relative;
 				display: flex; 
 				flex-wrap: nowrap; 
 				align-items: flex-start;
 			}
 			
-			img {
+			.img {
 				width: 350px;
 				height: 550px;
+				margin-right: 25px;
+				margin-bottom: 20px;
+				position: relative;
 			}
-			
-			.productDescCont {
+
+			#productDescCont {
 				position: relative;
 				left: 50px;
 				width: 700px;
 				height: auto;
 			}
 			
-			.productNameCont {
+			#prodname {
 				position: relative;
-				width: 100%;
-				height: 75px;
-				border-bottom: 1px solid #EAECEE;
-			}
-			
-			.productName {
-				position: relative;
-				font-size: 20px;
-				bottom: 20px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                letter-spacing: 1px;
-			}
-			
-			.price {
-				position: relative;
-				color: #353535;
-				bottom: 20px;
-				font-family: Montserrat, Sans-serif;
-                font-size: 16px;
-                font-weight: bold;
-                text-transform: uppercase;
-			}
-			
-			#editProduct {
-				position: relative;
-				bottom: 20px;
-				left: 50px;
-				width: 150px;
-				height: 35px;
-				background-color: #353535;
-                border-radius: 2px;
-				color: #F8F7F7;
-				border: none;
-				font-family: Montserrat, Sans-serif;
-				transition: all .15s ease-in-out;
+				margin-top: 20px;
+				height: 40px;
+				width: 50%;
 				font-size: 13px;
-				font-weight: bold;
-			}
-			
-			#editProduct:hover {
-				background-color: #454545;
-				cursor: pointer;
-				transition: all .15s ease-in-out;
-			}
-
-			#deleteProduct {
-				position: relative;
-				bottom: 20px;
-				left: 50px;
-				width: 150px;
-				height: 35px;
-				background-color: #353535;
+                padding-left: 10px;
+				border: 1px solid #E7E7E7;
                 border-radius: 2px;
-				color: #F8F7F7;
-				border: none;
-				font-family: Montserrat, Sans-serif;
-				transition: all .15s ease-in-out;
-				font-size: 13px;
-				font-weight: bold;
-			}
-			
-			#deleteProduct:hover {
-				background-color: #454545;
-				cursor: pointer;
-				transition: all .15s ease-in-out;
-			}
-			
-			.productDesc {
-				position: relative;
-				width: 100%;
-				height: auto;
-				top: 20px;
-			}
-			
-			.description {
-				position: relative;
+				background-color: #F7F7F7;
 				color: #353535;
-				bottom: 20px;
 				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-				text-align: justify;
-				letter-spacing: 0.5px;
+				outline: none;
+				font-weight: bold;
+				letter-spacing: 1px;
+				transition: all .15s ease-in-out;
 			}
-			
-			#collA:hover {
-                text-decoration: underline;
+            
+            #prodname:focus {
+                box-shadow: 0px 0px 1px 1px #3C5AA6;
+                transition: all .15s ease-in-out;
             }
 			
+			#proddesc {
+				position: relative;
+				margin-top: 20px;
+				height: 70px;
+				width: 90%;
+				font-size: 13px;
+				padding-top: 10px;
+                padding-left: 10px;
+				border: 1px solid #E7E7E7;
+                border-radius: 2px;
+				background-color: #F7F7F7;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				outline: none;
+				font-weight: bold;
+				letter-spacing: 1px;
+				transition: all .15s ease-in-out;
+				resize: none;
+			}
+			
+            #proddesc:focus {
+                box-shadow: 0px 0px 1px 1px #3C5AA6;
+                transition: all .15s ease-in-out;
+            }
+            
+			#prodprice {
+				position: relative;
+				margin-top: 20px;
+				height: 40px;
+				width: 10%;
+				font-size: 13px;
+                padding-left: 10px;
+				border: 1px solid #E7E7E7;
+                border-radius: 2px;
+				background-color: #F7F7F7;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				outline: none;
+				font-weight: bold;
+				letter-spacing: 1px;
+				transition: all .15s ease-in-out;
+			}
+            
+            #prodprice:focus {
+                box-shadow: 0px 0px 1px 1px #3C5AA6;
+                transition: all .15s ease-in-out;
+            }
+
+            #prodquantity {
+				position: relative;
+				margin-top: 20px;
+				height: 40px;
+				width: 11%;
+				font-size: 13px;
+                padding-left: 10px;
+				border: 1px solid #E7E7E7;
+                border-radius: 2px;
+				background-color: #F7F7F7;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				outline: none;
+				font-weight: bold;
+				letter-spacing: 1px;
+				transition: all .15s ease-in-out;
+			}
+            
+            #prodquantity:focus {
+                box-shadow: 0px 0px 1px 1px #3C5AA6;
+                transition: all .15s ease-in-out;
+            }
+
+            input[type="file"] {
+			    display: none;
+			}
+			
+			.custom-file-upload {
+				position: relative;
+				text-align: center;
+				padding: 10px;
+				background-color: #F7F7F7;
+                border-radius: 2px;
+				color: #353535;
+				border: 1px solid #E7E7E7;
+				font-family: Montserrat, Sans-serif;
+				transition: all .15s ease-in-out;
+				font-size: 13px;
+				font-weight: bold;
+			}
+            
+            .custom-file-upload:hover {
+               	box-shadow: 0px 0px 1px 1px #3C5AA6;
+               	cursor: pointer;
+				transition: all .15s ease-in-out;
+            }
+			
+			#editProdBtn {
+				position: relative;
+				margin-top: 30px;
+				margin-bottom: 20px;
+				text-align: center;
+				width: 150px;
+				height: 45px;
+				background-color: #353535;
+                border-radius: 2px;
+				color: #F8F7F7;
+				border: none;
+				font-family: Montserrat, Sans-serif;
+				transition: all .15s ease-in-out;
+				font-size: 13px;
+				font-weight: bold;
+				float: left;
+				left: 0px;
+			}
+
+			#editProdBtn:hover {
+				background-color: #454545;
+				cursor: pointer;
+				transition: all .15s ease-in-out;
+			}
+			
+			.upload::-webkit-input-placeholder {
+				color: #353535;
+				opacity: 0.75;
+				letter-spacing: 0px;
+			}
+
 			#funImage {
 				position: fixed;
 				width: 150px;
@@ -337,7 +389,7 @@
 				left: 0px;
 				top: 0px;
 			}
-			
+            
 			#funImage2 {
 				position: fixed;
 				width: 150px;
@@ -345,7 +397,7 @@
 				right: 0px;
 				top: 0px;
 			}
-            
+			
 		</style>
 	</head>
 	<body>
@@ -356,13 +408,27 @@
             <a href = "admin.jsp"><p id = "titleCaption">VIEW ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
 			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
-			<a href = "addProduct.jsp"><p id = "addProd">Add Product</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "admin.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
+            <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">Â»</span> Add Product</p>
         </div>
-		<article id = "productFormat">
-        	
+		<article id = "editProductFormat">
+			<div id = 'editProductContainer'>
+	            <img src = "images/question-marks-background-200px-Question_mark.png" class = "img" id = "image"></img>
+	            <div id = 'productDescCont'>
+	            	<form action = "addProduct" method = "POST" id = "addProdForm">
+							<input type = "text" placeholder = "Product Name" id = "prodname" name = "prodName" class = "upload" required /> <br>
+							<input type = "number" placeholder = "Price" id = "prodprice" name = "prodPrice" class = "upload" min = "0.01" step = "0.01" required /> <br>
+							<input type = "number" placeholder = "Quantity" id = "prodquantity" name = "prodQuantity" class = "upload" min = "1" required /> <br>
+							<textarea placeholder = "Product Description" id = "proddesc" name = "prodDesc" class = "upload" required></textarea> <br><br>
+							<label for = "prodImage" class="custom-file-upload" id = "label">
+							    Add Image
+							</label>
+							<input type = "file" id = "prodImage" name = "prodImage" class = "upload" accept=".png, .jpg, .jpeg" required /> <br><br>
+						<input type = "submit" id = "editProdBtn" value = "Update Product" />
+					</form>
+	            </div>
+	        </div>
         </article>
 	</div>
 	</body>

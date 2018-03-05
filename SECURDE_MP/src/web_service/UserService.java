@@ -437,4 +437,63 @@ public class UserService {
 		}
 		System.out.println();
 	}
+
+	/**
+	 * Updates a product to the database.
+	 * @param product - the Product object being updated.
+	 */
+	public static void editProduct(int id, String productName, double productPrice, int productQuantity, String productDesc, String productImage) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement(
+					"UPDATE products SET productname = ?, description = ?, " +
+					"image = ?, quantity = ?, price = ? WHERE productid = ?");
+			
+			stmt.setString(1, productName);
+			stmt.setString(2, productDesc);
+			stmt.setString(3, productImage);
+			stmt.setInt(4, productQuantity);
+			stmt.setDouble(5, productPrice);
+			stmt.setInt(6, id)
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+
+	/**
+	 * Removes product
+	 * @param productId - the id of the product
+	 */
+	public static void deleteProduct(int productId) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement("DELETE FROM pokemerch.products WHERE productid = ?");
+			
+			stmt.setInt(1, productId);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
 }
