@@ -613,6 +613,7 @@ public class UserServlet extends HttpServlet {
 			System.out.println("*******************************************");
 		} else {
 			response.getWriter().write("NO-ITEMS-CART");
+			System.out.println("*******************************************");
 		}
 
 	}
