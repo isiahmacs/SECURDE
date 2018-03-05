@@ -447,10 +447,10 @@
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
             <a href = "#"><p id = "myCart">My Cart</p></a>
             <p id = "sign-out"><a href = "logout">Sign Out</a></p>
-			<p id = "account"><a href = "transactions.jsp">Account</a></p>
+			<p id = "account"><a href = "#">Account</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> Your Shopping Cart</p>
+            <p id = "subCaption"><a href = "user.jsp" id = "homeA">Home</a> <span class="separator">»</span> Your Shopping Cart</p>
         </div>
         <article id = "cartFormat">
             <div id = "cartContainer">
