@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `pokemerch` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `pokemerch`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pokemerch
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,29 +16,32 @@ USE `pokemerch`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admins`
+-- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `admins`;
+DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `admins` (
-  `adminid` int(11) NOT NULL,
-  `adminuser` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`adminid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `products` (
+  `productid` int(11) NOT NULL AUTO_INCREMENT,
+  `productname` varchar(255) DEFAULT NULL,
+  `description` varchar(5000) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `available` int(2) DEFAULT '1',
+  PRIMARY KEY (`productid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admins`
+-- Dumping data for table `products`
 --
 
-LOCK TABLES `admins` WRITE;
-/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'Chan_de_lure','nyles@mail.com','nyles'),(2,'Machop_lalad','isiah@mail.com','isiahzedrick'),(3,'ResPichu','michael@mail.com','michaelryan');
-/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (2,'Dragon Something','I\'m a dragon.','product1.png',23,5.99,1),(3,'Pikachu Plushie','Pika pika chu','product2.jpg',2,2.99,1),(4,'Misty Figurine','Figurine','product3.jpg',50,40.99,0);
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-23  9:54:12
+-- Dump completed on 2018-03-07  0:36:02

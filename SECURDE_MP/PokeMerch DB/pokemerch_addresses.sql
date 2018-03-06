@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `pokemerch` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `pokemerch`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pokemerch
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,30 +16,28 @@ USE `pokemerch`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `products`
+-- Table structure for table `addresses`
 --
 
-DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `addresses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `products` (
-  `catalogid` int(11) DEFAULT NULL,
-  `productid` int(11) NOT NULL,
-  `productname` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  PRIMARY KEY (`productid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `addresses` (
+  `userid` int(11) DEFAULT NULL,
+  `addressid` int(11) NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`addressid`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `products`
+-- Dumping data for table `addresses`
 --
 
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+LOCK TABLES `addresses` WRITE;
+/*!40000 ALTER TABLE `addresses` DISABLE KEYS */;
+INSERT INTO `addresses` VALUES (1,1,'915 Shirley Temple, Pallet, Kanto'),(3,2,'2146 Algo Commerce, Goldenrod, Johto'),(5,3,'88 Dean\'s Beach, Akala, Alola'),(6,4,'300 AR Center, Castelia, Unova'),(7,5,'1357 Lavender House, Laverre, Kalos'),(12,6,'873 Train Center, Pastoria, Sinnoh'),(14,7,'11 Home Community, Petalburg, Hoenn'),(38,8,'2509 Pasong Tirad St. Brgy. Lapaz, Makati City, Philippines'),(38,9,'Taft Avenue, Manila, Philippines'),(38,10,'123 Grove St., Bikini Bottom, California, USA'),(38,11,'2509 Banana St. Manila City, Philippines'),(38,12,'Taft Avenue, Manila, Philippines');
+/*!40000 ALTER TABLE `addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-23  9:54:14
+-- Dump completed on 2018-03-07  0:36:03

@@ -291,7 +291,7 @@
 			#editProduct {
 				position: relative;
 				left: 500px;
-				top: 80px;
+				top: 115px;
 				width: 150px;
 				height: 35px;
 				background-color: #353535;
@@ -313,7 +313,7 @@
 
 			#removeProduct {
 				position: relative;
-				left: 510px;
+				left: 660px;
 				top: 80px;
 				width: 150px;
 				height: 35px;
@@ -389,7 +389,7 @@
             <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "admin.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
         </div>
 		<article id = "productFormat">
-        	
+        	<a href = 'editProduct.jsp' id = "link"><button id = 'editProduct'>Edit Product</button></a>
         </article>
 	</div>
 	</body>

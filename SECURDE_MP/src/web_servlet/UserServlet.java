@@ -441,7 +441,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void getProducts(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** UPDATING PRODUCT FEED ************************");
-		ArrayList<Product> productList = UserService.getProducts();
+		ArrayList<Product> productList = null;
 		String htmlPostList = "";
 		boolean found = false;
 		HttpSession s = request.getSession();
@@ -460,6 +460,7 @@ public class UserServlet extends HttpServlet {
 								break;
 							}
 						}
+						productList = UserService.getProducts();
 					} else if(c.getName().equals("ADMIN")) {
 						Cookie[] list = request.getCookies();
 						for (Cookie cookie : list) {
@@ -470,6 +471,7 @@ public class UserServlet extends HttpServlet {
 								break;
 							}
 						}
+						productList = UserService.getProductsForAdmin();
 					} else {
 						Cookie theCookie;
 						theCookie = new Cookie("GUEST", "0"); 
@@ -482,6 +484,7 @@ public class UserServlet extends HttpServlet {
 					
 						//Add cookie
 						response.addCookie(theCookie);
+						productList = UserService.getProducts();
 					}
 				} else break;
 			}
@@ -591,7 +594,6 @@ public class UserServlet extends HttpServlet {
 		String htmlProduct = "";
 		
 		htmlProduct += "<form action = 'removeProduct' method = 'POST'>" +
-     		   		   "<a href = 'editProduct.jsp'><button id = 'editProduct'>Edit Product</button></a>" +
      		   		   "<button id = 'removeProduct' type = 'submit' name = 'removeProd' value = '" + p.getProductId() + "'>Remove Product</button></a>" +
 					   "<div class = 'productContainer' id = '" + p.getProductId() + "'>" +
 					   "<img src = 'images/" + p.getProductImage() + "'></img>" +
@@ -667,17 +669,15 @@ public class UserServlet extends HttpServlet {
 		if(cartList != null) {
 			for(Cart c : cartList){
 				htmlProduct += "<form action = 'updateItem' method = 'POST'>" +
-							   "<form action = 'removeItem' method = 'POST' class = 'formTable'>" +
 							   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
 							   "		<div class = 'td' style = 'display: flex; align-items: center; width: 681.5px;'>" + 
 							   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
 							   "		<div class = 'td' style = 'width: 60px;'>$" + c.getProductPrice() + "</div>" +
 							   "		<div class = 'td' style = 'width: 68.5px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
-							   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
+							   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
 							   "		<div class = 'td' style = 'width: 56px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</div>" + 
 							   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'><button type = 'submit' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></div>" +
 							   "	</div>" +
-							   "</form>" +
 							   "</form>";
 				
 				totalPrice += (c.getQuantity() * c.getProductPrice());
@@ -741,6 +741,7 @@ public class UserServlet extends HttpServlet {
 			System.out.println("Error: UserServlet.java String to Integer parsing removeItem method");
 		}
 		
+		System.out.println(id);
 		UserService.deleteItem(id);
 		System.out.println("Item removed!");
 

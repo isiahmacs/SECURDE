@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `pokemerch` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `pokemerch`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: pokemerch
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,26 +16,29 @@ USE `pokemerch`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `catalogs`
+-- Table structure for table `admins`
 --
 
-DROP TABLE IF EXISTS `catalogs`;
+DROP TABLE IF EXISTS `admins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `catalogs` (
-  `catalogid` int(11) NOT NULL,
-  `catalogname` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`catalogid`)
+CREATE TABLE `admins` (
+  `adminid` int(11) NOT NULL,
+  `adminuser` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`adminid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `catalogs`
+-- Dumping data for table `admins`
 --
 
-LOCK TABLES `catalogs` WRITE;
-/*!40000 ALTER TABLE `catalogs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `catalogs` ENABLE KEYS */;
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+INSERT INTO `admins` VALUES (1,'Chan_de_lure','nyles@mail.com','nyles'),(2,'Machop_lalad','isiah@mail.com','isiahzedrick'),(3,'ResPichu','michael@mail.com','michaelryan');
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-23  9:54:13
+-- Dump completed on 2018-03-07  0:36:01
