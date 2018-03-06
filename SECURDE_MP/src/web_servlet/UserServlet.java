@@ -407,6 +407,7 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			request.setAttribute("Message", resultMessage);
+			Transport.close();
 			//response.sendRedirect("Verification.jsp");
 		}
 		
