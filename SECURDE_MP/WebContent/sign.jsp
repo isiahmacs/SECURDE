@@ -485,6 +485,17 @@
 				top: 0px;
 			}
 			
+			#errorNullHand {
+				position: relative;
+				font-family: Montserrat, Sans-serif;
+				font-size: 12px;
+				line-height: 15px;
+				top: 10px;
+				font-style: italic;
+				color: indianred;
+				display: none;
+			}
+			
 			#errorHand {
 				position: relative;
 				font-family: Montserrat, Sans-serif;
@@ -611,7 +622,7 @@
         <div id = "header">
             <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <a href = "cart.jsp"><p id = "myCart">My Cart</p></a>
+            <a href = "indexcart.jsp"><p id = "myCart">My Cart</p></a>
 		</div>
 		<div id = "nav">
             <p id = "subCaption"><a href = "index.jsp" id = "homeA">Home</a> <span class="separator">»</span> Account</p>
@@ -621,6 +632,7 @@
 				<div id = "registerSettings">
 					<p id = "signup">Sign Up NOW!</p>
 					<form action = "register" method = "POST" id = "signupForm">
+						<span id = "errorNullHand">*All fields must be filled up.*</span>
 						<input type = "text" placeholder = "First name" id = "firstname" name = "firstname" class = "registration" required /> <br>
 						<input type = "text" placeholder = "Last name" id = "lastname" name = "lastname" class = "registration" required /> <br>
 						<input type = "email" placeholder = "Enter email" id = "regEmail" name = "regEmail" class = "registration" required /> <br>
@@ -645,7 +657,7 @@
 					<input type = "email" placeholder = "Email" id = "email" class = "logination" name = "logUser" required /> <br>
 					<input type = "password" placeholder = "Password" id = "pword" class = "logination" name = "logPass" required /> <br>
 				</form>
-				<button id = "submit">Submit</button>
+				<button id = "submit">Login</button>
 				<a href = "#"><span id = "forgot">Forgot password?</span></a>
 			</div>
 		</section>

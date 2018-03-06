@@ -14,28 +14,41 @@ function duplicateHandler(data) {
 	
 	//front end handling constraint done here (create functions for them so we can reuse it on the 3rd case in the switch-case)
 	if(data === "EMAIL-TAKEN") {
+		$('#errorNullHand').hide();
 		$('#errorHand').show();
         $('#regEmail').css("border-color", "indianred"); 
 	}
         
 	if (data === "PASSWORD-MISMATCH") {
+		$('#errorNullHand').hide();
 		$('#errorPassHand').show();
         $('#regPass').css("border-color", "indianred");
         $('#regRePass').css("border-color", "indianred");
 	}
                                     
 	if (data !== "EMAIL-TAKEN" && data === "PASSWORD-MISMATCH") {
+		$('#errorNullHand').hide();
 		$('#errorHand').hide();
         $('#regEmail').css('border-color', '#E7E7E7'); 
 	}
 	
 	if (data === "EMAIL-TAKEN" && data !== "PASSWORD-MISMATCH") {
+		$('#errorNullHand').hide();
 		$('#errorPassHand').hide();
         $('#regPass').css('border-color', '#E7E7E7');
         $('#regRePass').css('border-color', '#E7E7E7');
 	}
 	
-	if (data !== "EMAIL-TAKEN" && data !== "PASSWORD-MISMATCH") {
+	if (data === "NULL-FIELD") {
+		$('#errorNullHand').show();
+		$('#firstname').css('border-color', '#E7E7E7');
+		$('#lastname').css('border-color', '#E7E7E7');
+        $('#regEmail').css('border-color', '#E7E7E7');
+		$('#regPass').css('border-color', '#E7E7E7');
+        $('#regRePass').css('border-color', '#E7E7E7');
+	}
+	
+	else if (data !== "EMAIL-TAKEN" && data !== "PASSWORD-MISMATCH") {
 		document.location.href = 'sign.jsp';
 	}
 	
@@ -57,14 +70,15 @@ function accPassMismatch(data) {
 	}
 	
 	else if(data === "NOT-EXIST") {
-		$('#errorLoginHandler').show();
+		$('#errorLogHand').show();
 		$('#email').css("border-color", "indianred");
+		$('#pword').css("border-color", "indianred");
 	}
 	
 	else if(data === "NOT-VERIFIED") {
-		console.log("NOT YET VERIFIED!");
-		$('#errorLoginHand').show();
+		$('#errorLogHand').show();
 		$('#email').css("border-color", "indianred");
+		$('#pword').css("border-color", "indianred");
 	}
 	
 	//redirect to adminhomepage.
@@ -90,7 +104,7 @@ $("document").ready(function() {
 		var password = document.getElementById("regPass").value;
 		var repassword = document.getElementById("regRePass").value;
 		
-		$('#modal1').show();
+		submitTheRegisterForm();
 	});
 	
 	$("#submit").click(function() {
@@ -108,12 +122,12 @@ $("document").ready(function() {
 		$("#passNote").hide();
 	});
 	
-	$("#proceedModal").click(function() {
+	/*$("#proceedModal").click(function() {
 	    // TODO update once verified mail
 		//$("form#signUpForm").submit();
 		$('#modal1').hide();
 		submitTheRegisterForm();
-	});
+	});*/
 	
 });
 
@@ -121,7 +135,7 @@ $("document").ready(function() {
 function submitTheRegisterForm() {
 	
 	$.ajax({
-		   context: this,
+		  context: this,
 	      url:'register',
 	      data:$("form#signupForm").serialize(),
 	      type:'POST',

@@ -62,6 +62,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String duplicateError;
 	private String matchError;
+	private String nullError;
 	private int productId, userId;
 	
 	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
@@ -290,6 +291,10 @@ public class UserServlet extends HttpServlet {
 			response.getWriter().write(matchError);
 		}
 		
+		else if (checkNull(firstname, lastname, username, password, rePassword)) {
+			response.getWriter().write(nullError);
+		}
+		
 		else {
 			//Perform hashing here//
 			PasswordAuthentication p = new PasswordAuthentication();
@@ -356,6 +361,17 @@ public class UserServlet extends HttpServlet {
 		return matchNotPass;
 	}
 	
+	private boolean checkNull(String firstname, String lastname, String username, String pass, String repass) {
+		boolean nullField = false;
+		nullError = "";
+		if(firstname.equals("") || lastname.equals("") || username.equals("") || pass.equals("") || repass.equals("")) {
+			nullField = true;
+			nullError = "NULL-FIELD";
+		}
+		
+		return nullField;
+	}
+	
 	private void performVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("******************SENDING VERIFICATION********************");
@@ -407,7 +423,6 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		} finally {
 			request.setAttribute("Message", resultMessage);
-			Transport.close();
 			//response.sendRedirect("Verification.jsp");
 		}
 		
@@ -565,7 +580,12 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void viewProductForAdmin(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** GETTING PRODUCT ************************");
+		HttpSession s = request.getSession();
 		
+		String userId = (String) s.getAttribute("UN");
+		System.out.println(userId);
+		
+		int id = Integer.parseInt(userId);
 		System.out.println(userId);
 		Product p = UserService.getProduct(productId);
 		String htmlProduct = "";
@@ -603,20 +623,25 @@ public class UserServlet extends HttpServlet {
 	 */
 	private void addtoCart(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
 		System.out.println("***************** ADD TO CART ************************");
+		HttpSession s = request.getSession();
 		Cookie[] cookies;
 		
-		UserService.addtoCart(productId, userId);
+		String userId = (String) s.getAttribute("UN");
+		System.out.println(userId);
+		
+		int id = Integer.parseInt(userId);
+		UserService.addtoCart(productId, id);
 		System.out.println("Product added to cart!");
 
 		System.out.println("*******************************************");
-		cookies = request.getCookies();
+		/*cookies = request.getCookies();
 		for (Cookie c : cookies) {
 			if(c.getName().equals("USER")) {
 				request.getRequestDispatcher("cart.jsp").forward(request, response);
 			} else if(c.getName().equals("GUEST")) {
 				request.getRequestDispatcher("indexcart.jsp").forward(request, response);
 			}
-		}
+		}*/
 	}
 
 	/**
