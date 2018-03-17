@@ -668,17 +668,15 @@ public class UserServlet extends HttpServlet {
 		String htmlProduct = "";
 		if(cartList != null) {
 			for(Cart c : cartList){
-				htmlProduct += "<form action = 'updateItem' method = 'POST'>" +
-							   "	<div id = '" + c.getProductId() + "' class = 'rowData'>" +
-							   "		<div class = 'td' style = 'display: flex; align-items: center; width: 681.5px;'>" + 
-							   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</div>" +
-							   "		<div class = 'td' style = 'width: 60px;'>$" + c.getProductPrice() + "</div>" +
-							   "		<div class = 'td' style = 'width: 68.5px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></div>" +
-							   "		<div class = 'td' style = 'width: 42px;'><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></div>" +
-							   "		<div class = 'td' style = 'width: 56px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</div>" + 
-							   "		<div class = 'td' style = 'width: 55.5px; border-right: 1px solid #ABB2B9;'><button type = 'submit' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></div>" +
-							   "	</div>" +
-							   "</form>";
+				htmlProduct += "	<tr id = '" + c.getProductId() + "' class = 'rowData'>" +
+							   "		<td class = 'td' style = 'display: flex; align-items: center; width: 680px;'>" + 
+							   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</td>" +
+							   "		<td class = 'td' style = 'width: 58px;'>$" + c.getProductPrice() + "</td>" +
+							   "		<td class = 'td' style = 'width: 67.88px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></td>" +
+							   "		<td class = 'td' style = 'width: 41px;'><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></td>" +
+							   "		<td class = 'td' style = 'width: 55.33px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</td>" + 
+							   "		<td class = 'td' style = 'width: 50px; border-right: 1px solid #ABB2B9;'><button type = 'submit' formaction = 'updateItem' formmethod = 'post' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></td>" +
+							   "	</tr>";
 				
 				totalPrice += (c.getQuantity() * c.getProductPrice());
 			}

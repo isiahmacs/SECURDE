@@ -397,11 +397,11 @@
 			
 			
 			#rowHeader {
-				display: table-row;
-			}
+                position: relative;
+                width: 100%;
+            }
 			
 			.th {
-				display: table-cell;
 				padding: 15px;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -413,17 +413,11 @@
 				border-left: 1px solid #ABB2B9;
 				background-color: #EAECEE;
 				position: relative;
-				display: inline-block;
 				text-align: center;
 				top: 1px;
 			}
 			
-			.rowData {
-				display: table-row;
-			}
-			
 			.td {
-				display: table-cell;
 				padding: 15px;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;
@@ -502,19 +496,19 @@
                 <p id = "cart">My Cart</p>
                 <p id = "emptyCart">Your cart is currently empty.</p>
 				<form action = "checkOut" method = "POST">
-		                <div id = "itemCart">
-							<div id = "rowHeader">
-								<div class = "th" style = "width: 682px;">Product</div>
-								<div class = "th" style = "width: 58px;">Item Price</div>
-								<div class = "th" style = "width: 67.88px;">Quantity</div>
-								<div class = "th" style = "width: 41px;">Remove</div>
-								<div class = "th" style = "width: 55.33px;">Price</div>
-								<div class = "th" style = "width: 55.33px; border-right: 1px solid #ABB2B9;">Update?</div>
-							</div>
-						</div>	
+		                <table id = "itemCart" cellspacing = "0">
+							<tr id = "rowHeader">
+								<th class = "th" width = "80px">Product</th>
+								<th class = "th" width = "70px">Item Price</th>
+								<th class = "th" width = "70px">Quantity</th>
+								<th class = "th" width = "70px">Remove</th>
+								<th class = "th" width = "70px">Price</th>
+								<th class = "th" width = "70px" style = "border-right: 1px solid #ABB2B9;">Update?</th>
+							</tr>
+                        </table>
 						<p id = "totalOrderPrice">Total Price: $${total }</p>
 						<p id = "note">To complete the order, please input your delivery address here: </p>
-						<input type = "text" id = "address" name = "address" placeholder = "Address" required />
+						<input type = "text" id = "address" name = "address" placeholder = "Address" />
 					<input type = "submit" id = "checkout" value = "Check Out" />
 				</form>
 					

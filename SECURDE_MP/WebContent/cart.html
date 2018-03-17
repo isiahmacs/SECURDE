@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang = "en">
 
@@ -394,9 +393,8 @@
 				left: 0px;
 				top: 0px;
 			}
-			
-			
-			#rowHeader {
+            
+            #rowHeader {
                 position: relative;
                 width: 100%;
             }
@@ -489,7 +487,7 @@
 			<p id = "account"><a href = "#">Account</a></p>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "user.jsp" id = "homeA">Home</a> <span class="separator">»</span> Your Shopping Cart</p>
+            <p id = "subCaption"><a href = "user.jsp" id = "homeA">Home</a> <span class="separator">Â»</span> Your Shopping Cart</p>
         </div>
         <article id = "cartFormat">
             <div id = "cartContainer">
@@ -498,17 +496,25 @@
 				<form action = "checkOut" method = "POST">
 		                <table id = "itemCart" cellspacing = "0">
 							<tr id = "rowHeader">
-								<th class = "th" width = "80px">Product</th>
-								<th class = "th" width = "70px">Item Price</th>
-								<th class = "th" width = "70px">Quantity</th>
-								<th class = "th" width = "70px">Remove</th>
-								<th class = "th" width = "70px">Price</th>
-								<th class = "th" width = "70px" style = "border-right: 1px solid #ABB2B9;">Update?</th>
+								<th class = "th" width = "80">Product</th>
+								<th class = "th" width = "70">Item Price</th>
+								<th class = "th" width = "70">Quantity</th>
+								<th class = "th" width = "70">Remove</th>
+								<th class = "th" width = "70">Price</th>
+								<th class = "th" width = "70" style = "border-right: 1px solid #ABB2B9;">Update?</th>
 							</tr>
-                        </table>
-						<p id = "totalOrderPrice">Total Price: $${total }</p>
+                            <tr class = "rowData">
+                                <td class = "td" style = "width: 680px; display: flex; align-items: center;"><img src = 'images/Shopify-243-Uncaged-04-Anorak-Windbreaker-FRONT.jpg'></img>Something</td>
+								<td class = "td" style = "width: 58px;">10</td>
+								<td class = "td" style = "width: 67.88px;">1</td>
+								<td class = "td" style = "width: 41px;"><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove'>X</button></td>
+								<td class = "td" style = "width: 55.33px;">10</td>
+								<td class = "td" style = "width: 50px; border-right: 1px solid #ABB2B9;"><button type = 'submit' class = 'update' name = 'update'>Update Item</button></td>
+							</tr>
+						</table>	
+						<p id = "totalOrderPrice">Total Price: $10.00</p>
 						<p id = "note">To complete the order, please input your delivery address here: </p>
-						<input type = "text" id = "address" name = "address" placeholder = "Address" />
+						<input type = "text" id = "address" name = "address" placeholder = "Address" required />
 					<input type = "submit" id = "checkout" value = "Check Out" />
 				</form>
 					
