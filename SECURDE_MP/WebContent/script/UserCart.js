@@ -12,7 +12,10 @@ function loadCart(){
         cache:false,
         success: function(data){
             if(data !== "NO-ITEMS-CART") {
-                $('#emptyCart').hide();
+                $('#emptyCart').hide();                
+                $('#note').show();
+                $('#address').show();
+                $('#checkout').show();
                 var tableRowHeader = document.getElementById("rowHeader");
                 var tableHeader = document.getElementsByClassName("th");
             	var cartFeed = document.getElementById("itemCart");
@@ -26,6 +29,7 @@ function loadCart(){
                     $(tableRowHeader).append(tableHeader);
                     $(cartFeed).append(tableRowHeader);
     	    	    $(cartFeed).append(data);
+    	    	    $(cartFeed).show();
             	}
             } else if (data === "NO-ITEMS-CART") {
                 $('#emptyCart').show();
@@ -37,7 +41,38 @@ function loadCart(){
     });
 }
 
+function loadPrice(){
+	$.ajax({
+ 	    context: this,
+        url: 'viewPrice',
+        type: 'GET',
+        cache:false,
+        success: function(data){
+        	if(data !== "NO-ITEMS-CART") {
+        		$(cartPrice).show();
+            	var cartPrice = document.getElementById("totalOrderPrice");
+            	if(cartPrice != null){
+    	        	// Remove all children
+    	        	while (cartPrice.firstChild) {	
+    	        		cartPrice.removeChild(cartPrice.firstChild);
+    	        	}
+    	
+    	        	// Append html snippet 
+    	    	    $(cartPrice).append("Total Price: $" + data);
+            	}
+            	$(cartPrice).show();
+        	} else if (data === "NO-ITEMS-CART") {
+                $(cartPrice).hide();
+            }
+    	},
+        error:function(){
+            console.log("URL viewPrice does not exist");
+        }
+    });
+}
+
 
 $(document).ready(function() {
 	loadCart();
+	loadPrice();
 });

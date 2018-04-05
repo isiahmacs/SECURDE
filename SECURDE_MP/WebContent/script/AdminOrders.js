@@ -10,7 +10,9 @@ function loadOrders(){
         type: 'GET',
         cache:false,
         success: function(data){
-        	var orderFeed = document.getElementById("transFormat");
+        	var tableRowHeader = document.getElementById("rowHeader");
+            var tableHeader = document.getElementsByClassName("th");
+        	var orderFeed = document.getElementById("itemCart");
         	if(orderFeed != null){
 	        	// Remove all children
 	        	while (orderFeed.firstChild) {	
@@ -18,6 +20,8 @@ function loadOrders(){
 	        	}
 	
 	        	// Append html snippet 
+	        	$(tableRowHeader).append(tableHeader);
+                $(orderFeed).append(tableRowHeader);
 	    	    $(orderFeed).append(data);
         	}
     	},

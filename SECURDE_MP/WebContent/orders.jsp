@@ -233,108 +233,9 @@
 			#transFormat {
 				width: 85%;
 				height: auto;
-				display: inline-block;
                 position: relative;
-                left: 120px;
+                left: 100px;
 				bottom: 20px;
-			}
-			
-			.transContainer {
-				position: relative;
-				display: flex; 
-				flex-wrap: nowrap; 
-				align-items: flex-start;
-				padding-bottom: 10px;
-				right: 15px;
-				border-bottom: 2px solid #D5D8DC;
-			}
-			
-			img {
-				width: 150px;
-				height: 250px;
-			}
-
-			.transDescCont {
-				position: relative;
-				top: 0px;
-				left: 50px;
-				width: 700px;
-				height: auto;
-			}	
-
-			.productName {
-				position: relative;
-				font-size: 14px;
-				bottom: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-			}
-
-			.productPrice {
-				position: relative;
-				font-size: 14px;
-				bottom: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-			}
-
-			.productQuantity {
-				position: relative;
-				font-size: 14px;
-				bottom: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-			}
-
-			.productTotalPrice {
-				position: relative;
-				font-size: 14px;
-				bottom: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-			}
-
-			.productBuyer {
-				position: relative;
-				font-size: 14px;
-				bottom: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-			}
-
-			.productBuyerEmail {
-				position: relative;
-				font-size: 14px;
-				bottom: 15px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-			}
-
-			.cancelOrderBtn {
-				position: relative;
-				width: 150px;
-				height: 35px;
-				background-color: #353535;
-                border-radius: 2px;
-				color: #F8F7F7;
-				border: none;
-				font-family: Montserrat, Sans-serif;
-				transition: all .15s ease-in-out;
-				font-size: 13px;
-				font-weight: bold;
-				z-index: 100;
-			}
-			
-			.cancelOrderBtn:hover {
-				background-color: #454545;
-				cursor: pointer;
-				transition: all .15s ease-in-out;
 			}
 			
 			#funImage {
@@ -351,6 +252,42 @@
 				height: 150px;
 				right: 0px;
 				top: 0px;
+			}
+			
+			#rowHeader {
+                position: relative;
+                width: 100%;
+            }
+			
+			.th {
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 15px;
+				font-size: 12px;
+				border-top: 1px solid #ABB2B9;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				background-color: #EAECEE;
+				position: relative;
+				text-align: center;
+				top: 1px;
+			}
+			
+			.td {
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 10px;
+				font-size: 13px;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				position: relative;
+				text-align: center;
+				vertical-align: middle;
+				top: 1px;
 			}
             
 		</style>
@@ -370,7 +307,16 @@
             <p id = "subCaption"><a href = "admin.jsp" id = "homeA">Home</a> <span class="separator">»</span> Orders</p>
         </div>
 		<article id = "transFormat">
-			
+			<table id = "itemCart" cellspacing = "0">
+				<tr id = "rowHeader">
+					<th class = "th" width = "380px">Product</th>
+					<th class = "th" width = "70px">Retail Price</th>
+					<th class = "th" width = "280px">Sold To</th>
+					<th class = "th" width = "280px">Buyer Email</th>
+					<th class = "th" width = "70px">Numbers Sold</th>
+					<th class = "th" width = "70px" style = "border-right: 1px solid #ABB2B9;">Total Profit</th>
+				</tr>
+        	</table>
         </article>
 	</div>
 	</body>

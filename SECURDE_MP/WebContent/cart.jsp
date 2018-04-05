@@ -262,7 +262,7 @@
 			}
             
             #itemCart {
-            	display:table;
+            	display: none;
                 position: relative;
                 bottom: 60px;
 				width: 100%;
@@ -379,6 +379,7 @@
 				transition: all .15s ease-in-out;
 				font-size: 13px;
 				font-weight: bold;
+				display: none;
 			}
 			
 			#checkout:hover {
@@ -445,6 +446,7 @@
 				transition: all .15s ease-in-out;
 				font-size: 16px;
 				font-weight: bold;
+				display: none;
 			}
 			
 			#note {
@@ -455,6 +457,7 @@
 				bottom: 100px;
 				font-style: italic;
 				color: #353535;
+				display: none;
 			}
 			
 			#address {
@@ -474,6 +477,7 @@
 				font-weight: bold;
 				letter-spacing: 1px;
 				transition: all .15s ease-in-out;
+				display: none;
 			}
 			           
 		</style>
@@ -482,7 +486,7 @@
 	<img src = "images/a4068434880_5(flipped).png" id = "funImage"></img>
 	<div id = "container">
         <div id = "header">
-            <a href = "index.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
+            <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
             <a href = "#"><p id = "myCart">My Cart</p></a>
             <p id = "sign-out"><a href = "logout">Sign Out</a></p>
@@ -506,7 +510,7 @@
 								<th class = "th" width = "70px" style = "border-right: 1px solid #ABB2B9;">Update?</th>
 							</tr>
                         </table>
-						<p id = "totalOrderPrice">Total Price: $${total }</p>
+						<p id = "totalOrderPrice"></p>
 						<p id = "note">To complete the order, please input your delivery address here: </p>
 						<input type = "text" id = "address" name = "address" placeholder = "Address" />
 					<input type = "submit" id = "checkout" value = "Check Out" />

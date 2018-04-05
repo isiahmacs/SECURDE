@@ -364,12 +364,12 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, t.quantity, SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? AND t.confirmed = 0 group by t.productid order by transactionid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, SUM(t.quantity), SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? AND t.confirmed = 0 group by t.productid order by transactionid asc;");
 			st.setInt(1, userId);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				cart.add(new Cart(rs.getInt("t.transactionid"), rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getInt("t.quantity"), rs.getDouble("SUM(p.price)")));
+				cart.add(new Cart(rs.getInt("t.transactionid"), rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getInt("SUM(t.quantity)"), rs.getDouble("SUM(p.price)")));
 				//System.out.println("Product: " + rs.getString("p.productname"));
 			} 
 			
@@ -541,7 +541,7 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, CONCAT(u.fname, ' ', u.lname) AS fullname, p.productname, p.price, t.quantity, (t.quantity * p.price) AS totalPrice, u.email, p.image FROM pokemerch.transactions t, pokemerch.users u, pokemerch.products p  WHERE t.confirmed = 1 AND t.productid = p.productid AND t.userid = u.userid order by transactionid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, CONCAT(u.fname, ' ', u.lname) AS fullname, p.productname, p.price, t.quantity, (t.quantity * p.price) AS totalPrice, u.email, p.image FROM pokemerch.transactions t, pokemerch.users u, pokemerch.products p  WHERE t.confirmed = 1 AND t.productid = p.productid AND t.userid = u.userid group by t.userid, t.productid;");
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
@@ -557,32 +557,6 @@ public class UserService {
 		System.out.println();
 		return orders;
 		
-	}
-	
-	/**
-	 * Removes order
-	 * @param orderId - the id of the order
-	 */
-	public static void deleteOrder(int orderId) {
-		System.out.println();
-		try {
-			String driver = "com.mysql.jdbc.Driver";
-			Class.forName(driver);
-			Connection conn = DatabaseManager.getConnection();
-			
-			PreparedStatement stmt =  conn.prepareStatement("DELETE FROM pokemerch.transactions WHERE transactionid = ?");
-			
-			stmt.setInt(1, orderId);
-			
-			stmt.executeUpdate();
-			
-			conn.close();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println();
 	}
 	
 	/**

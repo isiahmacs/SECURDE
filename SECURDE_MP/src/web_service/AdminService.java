@@ -66,7 +66,7 @@ public class AdminService {
 	
 			while(rs.next()) {
 				System.out.println("Id found!");
-				id = rs.getInt("id");
+				id = rs.getInt("adminid");
 				break;
 			} 
 				

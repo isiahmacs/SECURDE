@@ -48,6 +48,7 @@ import beans_model.Order;
 						   "/viewProductForAdmin",
 						   "/addtoCart",
 						   "/viewCart",
+						   "/viewPrice",
 						   "/removeItem",
 						   "/updateItem",
 						   "/addProduct",
@@ -67,7 +68,6 @@ public class UserServlet extends HttpServlet {
 	
 	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
 	private static final String SECURDE_PASS = "Securdeproj";
-	private static DecimalFormat df2 = new DecimalFormat(".##");
 
     /**
      * Default constructor. 
@@ -91,6 +91,7 @@ public class UserServlet extends HttpServlet {
 			case "/viewProductForAdmin": viewProductForAdmin(request, response); break;
 			case "/viewEditProduct": viewEditProduct(request, response); break;
 			case "/viewCart": viewCart(request, response); break;
+			case "/viewPrice": viewPrice(request, response); break;
 			case "/viewOrders": viewOrders(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
@@ -121,7 +122,6 @@ public class UserServlet extends HttpServlet {
 			case "/updateItem": updateItem(request, response); break;
 			case "/editProduct": editProduct(request, response); break;
 			case "/removeProduct": removeProduct(request, response); break;
-			case "/cancelOrder": cancelOrder(request, response); break;
 			case "/checkOut": checkOut(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doPost*): url pattern doesn't match existing patterns.");
 		}
@@ -461,6 +461,7 @@ public class UserServlet extends HttpServlet {
 							}
 						}
 						productList = UserService.getProducts();
+						break;
 					} else if(c.getName().equals("ADMIN")) {
 						Cookie[] list = request.getCookies();
 						for (Cookie cookie : list) {
@@ -472,6 +473,7 @@ public class UserServlet extends HttpServlet {
 							}
 						}
 						productList = UserService.getProductsForAdmin();
+						break;
 					} else {
 						Cookie theCookie;
 						theCookie = new Cookie("GUEST", "0"); 
@@ -496,7 +498,7 @@ public class UserServlet extends HttpServlet {
 							"   	<img src = 'images/" + p.getProductImage() + "' class = 'img' />" +
 							" 		<div class='productDesc'>" +
 							"			<p class = 'productName'>" + p.getProductName() + "</p>" + 
-							"			<p class = 'price'>" + df2.format(p.getPrice()) + "</p>" + 
+							"			<p class = 'price'>$" + String.format("%.2f", p.getPrice()) + "</p>" + 
 							"		</div> " +
 							"	</div>" +
 							"	</button>" +
@@ -558,7 +560,7 @@ public class UserServlet extends HttpServlet {
 					   "	<div class = 'productDescCont'>" +
 					   "		<div class = 'productNameCont'>" +
 					   "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
-					   " 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+					   " 			<span class = 'price'>$" + String.format("%.2f", p.getPrice()) + "</span>" +
 				       "		</div>" + 
 					   "		<div class = 'productDesc'>" +
 					   "			<p class = 'description'>" + p.getProductDescription() + "</p>" +
@@ -600,7 +602,7 @@ public class UserServlet extends HttpServlet {
 					   "	<div class = 'productDescCont'>" +
 					   "		<div class = 'productNameCont'>" +
 					   "   		<p class = 'productName'>" + p.getProductName() + "</p>" +
-					   " 			<span class = 'price'>$" + df2.format(p.getPrice()) + "</span>" +
+					   " 			<span class = 'price'>$" + String.format("%.2f", p.getPrice()) + "</span>" +
 				       "		</div>" + 
 					   "		<div class = 'productDesc'>" +
 					   "			<p class = 'description'>" + p.getProductDescription() + "</p>" +
@@ -664,9 +666,9 @@ public class UserServlet extends HttpServlet {
 		
 		int id = Integer.parseInt(userId);
 		ArrayList<Cart> cartList = UserService.getCart(id);
-
+		System.out.println(cartList);
 		String htmlProduct = "";
-		if(cartList != null) {
+		if(!cartList.isEmpty()) {
 			for(Cart c : cartList){
 				htmlProduct += "	<tr id = '" + c.getProductId() + "' class = 'rowData'>" +
 							   "		<td class = 'td' style = 'display: flex; align-items: center; width: 680px;'>" + 
@@ -674,18 +676,50 @@ public class UserServlet extends HttpServlet {
 							   "		<td class = 'td' style = 'width: 58px;'>$" + c.getProductPrice() + "</td>" +
 							   "		<td class = 'td' style = 'width: 67.88px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></td>" +
 							   "		<td class = 'td' style = 'width: 41px;'><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></td>" +
-							   "		<td class = 'td' style = 'width: 55.33px;'>$" + (c.getQuantity() * c.getProductPrice()) + "</td>" + 
+							   "		<td class = 'td' style = 'width: 55.33px;'>$" + String.format("%.2f", (c.getQuantity() * c.getProductPrice())) + "</td>" + 
 							   "		<td class = 'td' style = 'width: 50px; border-right: 1px solid #ABB2B9;'><button type = 'submit' formaction = 'updateItem' formmethod = 'post' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></td>" +
 							   "	</tr>";
 				
-				totalPrice += (c.getQuantity() * c.getProductPrice());
 			}
 			
-			request.getSession().setAttribute("total", totalPrice);
 			System.out.println(cartList);
 			response.setContentType("text/html"); 
 			response.setCharacterEncoding("UTF-8"); 
 			response.getWriter().write(htmlProduct);
+			System.out.println("*******************************************");
+		} else {
+			response.getWriter().write("NO-ITEMS-CART");
+			System.out.println("*******************************************");
+		}
+
+	}
+	
+	/**
+	 * Retrieves the price
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void viewPrice(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GETTING PRICE ************************");
+		HttpSession s = request.getSession();
+		
+		Double totalPrice = 0.00;
+		String userId = (String) s.getAttribute("UN");
+		System.out.println(userId);
+		
+		int id = Integer.parseInt(userId);
+		ArrayList<Cart> cartList = UserService.getCart(id);
+
+		if(!cartList.isEmpty()) {
+			for(Cart c : cartList){	
+				totalPrice += (c.getQuantity() * c.getProductPrice());
+			}
+			
+			response.setContentType("text/html"); 
+			response.setCharacterEncoding("UTF-8"); 
+			response.getWriter().write(String.format("%.2f", totalPrice));
 			System.out.println("*******************************************");
 		} else {
 			response.getWriter().write("NO-ITEMS-CART");
@@ -893,22 +927,15 @@ public class UserServlet extends HttpServlet {
 		ArrayList<Order> orderList = UserService.getOrders();
 
 		String htmlProduct = "";
-		if(orderList != null) {
 			for(Order o : orderList){
-				htmlProduct += "<form action = 'cancelOrder' method = 'POST'>" +
-							   "	<div class = 'transContainer'>" +
-							   "		<img src = 'images/" + o.getProductImage() + "'></img>" +
-							   "		<div class = 'transDescCont'>" +
-							   "			<p class = 'productName'>Product: " + o.getProductName() + "</p>" +
-							   "			<p class = 'productPrice'>Retail Price: " + o.getRetailPrice() + "</p>" + 
-							   "			<p class = 'productQuantity'>Quantity: " + o.getProductQuantity() + "</p>" + 
-							   "			<p class = 'productTotalPrice'>Total Price: " + o.getTotalPrice() + "</p>" + 
-							   "			<p class = 'productBuyer'>Ordered by: " + o.getProductBuyer() + "</p>" + 
-							   "			<p class = 'productBuyerEmail'>Email: " + o.getProductBuyerEmail() + "</p>" +
-							   "			<button type = 'submit' name = 'cancel' class = 'cancelOrderBtn' value = '" + o.getTransactionId() + "'>Cancel Order</button>" +
-							   "		</div>" +
-							   "	</div><br>" +
-							   "</form>";
+				htmlProduct += "	<tr class = 'rowData'>" +
+							   "		<td class = 'td'>" + o.getProductName() + "</td>" +
+							   "		<td class = 'td' style = 'width: 58px;'>$" + o.getRetailPrice() + "</td>" +
+							   "		<td class = 'td'>" + o.getProductBuyer() + "</td>" +
+							   "		<td class = 'td'>" + o.getProductBuyerEmail() + "</td>" +
+							   "		<td class = 'td' style = 'width: 67.88px;'>" + o.getProductQuantity() + "</td>" +
+							   "		<td class = 'td' style = 'width: 55.33px; border-right: 1px solid #ABB2B9;'>$" + String.format("%.2f", (o.getTotalPrice())) + "</td>" + 
+							   "	</tr>";
 			}
 					
 			System.out.println(orderList);
@@ -916,36 +943,7 @@ public class UserServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8"); 
 			response.getWriter().write(htmlProduct);       
 			System.out.println("*******************************************");
-		} else {
-			response.getWriter().write("NO-ITEMS-CART");
-			System.out.println("*******************************************");
-		}
 
-	}
-	
-	/**
-	 * Removes order
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	private void cancelOrder(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** REMOVE PRODUCT ******************");
-		Cookie[] cookies;
-		
-		int id = 0;
-		try {
-			id = Integer.parseInt(request.getParameter("cancel")); 
-		} catch(NumberFormatException e) {
-			System.out.println("Error: UserServlet.java String to Integer parsing removeProduct method");
-		}
-		
-		UserService.deleteOrder(id);
-		System.out.println("Order removed!");
-
-		System.out.println("*******************************************");
-		response.sendRedirect("orders.jsp");
 	}
 	
 	/**
