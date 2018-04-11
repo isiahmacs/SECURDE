@@ -8,7 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>PokeMerch</title>
 		<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
-		<script type = "text/javascript" src = "script/UserProducts.js"></script>
+		<script type="text/javascript" src="script/UserOrders.js"></script>
 		<link rel = "shortcut icon" href = "http://cliparts.co/cliparts/rij/rpj/rijrpj4rT.png" />
 		<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
@@ -28,7 +28,7 @@
 				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 				background-color: #555;
 			}
-			
+
 			@font-face {
 			    font-family: Montserrat;
 			    src: url("Montserrat/Montserrat-Regular.ttf");
@@ -59,6 +59,18 @@
                 top: 100px;
 			}
 			
+			#registerFormat {
+				float: left;
+				width: 65%;
+				height: 100%;
+				display: inline-block;
+			}
+			
+			#registerContainer {
+				position: relative;
+				top: 100px;
+			}
+			
 			#titleCaption {
 				position: relative;
                 width: 175px;
@@ -82,23 +94,6 @@
                 text-decoration: none;
                 transition: all .15s ease-in-out;
             }
-			
-			#subCaption {
-				position: relative;
-                float: left;
-                width: 130%;
-                padding-top: 20px;
-                bottom: 40px;
-				font-size: 12px;
-                letter-spacing: 0.5px;
-                font-weight: bold;
-				color: #353535;
-				font-family: Montserrat, Sans-serif; 
-            }
-            
-            #homeA:hover {
-                text-decoration: underline;
-            }
             
             #header {
                 position: relative;
@@ -106,13 +101,6 @@
                 height: 40px;
                 left: 100px;
                 border-bottom: 2px solid #3C5AA6;
-            }
-			
-			#nav {
-                position: relative;
-                width: 85%;
-                height: 5%;
-                left: 100px;
             }
             
             #search {
@@ -218,105 +206,45 @@
                 transition: all .15s ease-in-out;
             }
 			
-			#productFormat {
-				width: 85%;
-				height: auto;
-				display: inline-block;
-                position: relative;
-                left: 120px;
-				bottom: 20px;
-			}
-			
-			.productContainer {
+			#subCaption {
 				position: relative;
-				display: flex; 
-				flex-wrap: nowrap; 
-				align-items: flex-start;
-			}
-			
-			img {
-				width: 350px;
-				height: 550px;
-			}
-			
-			.productDescCont {
-				position: relative;
-				left: 50px;
-				width: 700px;
-				height: auto;
-			}
-			
-			.productNameCont {
-				position: relative;
-				width: 100%;
-				height: 70px;
-				border-bottom: 1px solid #EAECEE;
-			}
-			
-			.productName {
-				position: relative;
-				font-size: 20px;
-				bottom: 20px;
-				color: #353535;
-				font-family: Montserrat, Sans-serif;
-				font-weight: bold;
-                letter-spacing: 1px;
-			}
-			
-			.price {
-				position: relative;
-				color: #353535;
-				bottom: 15px;
-				font-family: Montserrat, Sans-serif;
-                font-size: 16px;
+                float: left;
+                width: 130%;
+                padding-top: 20px;
+                bottom: 40px;
+				font-size: 12px;
+                letter-spacing: 0.5px;
                 font-weight: bold;
-                text-transform: uppercase;
-			}
-			
-			#addtoCartBut {
-				position: relative;
-				left: 500px;
-				top: 80px;
-				width: 150px;
-				height: 35px;
-				background-color: #353535;
-                border-radius: 2px;
-				color: #F8F7F7;
-				border: none;
-				font-family: Montserrat, Sans-serif;
-				transition: all .15s ease-in-out;
-				font-size: 13px;
-				font-weight: bold;
-				z-index: 100;
-			}
-			
-			#addtoCartBut:hover {
-				background-color: #454545;
-				cursor: pointer;
-				transition: all .15s ease-in-out;
-			}
-			
-			.productDesc {
-				position: relative;
-				width: 100%;
-				height: auto;
-				top: 20px;
-			}
-			
-			.description {
-				position: relative;
 				color: #353535;
-				bottom: 20px;
-				font-family: Montserrat, Sans-serif;
-                font-size: 14px;
-                font-weight: bold;
-				text-align: justify;
-				letter-spacing: 0.5px;
-			}
-			
-			#collA:hover {
+				font-family: Montserrat, Sans-serif;   
+            }        
+            
+            #homeA:hover {
                 text-decoration: underline;
             }
+            
+            #header {
+                position: relative;
+                width: 85%;
+                height: 40px;
+                left: 100px;
+                border-bottom: 2px solid #3C5AA6;
+            }
+			
+			#nav {
+                position: relative;
+                width: 85%;
+                height: 5%;
+                left: 100px;
+            }
+			
+			#transFormat {
+				width: 85%;
+				height: auto;
+                position: relative;
+                left: 100px;
+				bottom: 20px;
+			}
 			
 			#funImage {
 				position: fixed;
@@ -333,6 +261,42 @@
 				right: 0px;
 				top: 0px;
 			}
+			
+			#rowHeader {
+                position: relative;
+                width: 100%;
+            }
+			
+			.th {
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 15px;
+				font-size: 12px;
+				border-top: 1px solid #ABB2B9;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				background-color: #EAECEE;
+				position: relative;
+				text-align: center;
+				top: 1px;
+			}
+			
+			.td {
+				padding: 15px;
+				color: #353535;
+				font-family: Montserrat, Sans-serif;
+				font-weight: bold;
+                line-height: 10px;
+				font-size: 13px;
+				border-bottom: 1px solid #ABB2B9;
+				border-left: 1px solid #ABB2B9;
+				position: relative;
+				text-align: center;
+				vertical-align: middle;
+				top: 1px;
+			}
             
 		</style>
 	</head>
@@ -343,39 +307,26 @@
         <div id = "header">
             <a href = "user.jsp"><p id = "titleCaption">SHOP ALL PRODUCTS</p></a>
             <input type = "text" placeholder = "Search our store" id = "search" name = "searchBar" />
-            <p id = "myCart"><a href = "cart.jsp">My Cart</a></p>
-			<p id = "sign-out"><a href = "logout">Sign Out</a></p>
-			<p id = "account"><a href = "account.jsp">Account</a></p>
+            <a href = "cart.jsp"><p id = "myCart">My Cart</p></a>
+			<a href = "logout"><p id = "sign-out">Sign Out</p></a>
+			<a href = "#"><p id = "account">Account</p></a>
 		</div>
 		<div id = "nav">
-            <p id = "subCaption"><a href = "user.jsp" id = "homeA">Home</a> <span class="separator">»</span> <a href = "user.jsp" id = "collA">Collections</a> <span class="separator">»</span> Product</p>
+            <p id = "subCaption"><a href = "user.jsp" id = "homeA">Home</a> <span class="separator">»</span> Account</p>
         </div>
-		<article id = "productFormat">
-            <button id = "addtoCartBut">Add to Cart</button>
+		<article id = "transFormat">
+			<table id = "itemCart" cellspacing = "0">
+				<tr id = "rowHeader">
+					<th class = "th" width = "380px">Product</th>
+					<th class = "th" width = "70px">Retail Price</th>
+					<th class = "th" width = "280px">Sold To</th>
+					<th class = "th" width = "280px">Buyer Email</th>
+					<th class = "th" width = "70px">Quantity</th>
+					<th class = "th" width = "70px" style = "border-right: 1px solid #ABB2B9;">Price</th>
+				</tr>
+        	</table>
         </article>
 	</div>
 	</body>
-	<script type="text/javascript">
-
-		function createCart() {
-		    $.ajax({
-		            context: this,
-		            url: 'addtoCart',
-		            type: 'POST',
-		            cache:false,
-		            success: function(data){
-		                window.location.href = "cart.jsp";
-		            },
-		            error:function(){
-		                console.log("URL addtoCart does not exist");
-		            }
-		        });
-		}
-
-		$(document).ready(function() {
-			$("#addtoCartBut").click(function() {
-	        	createCart();
-	    	});
-		});
-	</script>
+	
 </html>

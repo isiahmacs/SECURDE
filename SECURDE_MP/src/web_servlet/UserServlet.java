@@ -57,7 +57,8 @@ import beans_model.Order;
 						   "/removeProduct",
 						   "/viewOrders",
 						   "/cancelOrder",
-						   "/checkOut"})
+						   "/checkOut",
+						   "/viewTransactions"})
 @MultipartConfig
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -93,6 +94,7 @@ public class UserServlet extends HttpServlet {
 			case "/viewCart": viewCart(request, response); break;
 			case "/viewPrice": viewPrice(request, response); break;
 			case "/viewOrders": viewOrders(request, response); break;
+			case "/viewTransactions": viewTrans(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
 
@@ -925,6 +927,44 @@ public class UserServlet extends HttpServlet {
 		System.out.println("***************** GETTING ORDERS ************************");
 		
 		ArrayList<Order> orderList = UserService.getOrders();
+
+		String htmlProduct = "";
+			for(Order o : orderList){
+				htmlProduct += "	<tr class = 'rowData'>" +
+							   "		<td class = 'td'>" + o.getProductName() + "</td>" +
+							   "		<td class = 'td' style = 'width: 58px;'>$" + o.getRetailPrice() + "</td>" +
+							   "		<td class = 'td'>" + o.getProductBuyer() + "</td>" +
+							   "		<td class = 'td'>" + o.getProductBuyerEmail() + "</td>" +
+							   "		<td class = 'td' style = 'width: 67.88px;'>" + o.getProductQuantity() + "</td>" +
+							   "		<td class = 'td' style = 'width: 55.33px; border-right: 1px solid #ABB2B9;'>$" + String.format("%.2f", (o.getTotalPrice())) + "</td>" + 
+							   "	</tr>";
+			}
+					
+			System.out.println(orderList);
+			response.setContentType("text/html"); 
+			response.setCharacterEncoding("UTF-8"); 
+			response.getWriter().write(htmlProduct);       
+			System.out.println("*******************************************");
+
+	}
+	
+	/**
+	 * Retrieves all transactions of user
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @return List of products in cart
+	 */
+	private void viewTrans(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
+		System.out.println("***************** GETTING ORDERS ************************");
+		HttpSession s = request.getSession();
+		
+		String userId = (String) s.getAttribute("UN");
+		System.out.println(userId);
+		
+		int id = Integer.parseInt(userId);
+		ArrayList<Order> orderList = UserService.getTransactions(id);
 
 		String htmlProduct = "";
 			for(Order o : orderList){
