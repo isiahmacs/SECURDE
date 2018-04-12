@@ -594,7 +594,7 @@ public class UserServlet extends HttpServlet {
 							   "		<td class = 'td' style = 'display: flex; align-items: center; width: 680px;'>" + 
 							   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</td>" +
 							   "		<td class = 'td' style = 'width: 58px;'>$" + c.getProductPrice() + "</td>" +
-							   "		<td class = 'td' style = 'width: 67.88px;'><input type = 'number' class = 'quantity' name = 'quantity' min = '0' value = '" + c.getQuantity() + "' /></td>" +
+							   "		<td class = 'td' style = 'width: 67.88px;'><input type = 'number' class = 'quantity' name = 'quantity" + c.getTransId() + "' min = '0' value = '" + c.getQuantity() + "' /></td>" +
 							   "		<td class = 'td' style = 'width: 41px;'><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></td>" +
 							   "		<td class = 'td' style = 'width: 55.33px;'>$" + String.format("%.2f", (c.getQuantity() * c.getProductPrice())) + "</td>" + 
 							   "		<td class = 'td' style = 'width: 50px; border-right: 1px solid #ABB2B9;'><button type = 'submit' formaction = 'updateItem' formmethod = 'post' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></td>" +
@@ -716,7 +716,7 @@ public class UserServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void updateItem(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** REMOVE ITEM ******************");
+		System.out.println("***************** UPDATE ITEM ******************");
 		Cookie[] cookies;
 		int id = 0;
 		try {
@@ -725,7 +725,11 @@ public class UserServlet extends HttpServlet {
 			System.out.println("Error: UserServlet.java String to Integer parsing updateItem method");
 		}
 		
-		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		System.out.println(id);
+		
+		int quantity = Integer.parseInt(request.getParameter("quantity".concat("" + id)));
+		
+		System.out.println(quantity);
 		
 		UserService.updateItem(id, quantity);
 		System.out.println("Item updated!");
@@ -875,7 +879,7 @@ public class UserServlet extends HttpServlet {
 	 * @return List of products in cart
 	 */
 	private void viewTrans(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException  {
-		System.out.println("***************** GETTING ORDERS ************************");
+		System.out.println("***************** GETTING TRANSACTIONS ************************");
 		HttpSession s = request.getSession();
 		
 		String userId = (String) s.getAttribute("UN");
@@ -928,8 +932,15 @@ public class UserServlet extends HttpServlet {
 			System.out.println("Address added!");
 		}
 		
+		ArrayList<Order> orderList = UserService.getUnconfirmedTransactions(id);
 		UserService.updateTransaction(id);
 		System.out.println("Transaction updated!");
+		
+		System.out.println(orderList);
+		for(Order o : orderList) {
+			System.out.println(o.getProductQuantity());
+			UserService.updateProducts(o.getProductId(), o.getProductQuantity());
+		}
 		System.out.println("*******************************************");
 		cookies = request.getCookies();
 		for (Cookie c : cookies) {

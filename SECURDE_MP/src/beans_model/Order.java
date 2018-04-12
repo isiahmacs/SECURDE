@@ -4,10 +4,10 @@ public class Order {
 	
 	private String productName, productBuyer, productBuyerEmail, productImage;
 	private double retailPrice, totalPrice;
-	private int productQuantity, transactionId;
+	private int productQuantity, transactionId, productId;
 	
 	public Order(String productImage, int transactionId, String productName, String productBuyer, String productBuyerEmail, double retailPrice,
-			double totalPrice, int productQuantity) {
+			double totalPrice, int productQuantity, int productId) {
 		super();
 		this.productImage = productImage;
 		this.transactionId = transactionId;
@@ -17,6 +17,15 @@ public class Order {
 		this.retailPrice = retailPrice;
 		this.totalPrice = totalPrice;
 		this.productQuantity = productQuantity;
+		this.productId = productId;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public String getProductImage() {

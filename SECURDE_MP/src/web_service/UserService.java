@@ -545,7 +545,7 @@ public class UserService {
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				orders.add(new Order(rs.getString("p.image"), rs.getInt("t.transactionid"), rs.getString("p.productname"), rs.getString("fullname"), rs.getString("u.email"), rs.getDouble("p.price"), rs.getDouble("totalPrice"), rs.getInt("SUM(t.quantity)")));
+				orders.add(new Order(rs.getString("p.image"), rs.getInt("t.transactionid"), rs.getString("p.productname"), rs.getString("fullname"), rs.getString("u.email"), rs.getDouble("p.price"), rs.getDouble("totalPrice"), rs.getInt("SUM(t.quantity)"), rs.getInt("t.productid")));
 			} 
 			
 			conn.close();
@@ -571,13 +571,13 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, CONCAT(u.fname, ' ', u.lname) AS fullname, p.productname, p.price, SUM(t.quantity), (SUM(t.quantity) * p.price) AS totalPrice, u.email, p.image FROM pokemerch.transactions t, pokemerch.users u, pokemerch.products p  WHERE t.confirmed = 1 AND t.productid = p.productid AND t.userid = ? AND t.userid = u.userid group by t.userid, t.productid;");
+			PreparedStatement st = conn.prepareStatement("SELECT t.productid, t.transactionid, CONCAT(u.fname, ' ', u.lname) AS fullname, p.productname, p.price, SUM(t.quantity), (SUM(t.quantity) * p.price) AS totalPrice, u.email, p.image FROM pokemerch.transactions t, pokemerch.users u, pokemerch.products p  WHERE t.confirmed = 1 AND t.productid = p.productid AND t.userid = ? AND t.userid = u.userid group by t.userid, t.productid;");
 			st.setInt(1, id);
 			
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				orders.add(new Order(rs.getString("p.image"), rs.getInt("t.transactionid"), rs.getString("p.productname"), rs.getString("fullname"), rs.getString("u.email"), rs.getDouble("p.price"), rs.getDouble("totalPrice"), rs.getInt("SUM(t.quantity)")));
+				orders.add(new Order(rs.getString("p.image"), rs.getInt("t.transactionid"), rs.getString("p.productname"), rs.getString("fullname"), rs.getString("u.email"), rs.getDouble("p.price"), rs.getDouble("totalPrice"), rs.getInt("SUM(t.quantity)"), rs.getInt("t.productid")));
 			} 
 			
 			conn.close();
@@ -635,6 +635,65 @@ public class UserService {
 			PreparedStatement stmt =  conn.prepareStatement("UPDATE transactions SET confirmed = 1 WHERE userid = ?");
 			
 			stmt.setInt(1, id);
+			
+			stmt.executeUpdate();
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Retrieves a list of transactions
+	 * @return List of transactions
+	 */
+	public static ArrayList<Order> getUnconfirmedTransactions(int id) {
+		System.out.println();
+		ArrayList<Order> orders = new ArrayList<>();
+		try{
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+
+			PreparedStatement st = conn.prepareStatement("SELECT t.productid, t.transactionid, CONCAT(u.fname, ' ', u.lname) AS fullname, p.productname, p.price, SUM(t.quantity), (SUM(t.quantity) * p.price) AS totalPrice, u.email, p.image FROM pokemerch.transactions t, pokemerch.users u, pokemerch.products p  WHERE t.confirmed = 0 AND t.productid = p.productid AND t.userid = ? AND t.userid = u.userid group by t.userid, t.productid;");
+			st.setInt(1, id);
+			
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next()) {
+				orders.add(new Order(rs.getString("p.image"), rs.getInt("t.transactionid"), rs.getString("p.productname"), rs.getString("fullname"), rs.getString("u.email"), rs.getDouble("p.price"), rs.getDouble("totalPrice"), rs.getInt("SUM(t.quantity)"), rs.getInt("t.productid")));
+			} 
+			
+			conn.close();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println();
+		return orders;
+		
+	}
+	
+	/**
+	 * Updates the product
+	 * @param product - the Product object being updated.
+	 */
+	public static void updateProducts(int productid, int quantity_bought) {
+		System.out.println();
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			Class.forName(driver);
+			Connection conn = DatabaseManager.getConnection();
+			
+			PreparedStatement stmt =  conn.prepareStatement("UPDATE products SET quantity = quantity - ? WHERE productid = ?");
+			
+			stmt.setInt(1, quantity_bought);
+			stmt.setInt(2, productid);
 			
 			stmt.executeUpdate();
 			
