@@ -6,14 +6,7 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,9 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-
-import com.sun.mail.smtp.SMTPTransport;
 
 import web_service.AdminService;
 import web_service.PasswordAuthentication;
@@ -41,7 +31,6 @@ import beans_model.Order;
 						   "/register",
 						   "/logout",
 						   "/add",
-						   "/sendVerification",
 						   "/getProducts",
 						   "/getProductId",
 						   "/viewProduct",
@@ -67,8 +56,6 @@ public class UserServlet extends HttpServlet {
 	private String nullError;
 	private int productId, userId;
 	
-	private static final String SECURDE_EMAIL = "securdeproject@gmail.com";
-	private static final String SECURDE_PASS = "Securdeproj";
 
     /**
      * Default constructor. 
@@ -85,7 +72,6 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		switch(request.getServletPath()) {
 			case "/logout": performLogout(request, response); break;
-			case "/sendVerification": performVerification(request, response); break;
 			case "/getProducts": getProducts(request, response); break;
 			case "/getProductId": getProductId(request, response); break;
 			case "/viewProduct": viewProduct(request, response); break;
@@ -97,15 +83,6 @@ public class UserServlet extends HttpServlet {
 			case "/viewTransactions": viewTrans(request, response); break;
 			default: System.out.println("ERROR(Inside userServlet *doGet*): url pattern doesn't match existing patterns.");
 		}
-
-		/*request.getQueryString();
-		String hash = request.getParameter("verify");
-			
-		System.out.println("****************VERIFICATION SERVLET*******************");
-		UserService.verifyStudent(hash);
-		System.out.println("******************************************************");
-			
-		response.sendRedirect("sign.jsp");*/
 			
 	}
 
@@ -372,65 +349,6 @@ public class UserServlet extends HttpServlet {
 		}
 		
 		return nullField;
-	}
-	
-	private void performVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("******************SENDING VERIFICATION********************");
-		String email = (String) request.getAttribute("email");
-		String newVerificationId = (String) request.getAttribute("verificationId");
-
-		String resultMessage = "";
-		int port = request.getServerPort(); //get port of the server.
-		String name = request.getServerName(); //get name of server.
-		String generatedURL = "http://" + name + ":" + port +"/SECURDE/verification?verify=" + newVerificationId;
-		String generatedMsg = 	"Hi!"
-								+ "\n\n"
-								+ "Please click the link below to activate/confirm your account."
-								+ "\n\n"
-								+ generatedURL
-								+ "\n\n"
-								+"Thank you!";
-		String subject = "Account Confirmation";
-		Properties properties = System.getProperties();
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		
-		properties.put("mail.smtp.auth", "true"); 
-		properties.put("mail.smtp.starttls.enable", "true");
-
-		properties.put("mail.smtp.socketFactory.port", "465");
-		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		properties.put("mail.smtp.port", "465");
-
-		
-		Session session = Session.getInstance(properties,  
-			    new javax.mail.Authenticator() {  
-					@Override
-		      		protected javax.mail.PasswordAuthentication getPasswordAuthentication() {  
-		      			return new javax.mail.PasswordAuthentication(SECURDE_EMAIL, SECURDE_PASS);  
-		      		}  
-		    });
-		
-		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(SECURDE_EMAIL));
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
-			message.setSubject(subject);
-			message.setContent(generatedMsg, "text/plain");
-			
-            Transport.send(message/*, username, password*/);
-			resultMessage = "Message sent successfully!";
-		} catch (MessagingException e) {
-			resultMessage = "Unable to send message!";
-			e.printStackTrace();
-		} finally {
-			request.setAttribute("Message", resultMessage);
-			//response.sendRedirect("Verification.jsp");
-		}
-		
-		System.out.println("sending done!");
-		System.out.println("*****************************************************");
-		response.getWriter().write("VALID-SIGNUP");
 	}
 	
 	/**
