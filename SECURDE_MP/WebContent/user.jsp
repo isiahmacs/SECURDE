@@ -122,6 +122,7 @@
 				font-weight: bold;
                 transition: all .15s ease-in-out;
 				letter-spacing: 1px;
+				visibility: hidden;
 			}
             
             #search:focus {
@@ -236,6 +237,7 @@
 				float: left;
                 position: relative;
                 left: 115px;
+                margin-bottom: 20px;
 			}
 			
 			.productContainer {

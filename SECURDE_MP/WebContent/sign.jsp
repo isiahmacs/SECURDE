@@ -423,6 +423,7 @@
 				font-weight: bold;
                 transition: all .15s ease-in-out;
 				letter-spacing: 1px;
+				visibility: hidden;
 			}
             
             #search:focus {
@@ -497,6 +498,17 @@
 			}
 			
 			#errorHand {
+				position: relative;
+				font-family: Montserrat, Sans-serif;
+				font-size: 12px;
+				line-height: 15px;
+				top: 10px;
+				font-style: italic;
+				color: indianred;
+				display: none;
+			}
+			
+			#errorPassInv {
 				position: relative;
 				font-family: Montserrat, Sans-serif;
 				font-size: 12px;
@@ -638,7 +650,8 @@
 						<input type = "email" placeholder = "Enter email" id = "regEmail" name = "regEmail" class = "registration" required /> <br>
 						<span id = "errorHand">*Email already exists.*</span>
 						<input type = "password" placeholder = "Enter password" id = "regPass" name = "regPass" class = "registration" required /> <br>
-						<span id = "passNote">Note: Your password must be at least 8 characters. It must contain at least 1 uppercase and lowercase letter, numbers, and symbols.</span>
+						<span id = "passNote">Note: Your password must be at least 8 characters. It must contain at least 1 uppercase and lowercase letter, and numbers.</span>
+						<span id = "errorPassInv">*Password must be at least 8 characters. It must contain at least 1 uppercase and lowercase letter, and numbers.*</span>
 						<input type = "password" placeholder = "Re-enter password" id = "regRePass" name = "regRePass" class = "registration" /> <br>
 						<span id = "errorPassHand">*Passwords do not match.*</span> <br>
 					</form>

@@ -146,6 +146,7 @@
 				font-weight: bold;
                 transition: all .15s ease-in-out;
 				letter-spacing: 1px;
+				visibility: hidden;
 			}
             
             #search:focus {
@@ -164,7 +165,6 @@
                 float: right;
                 display: inline;
                 bottom: 14px;
-                right: 40px;
                 text-align: right;
 				color: #353535;
 				font-family: Montserrat, Sans-serif;

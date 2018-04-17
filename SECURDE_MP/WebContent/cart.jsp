@@ -152,6 +152,7 @@
 				font-weight: bold;
                 transition: all .15s ease-in-out;
 				letter-spacing: 1px;
+				visibility: hidden;
 			}
             
             #search:focus {

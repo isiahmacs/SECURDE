@@ -236,7 +236,7 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE quantity > 0 AND available = 1 order by productid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE quantity > 0 order by productid asc;");
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
@@ -267,7 +267,7 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT * FROM pokemerch.products WHERE quantity > 0 order by productid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT * FROM pokemerch.products order by productid asc;");
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
@@ -364,12 +364,12 @@ public class UserService {
 			Class.forName(driver);
 			Connection conn = DatabaseManager.getConnection();
 
-			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, SUM(t.quantity), SUM(p.price) FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? AND t.confirmed = 0 group by t.productid order by transactionid asc;");
+			PreparedStatement st = conn.prepareStatement("SELECT t.transactionid, t.productid, t.userid, p.image, p.productname, p.price, SUM(t.quantity), SUM(p.price), p.quantity FROM pokemerch.transactions t, pokemerch.products p WHERE p.productid = t.productid AND t.userid = ? AND t.confirmed = 0 group by t.productid order by transactionid asc;");
 			st.setInt(1, userId);
 			ResultSet rs = st.executeQuery();
 			
 			while(rs.next()) {
-				cart.add(new Cart(rs.getInt("t.transactionid"), rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getInt("SUM(t.quantity)"), rs.getDouble("SUM(p.price)")));
+				cart.add(new Cart(rs.getInt("t.transactionid"), rs.getInt("t.productid"), rs.getInt("t.userid"), rs.getString("p.image"), rs.getString("p.productname"), rs.getDouble("p.price"), rs.getInt("SUM(t.quantity)"), rs.getDouble("SUM(p.price)"), rs.getInt("p.quantity")));
 				//System.out.println("Product: " + rs.getString("p.productname"));
 			} 
 			

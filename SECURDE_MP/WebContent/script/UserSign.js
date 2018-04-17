@@ -48,6 +48,11 @@ function duplicateHandler(data) {
         $('#regRePass').css('border-color', '#E7E7E7');
 	}
 	
+	if (data === "PASSWORD-INVALID") {
+		$('#errorPassInv').show();
+		$('#regPass').css('border-color', '#E7E7E7');
+	}
+	
 	else if (data !== "EMAIL-TAKEN" && data !== "PASSWORD-MISMATCH") {
 		document.location.href = 'sign.jsp';
 	}

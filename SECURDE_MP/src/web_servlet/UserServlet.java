@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import web_service.AdminService;
 import web_service.PasswordAuthentication;
+import web_service.PasswordValidator;
 import web_service.UserService;
 import beans_model.Product;
 import beans_model.User;
@@ -51,9 +52,7 @@ import beans_model.Order;
 @MultipartConfig
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String duplicateError;
-	private String matchError;
-	private String nullError;
+	private String duplicateError, matchError, nullError, passError, invalidError;
 	private int productId, userId;
 	
 
@@ -274,6 +273,10 @@ public class UserServlet extends HttpServlet {
 			response.getWriter().write(nullError);
 		}
 		
+		else if (checkPasswordComplex(password)) {
+			response.getWriter().write(passError);
+		}
+		
 		else {
 			//Perform hashing here//
 			PasswordAuthentication p = new PasswordAuthentication();
@@ -349,6 +352,18 @@ public class UserServlet extends HttpServlet {
 		}
 		
 		return nullField;
+	}
+	
+	private boolean checkPasswordComplex(String pass) {
+		PasswordValidator pv = new PasswordValidator();
+		boolean passNotComp = false;
+		passError = "";
+		if(!pv.validate(pass)) {
+			passNotComp = true;
+			passError = "PASSWORD-INVALID";
+		}
+		
+		return passNotComp;
 	}
 	
 	/**
@@ -594,7 +609,7 @@ public class UserServlet extends HttpServlet {
 							   "		<td class = 'td' style = 'display: flex; align-items: center; width: 680px;'>" + 
 							   "		<img src = 'images/" + c.getImage() + "'></img>" + c.getProductName() + "</td>" +
 							   "		<td class = 'td' style = 'width: 58px;'>$" + c.getProductPrice() + "</td>" +
-							   "		<td class = 'td' style = 'width: 67.88px;'><input type = 'number' class = 'quantity' name = 'quantity" + c.getTransId() + "' min = '0' value = '" + c.getQuantity() + "' /></td>" +
+							   "		<td class = 'td' style = 'width: 67.88px;'><input type = 'number' class = 'quantity' name = 'quantity" + c.getTransId() + "' min = '1' max = '" + c.getProductQuantity() + "' value = '" + c.getQuantity() + "' oninvalid = \"setCustomValidity('Value must be lesser.')\" /></td>" +
 							   "		<td class = 'td' style = 'width: 41px;'><button type = 'submit' formaction = 'removeItem' formmethod = 'post' class = 'removeItem' name = 'remove' value = '" + c.getTransId() + "'>X</button></td>" +
 							   "		<td class = 'td' style = 'width: 55.33px;'>$" + String.format("%.2f", (c.getQuantity() * c.getProductPrice())) + "</td>" + 
 							   "		<td class = 'td' style = 'width: 50px; border-right: 1px solid #ABB2B9;'><button type = 'submit' formaction = 'updateItem' formmethod = 'post' class = 'update' name = 'update' value = '" + c.getTransId() + "'>Update Item</button></td>" +
@@ -733,7 +748,7 @@ public class UserServlet extends HttpServlet {
 		
 		UserService.updateItem(id, quantity);
 		System.out.println("Item updated!");
-
+	
 		System.out.println("*******************************************");
 		cookies = request.getCookies();
 		for (Cookie c : cookies) {
@@ -767,9 +782,9 @@ public class UserServlet extends HttpServlet {
 					   " 			<input type = 'text' value = '" + p.getProductName() + "' id = 'prodname' name = 'prodName' class = 'upload' required /> <br>" +
 					   "			<input type = 'number' value = '" + p.getPrice() + "' id = 'prodprice' name = 'prodPrice' class = 'upload' min = '0.01' step = '0.01' required /> <br>" +
 					   "			<input type = 'number' value = '" + p.getQuantity() + "' id = 'prodquantity' name = 'prodQuantity' class = 'upload' min = '1' required /> <br>" +
-					   "			<textarea id = 'proddesc' name = 'prodDesc' class = 'upload' required>" + p.getProductDescription() + "</textarea> <br><br>" +
+					   "			<textarea id = 'proddesc' name = 'prodDesc' class = 'upload' disabled>" + p.getProductDescription() + "</textarea> <br><br>" +
 					   "			<label for = 'prodImage' class='custom-file-upload' id = 'label'>" + p.getProductImage() + "</label>" +
-					   "			<input type = 'file' id = 'prodImage' name = 'prodImage' class = 'upload' accept='.png, .jpg, .jpeg' required /> <br><br>" +
+					   "			<input type = 'file' id = 'prodImage' name = 'prodImage' class = 'upload' accept='.png, .jpg, .jpeg' disabled /> <br><br>" +
 					   "			<button type = 'submit' name = 'editProdId' id = 'editProdBtn' value = '" + p.getProductId() + "'>Update Product</button>" +
 					   "		</form>" +
 					   "	</div>" +
@@ -803,11 +818,10 @@ public class UserServlet extends HttpServlet {
 		int productQuantity = Integer.parseInt(request.getParameter("prodQuantity")); 
 		String productDesc = request.getParameter("prodDesc");
 		String productImage = request.getParameter("prodImage");
-		
 			
 		UserService.editProduct(id, productName, productPrice, productQuantity, productDesc, productImage);
 		System.out.println("Product edited!");
-
+	
 		System.out.println("*******************************************");
 		response.sendRedirect("adminproduct.jsp");
 	}
@@ -909,6 +923,19 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	/**
+	 */
+	private boolean inputChecking(int number) {
+		boolean invalid = false;
+		matchError = "";
+		if(number < 1) {
+			invalid = true;
+			invalidError = "INVALID-INPUT";
+		}
+		invalid = false;
+		return invalid;
+	}
+	
+	/**
 	 * Adds the address and confirms the order
 	 * @param request
 	 * @param response
@@ -931,7 +958,7 @@ public class UserServlet extends HttpServlet {
 			UserService.addAddress(id, address);
 			System.out.println("Address added!");
 		}
-		
+			
 		ArrayList<Order> orderList = UserService.getUnconfirmedTransactions(id);
 		UserService.updateTransaction(id);
 		System.out.println("Transaction updated!");
